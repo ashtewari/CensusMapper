@@ -112,9 +112,16 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BingMaps.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Address.cs" />
+    <Compile Include="Model\Entity.cs" />
+    <Compile Include="Model\GeocodePoint.cs" />
+    <Compile Include="Model\Point.cs" />
+    <Compile Include="Model\Resource.cs" />
+    <Compile Include="Model\ResourceSet.cs" />
     <Compile Include="PopulatedState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringFormatConverter.cs" />
@@ -127,6 +134,9 @@
     <None Include="CensusMapper_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="api.keys.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
