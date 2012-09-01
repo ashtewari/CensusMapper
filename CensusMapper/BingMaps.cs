@@ -26,7 +26,7 @@ namespace CensusMapper
             client.BaseAddress = new Uri("http://dev.virtualearth.net/REST/v1/Locations/");
 	    }
 
-        public async void GetAddress(Map map, Location location)
+        public async Task<Address> GetAddress(Location location)
         {
             string requestUri = String.Format(baseUri, string.Format("{0},{1}", location.Latitude, location.Longitude), _bingMapsKey);
             var task = client.GetAsync(requestUri);
@@ -40,19 +40,14 @@ namespace CensusMapper
              */
 
             Entity result = JsonConvert.DeserializeObject<Entity>(json);
-            Address address = result.ResourceSets[0].Resources[0].Address;
-            //// address.PostalCode
 
-            AddExtendedPushPin(map, address, location);
-        }
+            if (result != null && result.StatusCode == 200 
+                && result.ResourceSets.Count > 0 && result.ResourceSets[0].Resources.Count > 0)
+            {
+                return result.ResourceSets[0].Resources[0].Address;
+            }
 
-        internal async void AddExtendedPushPin(Map map, Address address, Location location)
-        {
-            var ctrl = new ContentControl();
-            ctrl.Template = Application.Current.Resources["PushpinTemplate"] as ControlTemplate;
-            ctrl.DataContext = new { Name = string.Format("{0} ({1})", address.Locality, address.PostalCode) };
-            MapLayer.SetPosition(ctrl, location);
-            map.Children.Add(ctrl);
+            return null;            
         }
     }
 }
