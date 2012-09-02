@@ -42,7 +42,8 @@ namespace CensusMapper
             Entity result = JsonConvert.DeserializeObject<Entity>(json);
 
             if (result != null && result.StatusCode == 200 
-                && result.ResourceSets.Count > 0 && result.ResourceSets[0].Resources.Count > 0)
+                && result.ResourceSets.Count > 0 && 
+                result.ResourceSets[0].Resources.Count > 0)
             {
                 return result.ResourceSets[0].Resources[0].Address;
             }

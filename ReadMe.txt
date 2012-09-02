@@ -2,10 +2,10 @@ Windows 8 Metro App to visualize Census data on Bing maps.
 
 * Windows 8
 * WinRT
-* Metro
+* XAML
 * C#
 * Census API
-* Bing Maps
+* Bing Maps API
 * JSON.Net
 
 Before compiling - 
