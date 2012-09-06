@@ -8,7 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:bm="using:Bing.Maps"
     mc:Ignorable="d">
-    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">            
-        <bm:Map x:Name="map" MapType="Road" Tapped="map_Tapped_1"></bm:Map>           
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <bm:Map x:Name="map" MapType="Road" Tapped="map_Tapped_1">
+        </bm:Map>           
     </Grid>
 </Page>

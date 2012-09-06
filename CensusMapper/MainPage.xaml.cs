@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 namespace CensusMapper
 {
@@ -163,7 +164,7 @@ namespace CensusMapper
                         if (int.TryParse(item[0].ToString(), out count))
                         {
                             var ctrl = new ContentControl();
-                            ctrl.Template = Application.Current.Resources["PushpinTemplate"] as ControlTemplate;
+                            ctrl.Template = Application.Current.Resources["StateTemplate"] as ControlTemplate;
                             ctrl.DataContext = new PopulatedState(state) {Population = count};
                             MapLayer.SetPosition(ctrl, state.Center);
                             map.Children.Add(ctrl);
@@ -295,17 +296,22 @@ namespace CensusMapper
             Location location;
             map.TryPixelToLocation(pos, out location);
 
-            AddPushPin(map, location);
+            // AddPushPin(map, location);
+
+            var ctrl = new ContentControl();
+            ctrl.Template = Application.Current.Resources["ZipCodeTemplate"] as ControlTemplate;
+
+            MapLayer.SetPosition(ctrl, location);
+            map.Children.Add(ctrl);
 
             BingMaps bingMaps = new BingMaps(keyBingMaps);
             Address address = await bingMaps.GetAddress(location);
-
-            AddPushPin(map, address, location);
+           
+            AddPushPin(map, address, location, ctrl);
 
         }
 
-
-        private async void AddPushPin(Map map, Address address, Location location)
+        private async void AddPushPin(Map map, Address address, Location location, ContentControl ctrl)
         {
             if (address != null)
             {
@@ -313,27 +319,45 @@ namespace CensusMapper
 
                 string fips = StateAbbreviationToFips(address.AdminDistrict);
 
-                if (string.IsNullOrEmpty(fips)) return;
+                if (string.IsNullOrEmpty(fips))
+                {
+                    RemovePushpin(ctrl);
+                    return;
+                }
 
                 string requestUri = string.Format("sf1?key={0}&get=P0010001&for=zip+code+tabulation+area:{1}&in=state:{2}", keyCensus, address.PostalCode, fips);
                 var array = await GetCensusData(requestUri);
 
-                if (array == null) return;
+                if (array == null)
+                {
+                    RemovePushpin(ctrl);
+                    return;
+                }
 
                 int count;
 
                 if (int.TryParse(array[1][0].ToString(), out count))
                 {
-                    var ctrl = new ContentControl();
-                    ctrl.Template = Application.Current.Resources["PushpinTemplate"] as ControlTemplate;
-                    ctrl.DataContext = new { 
-                        Name = string.Format("{0} ({1})", address.Locality, address.PostalCode), 
+                    ctrl.DataContext = new
+                    {
+                        Name = string.Format("{0} ({1})", address.Locality, address.PostalCode),
                         FormattedPopulation = string.Format("{0:0,0}", count)
                     };
-                    MapLayer.SetPosition(ctrl, location);
-                    map.Children.Add(ctrl);
+                }
+                else
+                {
+                    RemovePushpin(ctrl);
                 }
             }
+            else
+            {
+                RemovePushpin(ctrl);
+            }
+        }
+
+        private void RemovePushpin(ContentControl ctrl)
+        {
+            map.Children.Remove(ctrl);     
         }
 
         private string StateAbbreviationToFips(string abbreviation)
