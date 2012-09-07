@@ -21,31 +21,11 @@
             </ControlTemplate>
             <ControlTemplate x:Key="ZipCodeTemplate">
             	<Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-
-                    <Path Grid.Row="0" Data="M-0.333333,-0.333333" Fill="#0822E8" HorizontalAlignment="Left" Height="0" Margin="-0.333,-0.333,0,0" Stretch="Fill" UseLayoutRounding="False" VerticalAlignment="Top" Width="0"/>
-                    <Path Grid.Row="0" Data="M0.166667,49.6667 C0,0.333398 -8.50033,-49.167 -0.000333,0.333032" Fill="#0822E8" HorizontalAlignment="Left" Height="77.411" Margin="0.477,1.249,0,0" Stretch="Fill" UseLayoutRounding="False" VerticalAlignment="Top" Width="47.745" Stroke="#0822E8" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
-            				<Path.RenderTransform>
-            					<CompositeTransform Rotation="-61.835" ScaleX="-1"/>
-            				</Path.RenderTransform>
-            			</Path>
-            			<Grid Grid.Row="1">
-                        <!--<Grid.ChildrenTransitions>
-                            <TransitionCollection>
-                                <AddDeleteThemeTransition/>
-                                <ContentThemeTransition/>
-                                <EntranceThemeTransition/>
-                            </TransitionCollection>
-                        </Grid.ChildrenTransitions>-->
-                        <Rectangle Name="backPanel" Fill="#0822E8"/>    
-            				<StackPanel Margin="6">
-            					<TextBlock Text="{Binding Name}" FontSize="16" Foreground="White" Margin="3"/>                                
-            					<TextBlock Text="{Binding FormattedPopulation}" FontSize="22" Foreground="White"/>                    
-            				</StackPanel>
-            			</Grid>
+					<Rectangle Name="backPanel" Fill="#0822E8"/>    
+					<StackPanel Margin="6">
+            			<TextBlock Text="{Binding Name}" FontSize="16" Foreground="White" Margin="3"/>                                
+            			<TextBlock Text="{Binding FormattedPopulation}" FontSize="22" Foreground="White"/>                    
+					</StackPanel>
             	</Grid>
             </ControlTemplate>                            
         <ResourceDictionary.MergedDictionaries>

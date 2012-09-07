@@ -211,8 +211,7 @@ namespace CensusMapper
             Location location = new Location(pos.Coordinate.Latitude, pos.Coordinate.Longitude);            
             map.SetView(location, 6.0f);
 
-            AddPushPin(map, location);
-            //// AddExtendedPushPin(map, new Address() { Locality="You are here!" }, location);
+            AddPushPin(map, location);            
         }
 
         internal void AddExtendedPushPin(Map map, Address address, Location location)
