@@ -21,11 +21,27 @@
             </ControlTemplate>
             <ControlTemplate x:Key="ZipCodeTemplate">
             	<Grid>
-					<Rectangle Name="backPanel" Fill="#0822E8"/>    
-					<StackPanel Margin="6">
-            			<TextBlock Text="{Binding Name}" FontSize="16" Foreground="White" Margin="3"/>                                
-            			<TextBlock Text="{Binding FormattedPopulation}" FontSize="22" Foreground="White"/>                    
-					</StackPanel>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ChildrenTransitions>
+                        <TransitionCollection>
+                            <AddDeleteThemeTransition/>
+                            <!--<ContentThemeTransition/>
+                                <EntranceThemeTransition/>-->
+                        </TransitionCollection>
+                    </Grid.ChildrenTransitions>
+
+                    <Path Grid.Row="0" Data="M-0.333333,-0.333333" Fill="#0822E8" HorizontalAlignment="Left" Height="0" Margin="-0.333,-0.333,0,0" Stretch="Fill" UseLayoutRounding="False" VerticalAlignment="Top" Width="0"/>
+            			<Grid Grid.Row="1">
+                        <Rectangle Name="backPanel" Fill="#0822E8"/>    
+            				<StackPanel Margin="6">
+            					<TextBlock Text="{Binding Name}" FontSize="16" Foreground="White" Margin="3"/>                                
+            					<TextBlock Text="{Binding FormattedPopulation}" FontSize="22" Foreground="White"/>                    
+            				</StackPanel>
+            			</Grid>
+            			<Path Data="M-0.124666,0.249666 L19.0003,49.5092 L-0.243455,49.6322 z" Fill="#0822E8" HorizontalAlignment="Left" Height="50.375" Margin="-0.125,0,0,0" Stretch="Fill" UseLayoutRounding="False" VerticalAlignment="Top" Width="20.25" Grid.RowSpan="2"/>
             	</Grid>
             </ControlTemplate>                            
         <ResourceDictionary.MergedDictionaries>
