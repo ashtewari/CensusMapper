@@ -20,6 +20,10 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 
+using System.Xml;
+using System.Xml.Linq;
+using System.Reflection;
+
 namespace CensusMapper
 {
     /// <summary>
@@ -27,6 +31,7 @@ namespace CensusMapper
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        const string API_KEYS_FILE = "ApiKeys.xml";
         const double InitialZoomLevel = 5.0;
 
         HttpClient client = null;  
@@ -39,14 +44,18 @@ namespace CensusMapper
         public MainPage()
         {
             this.InitializeComponent();
+            this.InitializeApis();
+        }
 
+        private void InitializeApis()
+        {
             SetApiKeys();
 
             geolocator = new Geolocator();
             geolocator.StatusChanged += geolocator_StatusChanged;
 
             client = new HttpClient();
-            client.BaseAddress = new Uri("http://api.census.gov/data/2010/");
+            client.BaseAddress = new Uri("http://api.census.gov/data/2010/");        
         }
 
         private string _status = "";
@@ -125,9 +134,17 @@ namespace CensusMapper
         }
 
         private void SetApiKeys()
-        {
-            keyCensus = ApiKeys.CensusApiKey;
-            keyBingMaps = ApiKeys.BingMapsKey;
+        {            
+            string fileName = API_KEYS_FILE;
+
+            var data = XDocument.Load(System.IO.Path.Combine(fileName));
+            var keys = data.Descendants("Keys").First();
+
+            var census = from key in keys.Elements("Key") where key.Attribute("name").Value == "Census" select key.Attribute("value").Value;
+            var bing = from key in keys.Elements("Key") where key.Attribute("name").Value == "Bing" select key.Attribute("value").Value;
+
+            keyCensus = census.ElementAt(0);
+            keyBingMaps = bing.ElementAt(0);
             map.Credentials = keyBingMaps;
         }
 
