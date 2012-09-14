@@ -32,12 +32,12 @@ namespace CensusMapper
     public sealed partial class MainPage : Page
     {
         const string API_KEYS_FILE = "ApiKeys.xml";
-        const double InitialZoomLevel = 5.0;
-
-        HttpClient client = null;  
+        const double InitialZoomLevel = 5.0; 
       
         private string keyCensus = "";
         private string keyBingMaps = "";
+
+        Census census = null;
 
         Geolocator geolocator = null;
 
@@ -54,8 +54,7 @@ namespace CensusMapper
             geolocator = new Geolocator();
             geolocator.StatusChanged += geolocator_StatusChanged;
 
-            client = new HttpClient();
-            client.BaseAddress = new Uri("http://api.census.gov/data/2010/");        
+            census = new Census(keyCensus);
         }
 
         private string _status = "";
@@ -165,8 +164,8 @@ namespace CensusMapper
 
                 Dictionary<string, UsState> statesList = GetStatesList();
 
-                string requestUri = string.Format("sf1?key={0}&get=P0010001,NAME&for=state:*",keyCensus);
-                var array = await GetCensusData(requestUri);
+                string requestUri = string.Format("get=P0010001,NAME&for=state:*",keyCensus);
+                var array = await census.GetCensusData(requestUri);
 
                 if (array == null) return;
 
@@ -195,22 +194,6 @@ namespace CensusMapper
             {
                 System.Diagnostics.Debug.WriteLine(exception);
             }
-        }
-
-        private async Task<JArray> GetCensusData(string requestUri)
-        {
-            var task = client.GetAsync(requestUri);
-            HttpResponseMessage response = await task;
-            
-            // response.EnsureSuccessStatusCode();
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-            {
-                var result = await response.Content.ReadAsStringAsync();
-                System.Diagnostics.Debug.WriteLine(result);
-                return JArray.Parse(result);
-            }
-
-            return null;
         }
 
         internal static void AddPushPin(Map map, Location location)
@@ -331,8 +314,6 @@ namespace CensusMapper
         {
             if (address != null)
             {
-                /// http://api.census.gov/data/2010/sf1?get=P0010001&for=zip+code+tabulation+area:99501&in=state:02
-
                 string fips = StateAbbreviationToFips(address.AdminDistrict);
 
                 if (string.IsNullOrEmpty(fips))
@@ -341,8 +322,8 @@ namespace CensusMapper
                     return;
                 }
 
-                string requestUri = string.Format("sf1?key={0}&get=P0010001&for=zip+code+tabulation+area:{1}&in=state:{2}", keyCensus, address.PostalCode, fips);
-                var array = await GetCensusData(requestUri);
+                string requestUri = string.Format("get=P0010001&for=zip+code+tabulation+area:{1}&in=state:{2}", keyCensus, address.PostalCode, fips);
+                var array = await census.GetCensusData(requestUri);
 
                 if (array == null)
                 {
