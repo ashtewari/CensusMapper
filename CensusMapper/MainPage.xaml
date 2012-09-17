@@ -10,6 +10,10 @@
     mc:Ignorable="d">
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
         <bm:Map x:Name="map" MapType="Road" Tapped="map_Tapped_1">
-        </bm:Map>           
+        </bm:Map>  
+        <Button x:Name="btnSave" Content="Save" 
+                Click="btnSave_Click_1"
+                Height="35" Width="45" 
+                HorizontalAlignment="Left" VerticalAlignment="Top"></Button>
     </Grid>
 </Page>

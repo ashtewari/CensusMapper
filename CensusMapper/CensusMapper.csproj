@@ -61,7 +61,7 @@
     <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
@@ -104,8 +104,14 @@
     <SDKReference Include="Bing.Maps.Xaml, Version=1.0">
       <Name>Bing Maps for C#, C++, or Visual Basic %28RP%29</Name>
     </SDKReference>
+    <SDKReference Include="LiveSDKXAML, Version=5.0">
+      <Name>Live SDK</Name>
+    </SDKReference>
     <SDKReference Include="Microsoft.VCLibs, Version=11.0">
       <Name>Microsoft Visual C++ Runtime Package</Name>
+    </SDKReference>
+    <SDKReference Include="MobileServicesManagedClient, Version=0.2.0.0">
+      <Name>Windows Azure Mobile Services Managed Client</Name>
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +120,7 @@
     </Compile>
     <Compile Include="BingMaps.cs" />
     <Compile Include="Census.cs" />
+    <Compile Include="Item.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

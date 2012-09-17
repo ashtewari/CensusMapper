@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
-  <Identity Name="97425f13-66e0-43ae-8c64-fb5948eaad46" Publisher="CN=Ash.Tewari" Version="1.0.0.0" />
+  <Identity Name="BUILD.d849717a-c90b-4e0c-b526-a77eae4fd3ef" Publisher="CN=Ash.Tewari" Version="1.0.0.0" />
   <Properties>
     <DisplayName>CensusMapper</DisplayName>
     <PublisherDisplayName>Ash.Tewari</PublisherDisplayName>

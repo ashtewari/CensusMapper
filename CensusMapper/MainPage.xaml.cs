@@ -24,6 +24,11 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Reflection;
 
+using Microsoft.Live;
+using Windows.UI.Popups;
+using Microsoft.WindowsAzure.MobileServices;
+using Newtonsoft.Json;
+
 namespace CensusMapper
 {
     /// <summary>
@@ -36,20 +41,31 @@ namespace CensusMapper
       
         private string keyCensus = "";
         private string keyBingMaps = "";
+        private string keyAzureMobile = "";
 
         Census census = null;
 
         Geolocator geolocator = null;
 
+        public MobileServiceClient MobileService = null;
+
+        private IList<Location> locations;
+
         public MainPage()
         {
             this.InitializeComponent();
             this.InitializeApis();
+
+            locations = new List<Location>();
         }
 
         private void InitializeApis()
         {
             SetApiKeys();
+
+            MobileService = new MobileServiceClient(
+            "https://censusmapper.azure-mobile.net/",
+            keyAzureMobile);
 
             geolocator = new Geolocator();
             geolocator.StatusChanged += geolocator_StatusChanged;
@@ -141,9 +157,12 @@ namespace CensusMapper
 
             var census = from key in keys.Elements("Key") where key.Attribute("name").Value == "Census" select key.Attribute("value").Value;
             var bing = from key in keys.Elements("Key") where key.Attribute("name").Value == "Bing" select key.Attribute("value").Value;
+            var azureMobile = from key in keys.Elements("Key") where key.Attribute("name").Value == "AzureMobile" select key.Attribute("value").Value;                              
 
             keyCensus = census.ElementAt(0);
             keyBingMaps = bing.ElementAt(0);
+            keyAzureMobile = azureMobile.ElementAt(0);
+
             map.Credentials = keyBingMaps;
         }
 
@@ -156,7 +175,7 @@ namespace CensusMapper
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             try
-            {                                               
+            {                   
                 var centerOfUs = new Location(39.833333, -98.583333);
 
                 map.Center = centerOfUs;                
@@ -189,12 +208,71 @@ namespace CensusMapper
                 }
 
                 SetCurrentLocation();
+
+                await Authenticate();
+                await LoadUserData();
             }
             catch (Exception exception)
             {
                 System.Diagnostics.Debug.WriteLine(exception);
             }
         }
+
+        private async Task SaveUserData()
+        {
+            if (locations.Count > 0)
+            {
+                var locs = new List<string>();
+                foreach (var loc in locations)
+                {
+                    locs.Add(string.Format("{0},{1}", loc.Latitude, loc.Longitude));
+                }
+
+                string points = await JsonConvert.SerializeObjectAsync(locs);
+
+                var reader = await this.MobileService.GetTable<Item>().ReadAsync();
+                if (reader.Any())
+                {
+                    var first = reader.First();
+                    first.Text = points;
+                    await this.MobileService.GetTable<Item>().UpdateAsync(first);
+                }
+                else
+                {
+                    Item log = new Item { UserId = userId, Text = points };
+                    await this.MobileService.GetTable<Item>().InsertAsync(log);
+                }
+            }
+        }
+
+        private async Task LoadUserData()
+        {
+            var request = await this.MobileService.GetTable<Item>().ReadAsync();
+            foreach (var item in request)
+            {
+                if (!item.Text.StartsWith("[")) continue;
+
+                JArray points = JArray.Parse(item.Text);
+                
+                foreach (var pt in points)
+                {
+                    double lat, lng;
+
+                    var l = pt.ToString().Split(",".ToCharArray());
+                    if (double.TryParse(l[0].ToString(), out lat) && double.TryParse(l[1].ToString(), out lng))
+                    {
+                        locations.Add(new Location(lat, lng));
+                    }
+                }
+            }
+
+            foreach (var item in locations)
+            {
+                await AddPushPinAtLocation(map, item);
+            }
+            
+        }
+
 
         internal static void AddPushPin(Map map, Location location)
         {
@@ -285,7 +363,7 @@ namespace CensusMapper
             states.Add("56", new UsState("56", "Wyoming", 42.675762, -107.008835));
 
             return states;
-        }
+        }        
 
         private async void map_Tapped_1(object sender, TappedRoutedEventArgs e)
         {
@@ -295,8 +373,16 @@ namespace CensusMapper
             Location location;
             map.TryPixelToLocation(pos, out location);
 
+            locations.Add(location);
+
             // AddPushPin(map, location);
 
+            await AddPushPinAtLocation(map, location);
+
+        }
+
+        private async Task AddPushPinAtLocation(Map map, Location location)
+        {
             var ctrl = new ContentControl();
             ctrl.Template = Application.Current.Resources["ZipCodeTemplate"] as ControlTemplate;
 
@@ -305,9 +391,8 @@ namespace CensusMapper
 
             BingMaps bingMaps = new BingMaps(keyBingMaps);
             Address address = await bingMaps.GetAddress(location);
-           
-            AddPushPin(map, address, location, ctrl);
 
+            AddPushPin(map, address, location, ctrl);
         }
 
         private async void AddPushPin(Map map, Address address, Location location, ContentControl ctrl)
@@ -429,6 +514,50 @@ namespace CensusMapper
                 return (states[abbreviation]);
             
             return string.Empty;
-        }      
+        }
+
+        private LiveConnectSession session;
+        private string userId;
+        private async System.Threading.Tasks.Task Authenticate()
+        {
+            LiveAuthClient liveIdClient = new LiveAuthClient("https://censusmapper.azure-mobile.net/");
+
+
+            while (session == null)
+            {
+                LiveLoginResult result = await liveIdClient.LoginAsync(new[] { "wl.basic" });
+                if (result.Status == LiveConnectSessionStatus.Connected)
+                {
+                    session = result.Session;
+                    LiveConnectClient client = new LiveConnectClient(result.Session);                    
+                    LiveOperationResult meResult = await client.GetAsync("me");
+                    MobileServiceUser loginResult = await this.MobileService.LoginAsync(result.Session.AuthenticationToken);
+
+                    userId = loginResult.UserId;
+                    string title = string.Format("Welcome {0}!", meResult.Result["first_name"]);
+                    var message = string.Format("You are now logged in - {0}", loginResult.UserId);
+                    //var dialog = new MessageDialog(message, title);
+                    //dialog.Commands.Add(new UICommand("OK"));
+                    //await dialog.ShowAsync();
+                    System.Diagnostics.Debug.WriteLine(message);
+                }
+                else
+                {
+                    session = null;
+                    userId = "";
+                    var dialog = new MessageDialog("You must log in.", "Login Required");
+                    dialog.Commands.Add(new UICommand("OK"));
+                    await dialog.ShowAsync();
+                }
+            }
+
+
+        }
+
+        private async void btnSave_Click_1(object sender, RoutedEventArgs e)
+        {
+            await Authenticate();
+            await SaveUserData();            
+        }
     }
 }
