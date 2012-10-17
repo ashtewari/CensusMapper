@@ -53,10 +53,20 @@ namespace CensusMapper
 
         public MainPage()
         {
+            App.Current.Suspending += Current_Suspending;
             this.InitializeComponent();
             this.InitializeApis();
 
             locations = new List<Location>();
+        }
+
+        async void Current_Suspending(object sender, Windows.ApplicationModel.SuspendingEventArgs e)
+        {
+            var deferral = e.SuspendingOperation.GetDeferral();
+
+            //// await SaveUserData();
+
+            deferral.Complete();
         }
 
         private void InitializeApis()
@@ -373,15 +383,15 @@ namespace CensusMapper
             Location location;
             map.TryPixelToLocation(pos, out location);
 
-            locations.Add(location);
+            bool result = await AddPushPinAtLocation(map, location);
 
-            // AddPushPin(map, location);
-
-            await AddPushPinAtLocation(map, location);
-
+            if (result)
+            {
+                locations.Add(location);
+            }
         }
 
-        private async Task AddPushPinAtLocation(Map map, Location location)
+        private async Task<bool> AddPushPinAtLocation(Map map, Location location)
         {
             var ctrl = new ContentControl();
             ctrl.Template = Application.Current.Resources["ZipCodeTemplate"] as ControlTemplate;
@@ -392,19 +402,22 @@ namespace CensusMapper
             BingMaps bingMaps = new BingMaps(keyBingMaps);
             Address address = await bingMaps.GetAddress(location);
 
-            AddPushPin(map, address, location, ctrl);
+            return await AddPushPin(map, address, location, ctrl);
         }
 
-        private async void AddPushPin(Map map, Address address, Location location, ContentControl ctrl)
+        private async Task<bool> AddPushPin(Map map, Address address, Location location, ContentControl ctrl)
         {
             if (address != null)
             {
+                SbaApi sba = new SbaApi();
+                var data = sba.GetCountyData(address.AdminDistrict);
+
                 string fips = StateAbbreviationToFips(address.AdminDistrict);
 
                 if (string.IsNullOrEmpty(fips))
                 {
                     RemovePushpin(ctrl);
-                    return;
+                    return false;
                 }
 
                 string requestUri = string.Format("get=P0010001&for=zip+code+tabulation+area:{1}&in=state:{2}", keyCensus, address.PostalCode, fips);
@@ -413,7 +426,7 @@ namespace CensusMapper
                 if (array == null)
                 {
                     RemovePushpin(ctrl);
-                    return;
+                    return false;
                 }
 
                 int count;
@@ -429,12 +442,16 @@ namespace CensusMapper
                 else
                 {
                     RemovePushpin(ctrl);
+                    return false;
                 }
             }
             else
             {
                 RemovePushpin(ctrl);
+                return false;
             }
+
+            return true;
         }
 
         private void RemovePushpin(ContentControl ctrl)
@@ -558,6 +575,21 @@ namespace CensusMapper
         {
             await Authenticate();
             await SaveUserData();            
+        }
+
+        private void map_ViewChanged_1(object sender, ViewChangedEventArgs e)
+        {
+            this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Low,
+                new Windows.UI.Core.DispatchedHandler(() =>
+                {
+                    this.txtZoom.Text = this.map.ZoomLevel.ToString();
+                }));              
+            System.Diagnostics.Debug.WriteLine("{0}", this.map.ZoomLevel);
+
+            // > 5 USA
+            // 5 - 10 State
+            // 10 - 12 County
+            // 12 > City
         }
     }
 }

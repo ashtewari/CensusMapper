@@ -9,8 +9,9 @@
     xmlns:bm="using:Bing.Maps"
     mc:Ignorable="d">
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-        <bm:Map x:Name="map" MapType="Road" Tapped="map_Tapped_1">
+        <bm:Map x:Name="map" MapType="Road" Tapped="map_Tapped_1" ViewChanged="map_ViewChanged_1">
         </bm:Map>  
+        <TextBlock Name="txtZoom" Text="Zoom Level" FontSize="36" Foreground="Black" HorizontalAlignment="Right" VerticalAlignment="Bottom"></TextBlock>
     </Grid>
     <Page.BottomAppBar>
     <AppBar Name="appBar">

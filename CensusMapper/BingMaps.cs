@@ -43,7 +43,8 @@ namespace CensusMapper
 
             if (result != null && result.StatusCode == 200 
                 && result.ResourceSets.Count > 0 && 
-                result.ResourceSets[0].Resources.Count > 0)
+                result.ResourceSets[0].Resources.Count > 0
+                && result.ResourceSets[0].Resources[0].EntityType == "Address")
             {
                 return result.ResourceSets[0].Resources[0].Address;
             }

@@ -15,9 +15,15 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="CensusMapper.App">
-      <VisualElements DisplayName="CensusMapper" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="CensusMapper" ForegroundText="light" BackgroundColor="#464646">
+      <VisualElements DisplayName="CensusMapper" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="Visualize U.S. Census data on Bing Maps" ForegroundText="light" BackgroundColor="#464646">
         <DefaultTile ShowName="allLogos" />
-        <SplashScreen Image="Assets\SplashScreen.png" />
+        <SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#000000" />
+        <InitialRotationPreference>
+          <Rotation Preference="portrait" />
+          <Rotation Preference="landscape" />
+          <Rotation Preference="portraitFlipped" />
+          <Rotation Preference="landscapeFlipped" />
+        </InitialRotationPreference>
       </VisualElements>
     </Application>
   </Applications>

@@ -7,6 +7,12 @@ namespace CensusMapper.Tests
     public class UnitTest1
     {
         [TestMethod]
+        public void TestSbaApi()
+        { 
+            
+        }
+
+        [TestMethod]
         public void TestMethod1()
         {
             //string jsonString = "[[\"A\", \"B\", \"C\"], [\"aaa\", \"bbb\", \"ccc\"]]";

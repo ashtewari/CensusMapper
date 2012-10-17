@@ -43,7 +43,7 @@
             			</Grid>
             			<Path Data="M-0.124666,0.249666 L19.0003,49.5092 L-0.243455,49.6322 z" Fill="#0822E8" HorizontalAlignment="Left" Height="50.375" Margin="-0.125,0,0,0" Stretch="Fill" UseLayoutRounding="False" VerticalAlignment="Top" Width="20.25" Grid.RowSpan="2"/>
             	</Grid>
-            </ControlTemplate>                            
+            </ControlTemplate>                         
         <ResourceDictionary.MergedDictionaries>
                 <!-- 
                     Styles that define common aspects of the platform look and feel
