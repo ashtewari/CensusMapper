@@ -37,7 +37,9 @@ namespace CensusMapper
     public sealed partial class MainPage : Page
     {
         const string API_KEYS_FILE = "ApiKeys.xml";
-        const double InitialZoomLevel = 5.0; 
+        const double InitialZoomLevel = 5.0;
+
+        private double currentZoomLevel = 5.0;
       
         private string keyCensus = "";
         private string keyBingMaps = "";
@@ -50,6 +52,7 @@ namespace CensusMapper
         public MobileServiceClient MobileService = null;
 
         private IList<Location> locations;
+        private CountyFips counties = null;
 
         public MainPage()
         {
@@ -158,6 +161,14 @@ namespace CensusMapper
             
         }
 
+        private async Task<string> ReadTextFile(string filename)
+        {                       
+            var folder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+            var file = await folder.GetFileAsync(filename);                         
+            var text = await Windows.Storage.FileIO.ReadTextAsync(file);
+            return text;
+        }
+
         private void SetApiKeys()
         {            
             string fileName = API_KEYS_FILE;
@@ -184,16 +195,29 @@ namespace CensusMapper
         /// property is typically used to configure the page.</param>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            await LoadCountyData();
+
+            //// await LoadAndDisplayStateData();
+        }
+
+        private async Task LoadCountyData()
+        {
+            string countyFipsJson = await ReadTextFile("CountyFips.json.txt");
+            counties = await JsonConvert.DeserializeObjectAsync<CountyFips>(countyFipsJson);
+        }
+
+        private async Task LoadAndDisplayStateData()
+        {
             try
-            {                   
+            {
                 var centerOfUs = new Location(39.833333, -98.583333);
 
-                map.Center = centerOfUs;                
+                map.Center = centerOfUs;
                 map.ZoomLevel = InitialZoomLevel;
 
                 Dictionary<string, UsState> statesList = GetStatesList();
 
-                string requestUri = string.Format("get=P0010001,NAME&for=state:*",keyCensus);
+                string requestUri = string.Format("get=P0010001,NAME&for=state:*", keyCensus);
                 var array = await census.GetCensusData(requestUri);
 
                 if (array == null) return;
@@ -210,7 +234,7 @@ namespace CensusMapper
                         {
                             var ctrl = new ContentControl();
                             ctrl.Template = Application.Current.Resources["StateTemplate"] as ControlTemplate;
-                            ctrl.DataContext = new PopulatedState(state) {Population = count};
+                            ctrl.DataContext = new PopulatedState(state) { Population = count };
                             MapLayer.SetPosition(ctrl, state.Center);
                             map.Children.Add(ctrl);
                         }
@@ -409,10 +433,14 @@ namespace CensusMapper
         {
             if (address != null)
             {
-                SbaApi sba = new SbaApi();
-                var data = sba.GetCountyData(address.AdminDistrict);
+
+                string fipsCounty = CountyNameToFips(address.AdminDistrict, address.AdminDistrict2);
 
                 string fips = StateAbbreviationToFips(address.AdminDistrict);
+
+                SbaApi sba = new SbaApi();
+                var cities = await sba.GetCityData(address.AdminDistrict.ToLowerInvariant());
+                var apex = cities.FirstOrDefault((c) => c.name.ToLowerInvariant() == address.Locality.ToLowerInvariant());
 
                 if (string.IsNullOrEmpty(fips))
                 {
@@ -420,7 +448,20 @@ namespace CensusMapper
                     return false;
                 }
 
-                string requestUri = string.Format("get=P0010001&for=zip+code+tabulation+area:{1}&in=state:{2}", keyCensus, address.PostalCode, fips);
+                string requestUri = string.Format("get=P0010001&for=zip+code+tabulation+area:{0}&in=state:{1}", address.PostalCode, fips);
+
+                if (string.IsNullOrEmpty(fipsCounty) == false)
+                {                   
+                    requestUri = string.Format("get=P0010001&for=county:{0}&in=state:{1}", fipsCounty.TrimStart(fips.ToCharArray()), fips);
+                }
+                
+                if (apex != null)
+                {
+                    ////http://api.census.gov/data/2010/sf1?get=P0010001&gnis=county:00161526
+                    requestUri = string.Format("get=P0010001&gnis=place:{0}", apex.feature_id);
+                }
+
+            
                 var array = await census.GetCensusData(requestUri);
 
                 if (array == null)
@@ -457,6 +498,27 @@ namespace CensusMapper
         private void RemovePushpin(ContentControl ctrl)
         {
             map.Children.Remove(ctrl);     
+        }
+
+        private string CountyNameToFips(string stateAbr, string countyName)
+        {
+            if (counties == null) return string.Empty;
+
+            string name = countyName.Trim();
+            if (name.EndsWith("Co."))
+            {
+                name = name.Substring(0, name.Length - 3);
+            }
+            else if (name.EndsWith("County"))
+            {
+                name = name.Substring(0, name.Length - 6);
+            }
+            
+            var result = counties.table.rows.FirstOrDefault((row) => row[1] == string.Format("{0}, {1}", stateAbr, name.Trim()));
+
+            if (result == null) return string.Empty;
+
+            return result[0];
         }
 
         private string StateAbbreviationToFips(string abbreviation)
@@ -586,10 +648,17 @@ namespace CensusMapper
                 }));              
             System.Diagnostics.Debug.WriteLine("{0}", this.map.ZoomLevel);
 
+            currentZoomLevel = this.map.ZoomLevel;
+
             // > 5 USA
             // 5 - 10 State
             // 10 - 12 County
             // 12 > City
+        }
+
+        private async void btnLoad_Click_1(object sender, RoutedEventArgs e)
+        {
+            await LoadCountyData();
         }
     }
 }

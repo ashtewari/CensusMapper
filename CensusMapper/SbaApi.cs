@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,11 @@ using System.Threading.Tasks;
 
 namespace CensusMapper
 {
+    /*
+                SbaApi sba = new SbaApi();
+                var county = await sba.GetCountyData(address.AdminDistrict);     
+     
+     */
     public class SbaApi
     {
         // All counties by state
@@ -27,17 +33,21 @@ namespace CensusMapper
             client.BaseAddress = new Uri("http://api.sba.gov/geodata/");
         }
 
-        public async Task<JArray> GetCountyData(string state)
+        public async Task<SbaData[]> GetCountyData(string state)
         {
-            return await GetData(state, queryCounties);
+            var json = await GetData(state, queryCounties);
+            SbaData[] county = JsonConvert.DeserializeObject<SbaData[]>(json);
+            return county;
         }
 
-        public async Task<JArray> GetCityData(string state)
+        public async Task<SbaData[]> GetCityData(string state)
         {
-            return await GetData(state, queryCities);
+            var json = await GetData(state, queryCities);
+            SbaData[] county = JsonConvert.DeserializeObject<SbaData[]>(json);
+            return county;
         }
 
-        private async Task<JArray> GetData(string state, string query)
+        private async Task<string> GetData(string state, string query)
         {
             var task = client.GetAsync(string.Format(query, state));
             HttpResponseMessage response = await task;
@@ -46,7 +56,7 @@ namespace CensusMapper
             {
                 var result = await response.Content.ReadAsStringAsync();
                 System.Diagnostics.Debug.WriteLine(result);
-                return JArray.Parse(result);
+                return result;
             }
 
             return null;

@@ -125,6 +125,8 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Address.cs" />
+    <Compile Include="Model\County.cs" />
+    <Compile Include="Model\CountyFips.cs" />
     <Compile Include="Model\Entity.cs" />
     <Compile Include="Model\GeocodePoint.cs" />
     <Compile Include="Model\Point.cs" />
@@ -147,6 +149,9 @@
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
+    <Content Include="CountyFips.json.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

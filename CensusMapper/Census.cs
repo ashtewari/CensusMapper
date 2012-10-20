@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -34,6 +35,10 @@ namespace CensusMapper
                 var result = await response.Content.ReadAsStringAsync();
                 System.Diagnostics.Debug.WriteLine(result);
                 return JArray.Parse(result);
+            }
+            else
+            {
+                Debug.WriteLine(response.Content);
             }
 
             return null;

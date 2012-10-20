@@ -15,9 +15,14 @@
     </Grid>
     <Page.BottomAppBar>
     <AppBar Name="appBar">
-        <Button x:Name="btnSave"
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="btnLoad"
+                Click="btnLoad_Click_1"  Style="{StaticResource SaveAppBarButtonStyle}"
+                HorizontalAlignment="Right" VerticalAlignment="Center"></Button>
+            <Button x:Name="btnSave"
                 Click="btnSave_Click_1" Style="{StaticResource SaveAppBarButtonStyle}"
                 HorizontalAlignment="Right" VerticalAlignment="Center"></Button>
-    </AppBar>
+            </StackPanel>
+        </AppBar>
     </Page.BottomAppBar>
 </Page>
