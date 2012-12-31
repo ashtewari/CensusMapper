@@ -24,9 +24,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Reflection;
 
-using Microsoft.Live;
 using Windows.UI.Popups;
-using Microsoft.WindowsAzure.MobileServices;
 using Newtonsoft.Json;
 
 namespace CensusMapper
@@ -49,7 +47,7 @@ namespace CensusMapper
 
         Geolocator geolocator = null;
 
-        public MobileServiceClient MobileService = null;
+        //public MobileServiceClient MobileService = null;
 
         private IList<Location> locations;
         private CountyFips counties = null;
@@ -67,7 +65,7 @@ namespace CensusMapper
         {
             var deferral = e.SuspendingOperation.GetDeferral();
 
-            //// await SaveUserData();
+            await SaveUserData();
 
             deferral.Complete();
         }
@@ -76,9 +74,9 @@ namespace CensusMapper
         {
             SetApiKeys();
 
-            MobileService = new MobileServiceClient(
-            "https://censusmapper.azure-mobile.net/",
-            keyAzureMobile);
+            //MobileService = new MobileServiceClient(
+            //"https://censusmapper.azure-mobile.net/",
+            //keyAzureMobile);
 
             geolocator = new Geolocator();
             geolocator.StatusChanged += geolocator_StatusChanged;
@@ -195,9 +193,9 @@ namespace CensusMapper
         /// property is typically used to configure the page.</param>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            await LoadCountyData();
+            //// await LoadCountyData();
 
-            //// await LoadAndDisplayStateData();
+            await LoadAndDisplayStateData();
         }
 
         private async Task LoadCountyData()
@@ -243,7 +241,7 @@ namespace CensusMapper
 
                 SetCurrentLocation();
 
-                await Authenticate();
+                //await Authenticate();
                 await LoadUserData();
             }
             catch (Exception exception)
@@ -264,46 +262,46 @@ namespace CensusMapper
 
                 string points = await JsonConvert.SerializeObjectAsync(locs);
 
-                var reader = await this.MobileService.GetTable<Item>().ReadAsync();
-                if (reader.Any())
-                {
-                    var first = reader.First();
-                    first.Text = points;
-                    await this.MobileService.GetTable<Item>().UpdateAsync(first);
-                }
-                else
-                {
-                    Item log = new Item { UserId = userId, Text = points };
-                    await this.MobileService.GetTable<Item>().InsertAsync(log);
-                }
+                //var reader = await this.MobileService.GetTable<Item>().ReadAsync();
+                //if (reader.Any())
+                //{
+                //    var first = reader.First();
+                //    first.Text = points;
+                //    await this.MobileService.GetTable<Item>().UpdateAsync(first);
+                //}
+                //else
+                //{
+                //    Item log = new Item { UserId = userId, Text = points };
+                //    await this.MobileService.GetTable<Item>().InsertAsync(log);
+                //}
             }
         }
 
         private async Task LoadUserData()
         {
-            var request = await this.MobileService.GetTable<Item>().ReadAsync();
-            foreach (var item in request)
-            {
-                if (!item.Text.StartsWith("[")) continue;
+            //var request = await this.MobileService.GetTable<Item>().ReadAsync();
+            //foreach (var item in request)
+            //{
+            //    if (!item.Text.StartsWith("[")) continue;
 
-                JArray points = JArray.Parse(item.Text);
+            //    JArray points = JArray.Parse(item.Text);
                 
-                foreach (var pt in points)
-                {
-                    double lat, lng;
+            //    foreach (var pt in points)
+            //    {
+            //        double lat, lng;
 
-                    var l = pt.ToString().Split(",".ToCharArray());
-                    if (double.TryParse(l[0].ToString(), out lat) && double.TryParse(l[1].ToString(), out lng))
-                    {
-                        locations.Add(new Location(lat, lng));
-                    }
-                }
-            }
+            //        var l = pt.ToString().Split(",".ToCharArray());
+            //        if (double.TryParse(l[0].ToString(), out lat) && double.TryParse(l[1].ToString(), out lng))
+            //        {
+            //            locations.Add(new Location(lat, lng));
+            //        }
+            //    }
+            //}
 
-            foreach (var item in locations)
-            {
-                await AddPushPinAtLocation(map, item);
-            }
+            //foreach (var item in locations)
+            //{
+            //    await AddPushPinAtLocation(map, item);
+            //}
             
         }
 
@@ -434,13 +432,13 @@ namespace CensusMapper
             if (address != null)
             {
 
-                string fipsCounty = CountyNameToFips(address.AdminDistrict, address.AdminDistrict2);
+                //string fipsCounty = CountyNameToFips(address.AdminDistrict, address.AdminDistrict2);
 
                 string fips = StateAbbreviationToFips(address.AdminDistrict);
 
-                SbaApi sba = new SbaApi();
-                var cities = await sba.GetCityData(address.AdminDistrict.ToLowerInvariant());
-                var apex = cities.FirstOrDefault((c) => c.name.ToLowerInvariant() == address.Locality.ToLowerInvariant());
+                //SbaApi sba = new SbaApi();
+                //var cities = await sba.GetCityData(address.AdminDistrict.ToLowerInvariant());
+                //var apex = cities.FirstOrDefault((c) => c.name.ToLowerInvariant() == address.Locality.ToLowerInvariant());
 
                 if (string.IsNullOrEmpty(fips))
                 {
@@ -450,16 +448,16 @@ namespace CensusMapper
 
                 string requestUri = string.Format("get=P0010001&for=zip+code+tabulation+area:{0}&in=state:{1}", address.PostalCode, fips);
 
-                if (string.IsNullOrEmpty(fipsCounty) == false)
-                {                   
-                    requestUri = string.Format("get=P0010001&for=county:{0}&in=state:{1}", fipsCounty.TrimStart(fips.ToCharArray()), fips);
-                }
+                //if (string.IsNullOrEmpty(fipsCounty) == false)
+                //{                   
+                //    requestUri = string.Format("get=P0010001&for=county:{0}&in=state:{1}", fipsCounty.TrimStart(fips.ToCharArray()), fips);
+                //}
                 
-                if (apex != null)
-                {
-                    ////http://api.census.gov/data/2010/sf1?get=P0010001&gnis=county:00161526
-                    requestUri = string.Format("get=P0010001&gnis=place:{0}", apex.feature_id);
-                }
+                //if (apex != null)
+                //{
+                //    ////http://api.census.gov/data/2010/sf1?get=P0010001&gnis=county:00161526
+                //    requestUri = string.Format("get=P0010001&gnis=place:{0}", apex.feature_id);
+                //}
 
             
                 var array = await census.GetCensusData(requestUri);
@@ -595,47 +593,47 @@ namespace CensusMapper
             return string.Empty;
         }
 
-        private LiveConnectSession session;
+        //private LiveConnectSession session;
         private string userId;
-        private async System.Threading.Tasks.Task Authenticate()
-        {
-            LiveAuthClient liveIdClient = new LiveAuthClient("https://censusmapper.azure-mobile.net/");
+        //private async System.Threading.Tasks.Task Authenticate()
+        //{
+        //    LiveAuthClient liveIdClient = new LiveAuthClient("https://censusmapper.azure-mobile.net/");
 
 
-            while (session == null)
-            {
-                LiveLoginResult result = await liveIdClient.LoginAsync(new[] { "wl.basic" });
-                if (result.Status == LiveConnectSessionStatus.Connected)
-                {
-                    session = result.Session;
-                    LiveConnectClient client = new LiveConnectClient(result.Session);                    
-                    LiveOperationResult meResult = await client.GetAsync("me");
-                    MobileServiceUser loginResult = await this.MobileService.LoginAsync(result.Session.AuthenticationToken);
+        //    while (session == null)
+        //    {
+        //        LiveLoginResult result = await liveIdClient.LoginAsync(new[] { "wl.basic" });
+        //        if (result.Status == LiveConnectSessionStatus.Connected)
+        //        {
+        //            session = result.Session;
+        //            LiveConnectClient client = new LiveConnectClient(result.Session);                    
+        //            LiveOperationResult meResult = await client.GetAsync("me");
+        //            MobileServiceUser loginResult = await this.MobileService.LoginAsync(result.Session.AuthenticationToken);
 
-                    userId = loginResult.UserId;
-                    string title = string.Format("Welcome {0}!", meResult.Result["first_name"]);
-                    var message = string.Format("You are now logged in - {0}", loginResult.UserId);
-                    //var dialog = new MessageDialog(message, title);
-                    //dialog.Commands.Add(new UICommand("OK"));
-                    //await dialog.ShowAsync();
-                    System.Diagnostics.Debug.WriteLine(message);
-                }
-                else
-                {
-                    session = null;
-                    userId = "";
-                    var dialog = new MessageDialog("You must log in.", "Login Required");
-                    dialog.Commands.Add(new UICommand("OK"));
-                    await dialog.ShowAsync();
-                }
-            }
+        //            userId = loginResult.UserId;
+        //            string title = string.Format("Welcome {0}!", meResult.Result["first_name"]);
+        //            var message = string.Format("You are now logged in - {0}", loginResult.UserId);
+        //            //var dialog = new MessageDialog(message, title);
+        //            //dialog.Commands.Add(new UICommand("OK"));
+        //            //await dialog.ShowAsync();
+        //            System.Diagnostics.Debug.WriteLine(message);
+        //        }
+        //        else
+        //        {
+        //            session = null;
+        //            userId = "";
+        //            var dialog = new MessageDialog("You must log in.", "Login Required");
+        //            dialog.Commands.Add(new UICommand("OK"));
+        //            await dialog.ShowAsync();
+        //        }
+        //    }
 
 
-        }
+        //}
 
         private async void btnSave_Click_1(object sender, RoutedEventArgs e)
         {
-            await Authenticate();
+            //await Authenticate();
             await SaveUserData();            
         }
 
@@ -659,6 +657,10 @@ namespace CensusMapper
         private async void btnLoad_Click_1(object sender, RoutedEventArgs e)
         {
             await LoadCountyData();
+        }
+
+        private void BtnSearch_OnClick(object sender, RoutedEventArgs e)
+        {            
         }
     }
 }

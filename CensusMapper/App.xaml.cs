@@ -1,4 +1,4 @@
-﻿using Microsoft.WindowsAzure.MobileServices;
+﻿
 using System;
 using System.Collections.Generic;
 using System.IO;
