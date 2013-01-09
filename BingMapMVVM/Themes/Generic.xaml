@@ -1,0 +1,16 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BingMapMVVM"
+    xmlns:Maps="using:Bing.Maps">
+
+    <Style TargetType="local:BindableMap">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:BindableMap">
+                    <Maps:Map x:Name="PART_Map" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

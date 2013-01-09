@@ -6,15 +6,24 @@
     xmlns:local="using:CensusMapper"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:bm="using:Bing.Maps"
+    xmlns:bm="using:Bing.Maps" 
+    xmlns:vm="using:CensusMapper.ViewModels"
+    xmlns:wrtb="using:WinRtBehaviors"
+    xmlns:w8nlb="using:Win8nl.Behaviors"
+    xmlns:bdm="using:BingMapMVVM"
+    xmlns:views="using:CensusMapper.Views"
     mc:Ignorable="d">
+    <Page.Resources>
+        <views:MapItemDataTemplateSelector x:Key="ItemTemplateSelector" />
+    </Page.Resources>
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-        <bm:Map x:Name="map" MapType="Road" Tapped="map_Tapped_1" ViewChanged="map_ViewChanged_1">
-        </bm:Map>  
-        <TextBlock Name="txtZoom" Text="ZoomLevel" FontSize="36" Foreground="Black" HorizontalAlignment="Right" VerticalAlignment="Bottom"></TextBlock>
+            <bdm:BindableMap x:Name="map" Tapped="map_Tapped_1"
+                          DataTemplateSelector="{StaticResource ItemTemplateSelector}" ItemsSource="{Binding Items}">
+            </bdm:BindableMap>        
+        <TextBlock Name="txtZoom" Text="{Binding ElementName=bindableMap, Path=ZoomLevel, Mode=TwoWay}" FontSize="36" Foreground="Black" HorizontalAlignment="Right" VerticalAlignment="Bottom"></TextBlock>
     </Grid>
     <Page.BottomAppBar>
-    <AppBar Name="appBar">
+        <AppBar Name="appBar">
             <StackPanel Orientation="Horizontal" Height="75">
                 <!--<Button x:Name="btnLoad"
                 Click="btnLoad_Click_1"  Style="{StaticResource SaveAppBarButtonStyle}"
@@ -23,9 +32,15 @@
                 Click="btnSave_Click_1" Style="{StaticResource SaveAppBarButtonStyle}"
                 HorizontalAlignment="Right" VerticalAlignment="Center"></Button>-->
                 <TextBox x:Name="txtSearch" Width="300"></TextBox>
-                <Button x:Name="btnSearch"
-                Click="BtnSearch_OnClick"  Style="{StaticResource SaveAppBarButtonStyle}"
-                HorizontalAlignment="Right" VerticalAlignment="Center"></Button>
+                <Button x:Name="btnSearch"  Style="{StaticResource SaveAppBarButtonStyle}"
+                HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <!--<wrtb:Interaction.Behaviors>
+                        <w8nlb:EventToCommandBehavior Event="Clicked"
+                Command="DoSomethingCommand" 
+                CommandParameter="John doe"
+                PassEventArgsToCommand=""/>
+                    </wrtb:Interaction.Behaviors>-->
+                </Button>
             </StackPanel>
         </AppBar>
     </Page.BottomAppBar>

@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Bing.Maps;
+using GalaSoft.MvvmLight.Command;
 
 namespace CensusMapper.ViewModels
 {
-    class MainViewModel
+    public class MainViewModel
     {
         public MainViewModel()
         {
@@ -15,5 +17,16 @@ namespace CensusMapper.ViewModels
         }
 
         public double ZoomLevel { get; set; }
+
+        public ICommand DoSomethingCommand
+        {
+            get
+            {
+                return new RelayCommand<string>((p) =>
+                {
+                    System.Diagnostics.Debug.WriteLine("Hi there {0}", p);
+                });
+            }
+        }
     }
 }

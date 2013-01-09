@@ -6,16 +6,11 @@ using System.Threading.Tasks;
 
 namespace CensusMapper
 {
-    class PopulatedState : UsState
+    public class PopulatedState : PopulatedEntity
     {
-        public PopulatedState(UsState state):base(state.Fips, state.Name, state.Center.Latitude, state.Center.Longitude)
+        public PopulatedState(UsState state) : base(state)
         {
             
-        }
-        public int Population { get; set; }
-        public string FormattedPopulation
-        {
-            get { return string.Format("{0:0,0}", this.Population); }
         }
     }
 }

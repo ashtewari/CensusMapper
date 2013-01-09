@@ -7,8 +7,13 @@ using Bing.Maps;
 
 namespace CensusMapper
 {
-    class UsState
+    public class UsState
     {
+        public UsState()
+        {
+            
+        }
+
         public UsState(string fips, string name, double lat, double lng)
         {
             Fips = fips;

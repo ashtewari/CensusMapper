@@ -166,7 +166,15 @@ namespace CensusMapper.Converters
             states.Add("56", new UsState("56", "Wyoming", 42.675762, -107.008835));
 
             return states;
-        }        
+        }
+
+        private async Task<string> ReadTextFile(string filename)
+        {
+            var folder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+            var file = await folder.GetFileAsync(filename);
+            var text = await Windows.Storage.FileIO.ReadTextAsync(file);
+            return text;
+        }
 
     }
 }
