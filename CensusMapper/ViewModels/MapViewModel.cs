@@ -5,19 +5,25 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Bing.Maps;
 using CensusMapper.Converters;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Newtonsoft.Json.Linq;
 
 namespace CensusMapper.ViewModels
 {
-    public class MapViewModel
+    public class MapViewModel : ViewModelBase
     {
-        private ObservableCollection<MapShapeLayer> _ShapeLayers;
-        private ObservableCollection<PopulatedEntity> _items;
+        private ObservableCollection<PopulatedEntity> _items;        
+
         private string bingMapsApiKey;
         private string censusApiKey;
 
         private BingMaps bingMaps;
         private Census census;
+        private Location _centerOfUs;
+        private double _zoomLevel;
+
+        private ICommand _command;
 
         public MapViewModel(string keyBingMaps, string keyCensus)
         {
@@ -25,34 +31,38 @@ namespace CensusMapper.ViewModels
             censusApiKey = keyCensus;
 
             bingMaps = new BingMaps(bingMapsApiKey);
-            census = new Census(censusApiKey);
-
-            _ShapeLayers = new ObservableCollection<MapShapeLayer>();
+            census = new Census(censusApiKey);            
 
             _items = new ObservableCollection<PopulatedEntity>();
+
+            _centerOfUs = new Location(39.833333, -98.583333);
+            _zoomLevel = 5.0;
         }
 
-        public ObservableCollection<MapShapeLayer> ShapeLayers
+        public Location CenterOfUs
         {
-            get { return _ShapeLayers; }
-            set { _ShapeLayers = value; }
+            get { return _centerOfUs; }
+            set
+            {
+                _centerOfUs = value;                
+                RaisePropertyChanged("CenterOfUs");
+            }
+        }
+
+        public double CurrentZoomLevel
+        {
+            get { return _zoomLevel; }
+            set
+            {
+                _zoomLevel = value;
+                RaisePropertyChanged("CurrentZoomLevel");
+            }
         }
 
         public ObservableCollection<PopulatedEntity> Items
         {
             get { return _items; }
             set { _items = value; }
-        }
-
-        public ICommand DoSomethingCommand
-        {
-            get
-            {
-                return new RelayCommand<string>((p) =>
-                {
-                    System.Diagnostics.Debug.WriteLine("Hi there {0}", p);
-                });
-            }
         }
 
         public async Task<bool> SelectLocation(Location location)
@@ -100,6 +110,41 @@ namespace CensusMapper.ViewModels
             return true;
         }
 
+        public async Task LoadStateDataOneByOne()
+        {
+            try
+            {
+                Dictionary<string, UsState> statesList = Mappings.GetStatesList();
+
+                foreach (var usState in statesList)
+                {
+                    string requestUri = string.Format("get=P0010001,NAME&for=state:{0}", usState.Key);
+                    var array = await census.GetCensusData(requestUri);
+
+                    if (array == null) return;
+
+                    foreach (var item in array)
+                    {
+                        string fips = item[2].ToString();
+                        if (statesList.ContainsKey(fips))
+                        {
+                            UsState state = statesList[fips];
+                            int count;
+
+                            if (int.TryParse(item[0].ToString(), out count))
+                            {
+                                Items.Add(new PopulatedState(state) {Population = count});
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                System.Diagnostics.Debug.WriteLine(exception);
+            }            
+        }
+
         public async Task LoadStateData()
         {
             try
@@ -113,23 +158,28 @@ namespace CensusMapper.ViewModels
 
                 foreach (var item in array)
                 {
-                    string fips = item[2].ToString();
-                    if (statesList.ContainsKey(fips))
-                    {
-                        UsState state = statesList[fips];
-                        int count;
-
-                        if (int.TryParse(item[0].ToString(), out count))
-                        {
-                            Items.Add(new PopulatedState(state) { Population = count });
-                        }
-                    }
+                    AddStateItem(item, statesList);
                 }
             }
             catch (Exception exception)
             {
                 System.Diagnostics.Debug.WriteLine(exception);
-            }            
+            }
+        }
+
+        private void AddStateItem(JToken item, Dictionary<string, UsState> statesList)
+        {
+            string fips = item[2].ToString();
+            if (statesList.ContainsKey(fips))
+            {
+                UsState state = statesList[fips];
+                int count;
+
+                if (int.TryParse(item[0].ToString(), out count))
+                {
+                    Items.Add(new PopulatedState(state) {Population = count});
+                }
+            }
         }
     }
 }

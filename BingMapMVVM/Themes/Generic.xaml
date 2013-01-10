@@ -8,7 +8,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:BindableMap">
-                    <Maps:Map x:Name="PART_Map" />
+                    <Maps:Map x:Name="PART_Map"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

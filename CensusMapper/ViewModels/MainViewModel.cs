@@ -5,28 +5,63 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Bing.Maps;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
 namespace CensusMapper.ViewModels
 {
-    public class MainViewModel
+    public class MainViewModel : ViewModelBase
     {
-        public MainViewModel()
+        private MapViewModel _mapViewModel;
+        private ICommand _searchCommand;
+
+        public MainViewModel(string keyBingMaps, string keyCensus)
         {
-            ZoomLevel = 5.0;
+            _mapViewModel = new MapViewModel(keyBingMaps, keyCensus);
+
+            _searchCommand = new RelayCommand<string>(DoSearch, CanDoSearch);
         }
 
-        public double ZoomLevel { get; set; }
-
-        public ICommand DoSomethingCommand
+        public MapViewModel MapViewModel
         {
-            get
+            get { return _mapViewModel; }
+            set
             {
-                return new RelayCommand<string>((p) =>
-                {
-                    System.Diagnostics.Debug.WriteLine("Hi there {0}", p);
-                });
+                _mapViewModel = value;
+                RaisePropertyChanged("MapViewModel");
             }
+        }
+
+        public ICommand SearchCommand
+        {
+            get { return _searchCommand; }
+            set
+            {
+                _searchCommand = value;
+                RaisePropertyChanged("SearchCommand");
+            }
+
+        }
+
+        public ICommand LoadData
+        {
+            get { return new RelayCommand<string>(async (arg) =>
+                {
+                    System.Diagnostics.Debug.WriteLine(arg);
+                    await _mapViewModel.LoadStateData();
+                }
+                ); 
+            }
+        }
+
+        private void DoSearch(string param)
+        {
+            System.Diagnostics.Debug.WriteLine("Hi there {0}", param);
+        }
+
+        private bool CanDoSearch(string arg)
+        {
+            return !string.IsNullOrEmpty(arg);
         }
     }
 }

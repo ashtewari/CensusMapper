@@ -114,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BindableMap.cs" />
+    <Compile Include="DeferredAction.cs" />
     <Compile Include="LocationAwareDataTemplate.cs" />
     <Compile Include="MapItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

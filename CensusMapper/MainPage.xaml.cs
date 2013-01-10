@@ -31,13 +31,9 @@ namespace CensusMapper
 
         Geolocator geolocator = null;
 
-        private IList<Location> locations;
-
         public MainPage()
-        {
-            locations = new List<Location>();
-
-            App.Current.Suspending += Current_Suspending;
+        {            
+            App.Current.Suspending += Current_Suspending;            
 
             this.InitializeComponent();
             this.InitializeApis();                       
@@ -45,7 +41,7 @@ namespace CensusMapper
             geolocator = new Geolocator();
             geolocator.StatusChanged += geolocator_StatusChanged;
 
-            this.DataContext = new MapViewModel(keyBingMaps, keyCensus);
+            this.DataContext = new MainViewModel(keyBingMaps, keyCensus);
         }
 
         async void Current_Suspending(object sender, Windows.ApplicationModel.SuspendingEventArgs e)
@@ -150,18 +146,7 @@ namespace CensusMapper
         /// <param name="e">Event data that describes how this page was reached.  The Parameter
         /// property is typically used to configure the page.</param>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
-        {
-            //// var centerOfUs = new Location(39.833333, -98.583333);
-            ////map.Center = centerOfUs;
-            ////map.ZoomLevel = InitialZoomLevel;
-
-            var vm = map.DataContext as MapViewModel;
-
-            if (vm != null)
-            {
-                await vm.LoadStateData();
-            }
-
+        {            
             SetCurrentLocation();
         }
 
@@ -170,7 +155,7 @@ namespace CensusMapper
             if (!locationEnabled) return;
 
             var pos = await geolocator.GetGeopositionAsync();
-            Location location = new Location(pos.Coordinate.Latitude, pos.Coordinate.Longitude);            
+            var location = new Location(pos.Coordinate.Latitude, pos.Coordinate.Longitude);            
 
             await SetLocation(map, location);
         }
@@ -197,11 +182,7 @@ namespace CensusMapper
 
             if (vm == null) return;
 
-            var result = await vm.SelectLocation(location);
-            if (result)
-            {
-                locations.Add(location);
-            }
+            await vm.SelectLocation(location);
         }
 
         // > 5 USA

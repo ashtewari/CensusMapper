@@ -19,6 +19,7 @@
 
         private Map _mapControl;
         private bool _inited = false;
+        private IList<DeferredAction> deferredActions = new List<DeferredAction>();
 
         public BindableMap()
         {
@@ -152,16 +153,17 @@
             base.OnApplyTemplate();
 
             _mapControl = (Map)this.GetTemplateChild("PART_Map");
-
+            _mapControl.ViewChanged += _mapControl_ViewChanged;
+            
             ApplyCredentials();
 
-            ZoomLevel = _mapControl.ZoomLevel;
+            ////ZoomLevel = _mapControl.ZoomLevel;
             ApplyZoomLevel();
 
-            MapType = _mapControl.MapType;
+            ////MapType = _mapControl.MapType;
             ApplyMapType();
 
-            Center = _mapControl.Center;
+            ////Center = _mapControl.Center;
             ApplyCenter();
 
             ApplyShapeLayerCollection();
@@ -170,6 +172,21 @@
 
 
             _inited = true;
+
+            foreach (var deferredAction in deferredActions)
+            {
+                deferredAction.Execute();
+            }
+
+            deferredActions.Clear();
+        }
+
+        void _mapControl_ViewChanged(object sender, ViewChangedEventArgs e)
+        {
+            var map = sender as Map;
+            if (map == null) return;
+
+            this.ZoomLevel = map.ZoomLevel;
         }
 
         private void ApplyShapeLayerCollection()
@@ -212,7 +229,7 @@
         }
 
         private void ApplyCenter()
-        {
+        {            
             _mapControl.Center = Center;
         }
 
@@ -288,7 +305,10 @@
         private void OnZoomLevelPropertyChanged(double oldValue, double newValue)
         {
             if (!_inited)
+            {
+                this.deferredActions.Add(new DeferredAction(() => OnZoomLevelPropertyChanged(oldValue, newValue)));
                 return;
+            }
 
             ApplyZoomLevel();
         }
@@ -296,15 +316,21 @@
         private void OnMapTypePropertyChanged(Bing.Maps.MapType oldValue, Bing.Maps.MapType newValue)
         {
             if (!_inited)
+            {
+                this.deferredActions.Add(new DeferredAction(() => OnMapTypePropertyChanged(oldValue, newValue)));
                 return;
+            }
 
             ApplyMapType();
         }
 
         private void OnCenterPropertyChanged(Location oldValue, Location newValue)
         {
-            if (_inited)
+            if (!_inited)
+            {
+                this.deferredActions.Add(new DeferredAction(() => OnCenterPropertyChanged(oldValue, newValue)));
                 return;
+            }
 
             ApplyCenter();
         }

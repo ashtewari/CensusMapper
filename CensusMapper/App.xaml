@@ -36,6 +36,13 @@
                 Maps:LocationAwareDataTemplate.LatitudePath="Center.Latitude"
                 Maps:LocationAwareDataTemplate.LongitudePath="Center.Longitude">                
                 <Grid>
+                    <Grid.ChildrenTransitions>
+                        <TransitionCollection>
+                            <!--<AddDeleteThemeTransition/>
+                            <ContentThemeTransition/>-->
+                            <EntranceThemeTransition/>
+                        </TransitionCollection>
+                    </Grid.ChildrenTransitions>                    
                 <Border CornerRadius="2" BorderBrush="AliceBlue" BorderThickness="2" Margin="4">
                     <Grid>                    
                         <Rectangle Fill="#2A41EF"/>    
