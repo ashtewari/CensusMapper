@@ -1,4 +1,6 @@
-﻿namespace BingMapMVVM
+﻿using CensusMapper;
+
+namespace BingMapMVVM
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -133,19 +135,19 @@
             ((BindableMap)sender).OnMapTypePropertyChanged((MapType)eventArgs.OldValue, (MapType)eventArgs.NewValue);
         }
 
-        public Location Center
+        public object Center
         {
-            get { return (Location)GetValue(CenterProperty); }
+            get { return (object)GetValue(CenterProperty); }
             set { SetValue(CenterProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Center.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CenterProperty =
-            DependencyProperty.Register("Center", typeof(Location), typeof(BindableMap), new PropertyMetadata(null, OnCenterPropertyChanged));
+            DependencyProperty.Register("Center", typeof(object), typeof(BindableMap), new PropertyMetadata(null, OnCenterPropertyChanged));
 
         private static void OnCenterPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs eventArgs)
         {
-            ((BindableMap)sender).OnCenterPropertyChanged((Location)eventArgs.OldValue, (Location)eventArgs.NewValue);
+            ((BindableMap)sender).OnCenterPropertyChanged((object)eventArgs.OldValue, (object)eventArgs.NewValue);
         }
 
         protected override void OnApplyTemplate()
@@ -229,8 +231,17 @@
         }
 
         private void ApplyCenter()
-        {            
-            _mapControl.Center = Center;
+        {
+            if (Center == null) return;
+            if (Center is Location)
+            {
+                _mapControl.Center = (Location)Center;
+            }
+            else
+            {
+                var xy = Center as Coordinates;
+                _mapControl.Center = new Location(xy.Latitude, xy.Longitude);
+            }            
         }
 
         private void OnShapeLayersPropertyChanged(ICollection<MapShapeLayer> oldValue, ICollection<MapShapeLayer> newValue)
@@ -324,7 +335,7 @@
             ApplyMapType();
         }
 
-        private void OnCenterPropertyChanged(Location oldValue, Location newValue)
+        private void OnCenterPropertyChanged(object oldValue, object newValue)
         {
             if (!_inited)
             {

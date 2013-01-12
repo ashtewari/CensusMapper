@@ -4,15 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Bing.Maps;
 using BingMapMVVM;
-using CensusMapper.Converters;
+using CensusMapper.Services;
 using CensusMapper.ViewModels;
 using Windows.Devices.Geolocation;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
-using System.Xml.Linq;
-using Newtonsoft.Json;
 
 namespace CensusMapper
 {
@@ -21,14 +18,6 @@ namespace CensusMapper
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        const string API_KEYS_FILE = "ApiKeys.xml";
-        const double InitialZoomLevel = 5.0;
-      
-        private string keyCensus = "";
-        private string keyBingMaps = "";
-        private string keyAzureMobile = "";
-
-
         Geolocator geolocator = null;
 
         public MainPage()
@@ -36,12 +25,15 @@ namespace CensusMapper
             App.Current.Suspending += Current_Suspending;            
 
             this.InitializeComponent();
-            this.InitializeApis();                       
 
-            geolocator = new Geolocator();
-            geolocator.StatusChanged += geolocator_StatusChanged;
+            var keyService = new ApiKeyProvider();
 
-            this.DataContext = new MainViewModel(keyBingMaps, keyCensus);
+            this.InitializeApis(keyService);
+
+            var bingMapsApi = new BingMapsApi(keyService);
+            var censusApi = new CensusApi(keyService);
+
+            this.DataContext = new MainViewModel(bingMapsApi, censusApi);
         }
 
         async void Current_Suspending(object sender, Windows.ApplicationModel.SuspendingEventArgs e)
@@ -53,9 +45,11 @@ namespace CensusMapper
             deferral.Complete();
         }
 
-        private void InitializeApis()
+        private void InitializeApis(IApiKeyProvider keyService)
         {
-            SetApiKeys();            
+            map.Credentials = keyService.BingMapsKey;
+            geolocator = new Geolocator();
+            geolocator.StatusChanged += geolocator_StatusChanged;          
         }
 
         private string _status = "";
@@ -121,25 +115,6 @@ namespace CensusMapper
             
         }
 
-        private void SetApiKeys()
-        {            
-            string fileName = API_KEYS_FILE;
-
-            var data = XDocument.Load(System.IO.Path.Combine(fileName));
-            var keys = data.Descendants("Keys").First();
-
-            var census = from key in keys.Elements("Key") where key.Attribute("name").Value == "Census" select key.Attribute("value").Value;
-            var bing = from key in keys.Elements("Key") where key.Attribute("name").Value == "Bing" select key.Attribute("value").Value;
-            var azureMobile = from key in keys.Elements("Key") where key.Attribute("name").Value == "AzureMobile" select key.Attribute("value").Value;                              
-
-            keyCensus = census.ElementAt(0);
-            keyBingMaps = bing.ElementAt(0);
-            keyAzureMobile = azureMobile.ElementAt(0);
-
-            map.Credentials = keyBingMaps;
-        }
-
-
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
         /// </summary>
@@ -182,7 +157,7 @@ namespace CensusMapper
 
             if (vm == null) return;
 
-            await vm.SelectLocation(location);
+            await vm.SelectLocation(new Coordinates(location.Latitude, location.Longitude));
         }
 
         // > 5 USA

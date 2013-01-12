@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace CensusMapper
 {
-    public class Item
+    public class PopulatedState : PopulatedEntity
     {
-        public int Id { get; set; }
-        public string UserId { get; set; }
-        public string Text { get; set; }
+        public PopulatedState(UsState state) : base(state)
+        {
+            
+        }
     }
 }

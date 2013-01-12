@@ -6,15 +6,15 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{27B4C7A8-6111-413B-A28E-CBEEEA8E7F0A}</ProjectGuid>
+    <ProjectGuid>{F443EC0B-99BD-401A-A9D0-D4FC5FAF622B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CensusMapper.UnitTests</RootNamespace>
-    <AssemblyName>CensusMapper.UnitTests</AssemblyName>
+    <RootNamespace>CensusMapperTests</RootNamespace>
+    <AssemblyName>CensusMapperTests</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>CensusMapper.UnitTests_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>CensusMapperTests_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,7 +24,7 @@
     <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -110,8 +110,6 @@
     <SDKReference Include="TestPlatform, Version=11.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainViewModelTests.cs" />
-    <Compile Include="MapViewModelTests.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -119,7 +117,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="CensusMapper.UnitTests_TemporaryKey.pfx" />
+    <None Include="CensusMapperTests_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\UnitTestLogo.png">
@@ -134,25 +132,6 @@
     <Content Include="Images\UnitTestStoreLogo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CensusMapper.Models\CensusMapper.Models.csproj">
-      <Project>{073aca96-9ebe-4975-8308-9e10d2cdb5f8}</Project>
-      <Name>CensusMapper.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CensusMapper.Services\CensusMapper.Services.csproj">
-      <Project>{c483a673-f6ab-4314-893d-e0ded39051fb}</Project>
-      <Name>CensusMapper.Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CensusMapper.ViewModels\CensusMapper.ViewModels.csproj">
-      <Project>{ffac299f-d889-4aed-91fa-a229ae1ae4bf}</Project>
-      <Name>CensusMapper.ViewModels</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="GalaSoft.MvvmLight.Win8">
-      <HintPath>..\packages\Win8nl.1.0.7\lib\NetCore45\GalaSoft.MvvmLight.Win8.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

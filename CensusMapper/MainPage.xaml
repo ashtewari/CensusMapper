@@ -11,9 +11,10 @@
     xmlns:wrtb="using:WinRtBehaviors"
     xmlns:w8nlb="using:Win8nl.Behaviors"
     xmlns:bdm="using:BingMapMVVM"
-    xmlns:views="using:CensusMapper.Views"
+    xmlns:views="using:CensusMapper.Views" xmlns:converters="using:CensusMapper.Converters"
     mc:Ignorable="d">
     <Page.Resources>
+        <converters:LocationCoordinateConverter x:Key="LoConverter" />
         <views:MapItemDataTemplateSelector x:Key="ItemTemplateSelector" />
     </Page.Resources>
 
@@ -24,7 +25,7 @@
     </wrtb:Interaction.Behaviors>
 
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-        <bdm:BindableMap x:Name="map" DataContext="{Binding MapViewModel}" Center="{Binding CenterOfUs, Mode=TwoWay}"
+        <bdm:BindableMap x:Name="map" DataContext="{Binding MapViewModel}" Center="{Binding CenterOfUs, Mode=TwoWay, Converter={StaticResource LoConverter}}"
                         ZoomLevel="{Binding CurrentZoomLevel, Mode=TwoWay}"
                         DataTemplateSelector="{StaticResource ItemTemplateSelector}" ItemsSource="{Binding Items}"
                         Tapped="map_Tapped_1">

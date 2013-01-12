@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Bing.Maps;
-using CensusMapper.Services;
+﻿using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
@@ -57,7 +50,7 @@ namespace CensusMapper.ViewModels
 
         private void DoSearch(string param)
         {
-            System.Diagnostics.Debug.WriteLine("Hi there {0}", param);
+            this.MapViewModel.Search(param);
         }
 
         private bool CanDoSearch(string arg)

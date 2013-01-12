@@ -14,14 +14,16 @@ namespace CensusMapper
             
         }
 
+
         public UsState(string fips, string name, double lat, double lng)
         {
             Fips = fips;
             Name = name;
-            Center = new Location(lat, lng);
+            Center = new Coordinates(lat, lng);
         }
+
         public string Fips { get; set; }
         public string Name { get; set; }
-        public Location Center { get; set; }
+        public Coordinates Center { get; set; }
     }
 }

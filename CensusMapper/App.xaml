@@ -1,10 +1,12 @@
 ﻿<Application
     x:Class="CensusMapper.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Maps="using:BingMapMVVM">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Maps="using:BingMapMVVM"
+    xmlns:converters="using:CensusMapper.Converters">
 
-    <Application.Resources>
+    <Application.Resources>       
         <ResourceDictionary>
+            <converters:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" True="Visible" False="Collapsed"/>
             <DataTemplate x:Key="ZipCodeTemplate"
                 Maps:LocationAwareDataTemplate.LatitudePath="Center.Latitude"
                 Maps:LocationAwareDataTemplate.LongitudePath="Center.Longitude">
@@ -20,7 +22,9 @@
                                 <EntranceThemeTransition/>-->
                         </TransitionCollection>
                     </Grid.ChildrenTransitions>
-
+                    <Grid.Visibility>
+                        <Binding Path="IsVisible" Converter="{StaticResource BoolToVisibilityConverter}" ConverterParameter="true"/>
+                    </Grid.Visibility>
                     <Path Grid.Row="0" Data="M-0.333333,-0.333333" Fill="#0822E8" HorizontalAlignment="Left" Height="0" Margin="-0.333,-0.333,0,0" Stretch="Fill" UseLayoutRounding="False" VerticalAlignment="Top" Width="0"/>
                     <Grid Grid.Row="1">
                         <Rectangle Name="backPanel" Fill="#0822E8"/>
@@ -42,8 +46,11 @@
                             <ContentThemeTransition/>-->
                             <EntranceThemeTransition/>
                         </TransitionCollection>
-                    </Grid.ChildrenTransitions>                    
-                <Border CornerRadius="2" BorderBrush="AliceBlue" BorderThickness="2" Margin="4">
+                    </Grid.ChildrenTransitions>
+                    <Grid.Visibility>
+                        <Binding Path="IsVisible" Converter="{StaticResource BoolToVisibilityConverter}" ConverterParameter="true"/>
+                    </Grid.Visibility>
+                    <Border CornerRadius="2" BorderBrush="AliceBlue" BorderThickness="2" Margin="4">
                     <Grid>                    
                         <Rectangle Fill="#2A41EF"/>    
                         <StackPanel Margin="6">

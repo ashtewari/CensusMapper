@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using System.Windows.Input;
+//using Bing.Maps;
 using Bing.Maps;
 using CensusMapper.Converters;
-using CensusMapper.Services;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using Newtonsoft.Json.Linq;
 
 namespace CensusMapper.ViewModels
 {
@@ -19,7 +16,7 @@ namespace CensusMapper.ViewModels
         private IBingMapsApi bingMaps;
         private ICensusApi censusApi;
 
-        private Location _centerOfUs;
+        private object _centerOfUs;
         private double _zoomLevel;
 
         public MapViewModel(IBingMapsApi bingMaps, ICensusApi censusApi)
@@ -28,11 +25,11 @@ namespace CensusMapper.ViewModels
             this.censusApi = censusApi;
 
             _items = new ObservableCollection<PopulatedEntity>();
-            _centerOfUs = new Location(39.833333, -98.583333);
+            _centerOfUs = new Coordinates(39.833333, -98.583333);
             _zoomLevel = 5.0;
         }
 
-        public Location CenterOfUs
+        public object CenterOfUs
         {
             get { return _centerOfUs; }
             set
@@ -110,8 +107,11 @@ namespace CensusMapper.ViewModels
 
                 foreach (var item in array)
                 {
-                    UsState state = statesList[item.Key];
-                    Items.Add(new PopulatedState(state) { Population = item.Value });
+                    if (statesList.ContainsKey(item.Key))
+                    {
+                        UsState state = statesList[item.Key];
+                        Items.Add(new PopulatedState(state) {Population = item.Value});
+                    }
                 }
             }
             catch (Exception exception)
@@ -119,5 +119,20 @@ namespace CensusMapper.ViewModels
                 System.Diagnostics.Debug.WriteLine(exception);
             }
         }        
+
+        public void Search(string text)
+        {
+            foreach (var item in this.Items)
+            {
+                if (item.Name.ToLowerInvariant().Contains(text.ToLowerInvariant()))
+                {
+                    item.IsVisible = true;
+                }
+                else
+                {
+                    item.IsVisible = false;
+                }
+            }
+        }
     }
 }

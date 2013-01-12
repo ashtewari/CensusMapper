@@ -1,32 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using Bing.Maps;
+//using Bing.Maps;
+using CensusMapper.Services;
 using Newtonsoft.Json;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace CensusMapper
 {
-    public class BingMaps
+    public class BingMapsApi : IBingMapsApi
     {
         private string baseUri = @"{0}?&key={1}";
         private string _bingMapsKey = String.Empty;
 
-        HttpClient client = new HttpClient();
+        private readonly HttpClient client = new HttpClient();
 
-        public BingMaps(string bingMapsKey)
+        public BingMapsApi(IApiKeyProvider keyService)
 	    {
-            _bingMapsKey = bingMapsKey;
+            _bingMapsKey = keyService.BingMapsKey;
 
             client = new HttpClient();
             client.BaseAddress = new Uri("http://dev.virtualearth.net/REST/v1/Locations/");
 	    }
 
-        public async Task<Address> GetAddress(Location location)
+        public async Task<Address> GetAddress(Coordinates location)
         {
             string requestUri = String.Format(baseUri, string.Format("{0},{1}", location.Latitude, location.Longitude), _bingMapsKey);
             var task = client.GetAsync(requestUri);
