@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 
-namespace CensusMapper
+namespace CensusMapper.ViewModels
 {
     public class UsState : ViewModelBase
     {

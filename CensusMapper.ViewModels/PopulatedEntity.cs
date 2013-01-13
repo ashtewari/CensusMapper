@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CensusMapper
+namespace CensusMapper.ViewModels
 {
     public class PopulatedEntity : UsState
     {

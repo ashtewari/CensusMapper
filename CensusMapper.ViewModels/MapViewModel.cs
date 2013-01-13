@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-//using Bing.Maps;
-using Bing.Maps;
-using CensusMapper.Converters;
 using GalaSoft.MvvmLight;
 
 namespace CensusMapper.ViewModels
@@ -124,7 +121,7 @@ namespace CensusMapper.ViewModels
         {
             foreach (var item in this.Items)
             {
-                if (item.Name.ToLowerInvariant().Contains(text.ToLowerInvariant()))
+                if (string.IsNullOrEmpty(text) || (item.Name.ToLowerInvariant().Contains(text.ToLowerInvariant())))
                 {
                     item.IsVisible = true;
                 }

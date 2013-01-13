@@ -55,7 +55,7 @@ namespace CensusMapper.ViewModels
 
         private bool CanDoSearch(string arg)
         {
-            return !string.IsNullOrEmpty(arg);
+            return true;
         }
     }
 }
