@@ -36,9 +36,20 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>                    
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="SearchBox" Grid.Column="0" Width="300" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBox>
-                <Button x:Name="SearchButton" Grid.Column="1"  Style="{StaticResource SearchAppBarButtonStyle}"   
+                <Button x:Name="LoadButton" Grid.Column="0" 
+                        Command="{Binding RefreshCommand}"
+                        Style="{StaticResource RefreshAppBarButtonStyle}"
+                HorizontalAlignment="Right" VerticalAlignment="Center"></Button>                
+                <Button x:Name="ClearButton" Grid.Column="1"
+                        Command="{Binding ClearCommand}"
+                Style="{StaticResource DeleteAppBarButtonStyle}"
+                HorizontalAlignment="Right" VerticalAlignment="Center"></Button>
+
+                <TextBox x:Name="SearchBox" Grid.Column="2" Width="300" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBox>
+                <Button x:Name="SearchButton" Grid.Column="3"  Style="{StaticResource SearchAppBarButtonStyle}"   
                         Command="{Binding SearchCommand}" 
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         CommandParameter="{Binding ElementName=SearchBox, Path=Text, Mode=TwoWay}"
