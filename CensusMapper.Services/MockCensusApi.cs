@@ -19,8 +19,17 @@ namespace CensusMapper.Services
             var result = new Dictionary<string, int?>();
 
             foreach (var state in states)
-            {                
-                result.Add((state == "*") ? "37" : state, 999999);
+            {
+                if (state == "*")
+                {
+                    result.Add("37", 9535483);
+                    result.Add("45", 4625364);
+                    result.Add("51", 8001024);
+                }
+                else
+                {
+                    result.Add("01", 999999);
+                }
             }
 
             return result;

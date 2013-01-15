@@ -34,8 +34,8 @@ namespace CensusMapper.UnitTests
 
             vm.LoadData.Execute(null);
 
-            Assert.AreEqual(1, vm.MapViewModel.Items.Count);
-            Assert.AreEqual(999999, vm.MapViewModel.Items[0].Population.Value);
+            Assert.AreEqual(3, vm.MapViewModel.Items.Count);
+            Assert.AreEqual(9535483, vm.MapViewModel.Items[0].Population.Value);
         }
     }
 }
