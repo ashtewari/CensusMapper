@@ -1,5 +1,4 @@
-﻿using CensusMapper;
-
+﻿
 namespace BingMapMVVM
 {
     using System.Collections.Generic;
@@ -7,6 +6,7 @@ namespace BingMapMVVM
     using System.Collections.Specialized;
     using System.Linq;
     using Bing.Maps;
+    using CensusMapper.ViewModels;
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
     using System.Collections;
@@ -156,6 +156,8 @@ namespace BingMapMVVM
 
             _mapControl = (Map)this.GetTemplateChild("PART_Map");
             _mapControl.ViewChanged += _mapControl_ViewChanged;
+            _mapControl.ShowNavigationBar = false;
+            _mapControl.ShowScaleBar = false;
             
             ApplyCredentials();
 

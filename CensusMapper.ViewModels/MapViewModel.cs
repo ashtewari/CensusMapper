@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using CensusMapper.Models;
 using GalaSoft.MvvmLight;
 
 namespace CensusMapper.ViewModels
 {
     public class MapViewModel : ViewModelBase
     {
-        private ObservableCollection<PopulatedEntity> _items;        
+        private ObservableCollection<PopulatedEntityViewModel> _items;        
 
         private IBingMapsApi bingMaps;
         private ICensusApi censusApi;
@@ -21,7 +22,7 @@ namespace CensusMapper.ViewModels
             this.bingMaps = bingMaps;
             this.censusApi = censusApi;
 
-            _items = new ObservableCollection<PopulatedEntity>();
+            _items = new ObservableCollection<PopulatedEntityViewModel>();
             _centerOfUs = new Coordinates(39.833333, -98.583333);
             _zoomLevel = 5.0;
         }
@@ -46,15 +47,15 @@ namespace CensusMapper.ViewModels
             }
         }
 
-        public ObservableCollection<PopulatedEntity> Items
+        public ObservableCollection<PopulatedEntityViewModel> Items
         {
             get { return _items; }
             set { _items = value; }
         }
 
-        public async Task SelectLocation(Coordinates location)
+        public async Task SelectLocation(Coordinates coordinates)
         {
-            Address address = await bingMaps.GetAddress(location);
+            Address address = await bingMaps.GetAddress(new Location(coordinates.Latitude, coordinates.Longitude));
             if (address == null) return;
             
             string fips = Mappings.StateAbbreviationToFips(address.AdminDistrict);
@@ -63,7 +64,7 @@ namespace CensusMapper.ViewModels
             var population = await censusApi.GetPopulationForZipCode(fips, address.PostalCode);
             if (population == null) return;
 
-            Items.Add(new PopulatedZipCode(new UsState(fips, string.Format("{0} ({1})", address.Locality, address.PostalCode), location.Latitude, location.Longitude))
+            Items.Add(new ZipCodeViewModel(new CensusEntityViewModel(fips, string.Format("{0} ({1})", address.Locality, address.PostalCode), coordinates.Latitude, coordinates.Longitude))
             {
                 Population = population
             });
@@ -73,7 +74,7 @@ namespace CensusMapper.ViewModels
         {
             try
             {
-                Dictionary<string, UsState> statesList = Mappings.GetStatesList();
+                Dictionary<string, CensusEntityViewModel> statesList = Mappings.GetStatesList();
 
                 foreach (var usState in statesList.Keys)
                 {
@@ -82,8 +83,8 @@ namespace CensusMapper.ViewModels
 
                     foreach (var item in array)
                     {
-                        UsState state = statesList[item.Key];
-                        Items.Add(new PopulatedState(state) {Population = item.Value});
+                        CensusEntityViewModel state = statesList[item.Key];
+                        Items.Add(new StateViewModel(state) {Population = item.Value});
                     }
                 }
             }
@@ -100,14 +101,14 @@ namespace CensusMapper.ViewModels
                 var array = await censusApi.GetPopulationForStates(new List<string>() {"*"});
                 if (array == null) return;
 
-                Dictionary<string, UsState> statesList = Mappings.GetStatesList();
+                Dictionary<string, CensusEntityViewModel> statesList = Mappings.GetStatesList();
 
                 foreach (var item in array)
                 {
                     if (statesList.ContainsKey(item.Key))
                     {
-                        UsState state = statesList[item.Key];
-                        Items.Add(new PopulatedState(state) {Population = item.Value});
+                        CensusEntityViewModel state = statesList[item.Key];
+                        Items.Add(new StateViewModel(state) {Population = item.Value});
                     }
                 }
             }

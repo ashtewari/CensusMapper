@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CensusMapper.ViewModels
 {
-    public class PopulatedState : PopulatedEntity
+    public class StateViewModel : PopulatedEntityViewModel
     {
-        public PopulatedState(UsState state) : base(state)
+        public StateViewModel(CensusEntityViewModel state) : base(state)
         {
             
         }

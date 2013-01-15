@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-//using Bing.Maps;
+using CensusMapper.Models;
 
 namespace CensusMapper
 {
     public interface IBingMapsApi
     {
-        Task<Address> GetAddress(Coordinates location);
+        Task<Address> GetAddress(Location location);
     }
 }

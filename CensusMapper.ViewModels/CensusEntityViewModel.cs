@@ -7,14 +7,14 @@ using GalaSoft.MvvmLight;
 
 namespace CensusMapper.ViewModels
 {
-    public class UsState : ViewModelBase
+    public class CensusEntityViewModel : ViewModelBase
     {
-        public UsState()
+        public CensusEntityViewModel()
         {
             
         }
 
-        public UsState(string fips, string name, double lat, double lng)
+        public CensusEntityViewModel(string fips, string name, double lat, double lng)
         {
             Fips = fips;
             Name = name;

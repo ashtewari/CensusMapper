@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CensusMapper.ViewModels
 {
-    public class PopulatedZipCode : PopulatedEntity
+    public class ZipCodeViewModel : PopulatedEntityViewModel
     {
-        public PopulatedZipCode(UsState state):base(state)
+        public ZipCodeViewModel(CensusEntityViewModel state):base(state)
         {
             
         }

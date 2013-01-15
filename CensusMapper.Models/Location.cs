@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CensusMapper
+namespace CensusMapper.Models
 {
-    public class Coordinates
+    public class Location
     {
-        public Coordinates(double lat, double lng)
+        public Location(double lat, double lng)
         {
             Latitude = lat;
             Longitude = lng;

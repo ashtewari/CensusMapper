@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-//using Bing.Maps;
+﻿using System.Threading.Tasks;
+using CensusMapper.Models;
 
 namespace CensusMapper.Services
 {
@@ -14,7 +10,7 @@ namespace CensusMapper.Services
             
         }
 
-        public async Task<Address> GetAddress(Coordinates location)
+        public async Task<Address> GetAddress(Location location)
         {
             return new Address() {AdminDistrict = "NC", AdminDistrict2 = "", CountryRegion = "", PostalCode = "27501", Locality = "Raleigh", FormattedAddress = "123 First Street"};
         }

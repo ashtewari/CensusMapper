@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace CensusMapper.ViewModels
 {
-    public class PopulatedEntity : UsState
+    public class PopulatedEntityViewModel : CensusEntityViewModel
     {
         private bool _isVisible;
 
-        public PopulatedEntity(UsState state)
+        public PopulatedEntityViewModel(CensusEntityViewModel state)
             : base(state.Fips, state.Name, state.Center.Latitude, state.Center.Longitude)
         {
             IsVisible = true;

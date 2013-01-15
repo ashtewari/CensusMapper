@@ -104,66 +104,66 @@ namespace CensusMapper.ViewModels
             return string.Empty;
         }
 
-        internal static Dictionary<string, UsState> GetStatesList()
+        internal static Dictionary<string, CensusEntityViewModel> GetStatesList()
         {
-            var states = new Dictionary<string, UsState>();
+            var states = new Dictionary<string, CensusEntityViewModel>();
 
-            states.Add("01", new UsState("01", "Alabama", 33.001, -86.766233));
-            states.Add("02", new UsState("02", "Alaska", 61.288254, -148.716968));
+            states.Add("01", new CensusEntityViewModel("01", "Alabama", 33.001, -86.766233));
+            states.Add("02", new CensusEntityViewModel("02", "Alaska", 61.288254, -148.716968));
 
-            states.Add("04", new UsState("04", "Arizona", 33.373506, -111.828711));
-            states.Add("05", new UsState("05", "Arkansas", 35.080251, -92.576816));
-            states.Add("06", new UsState("06", "California", 35.458606, -119.355165));
+            states.Add("04", new CensusEntityViewModel("04", "Arizona", 33.373506, -111.828711));
+            states.Add("05", new CensusEntityViewModel("05", "Arkansas", 35.080251, -92.576816));
+            states.Add("06", new CensusEntityViewModel("06", "California", 35.458606, -119.355165));
 
-            states.Add("08", new UsState("08", "Colorado", 39.500656, -105.203628));
-            states.Add("09", new UsState("09", "Connecticut", 41.494852, -72.874365));
-            states.Add("10", new UsState("10", "Delaware", 39.397164, -75.561908));
-            states.Add("11", new UsState("11", "District of Columbia", 38.910092, -77.014001));
-            states.Add("12", new UsState("12", "Florida", 27.795850, -81.634622));
-            states.Add("13", new UsState("13", "Georgia", 33.332208, -83.868887));
+            states.Add("08", new CensusEntityViewModel("08", "Colorado", 39.500656, -105.203628));
+            states.Add("09", new CensusEntityViewModel("09", "Connecticut", 41.494852, -72.874365));
+            states.Add("10", new CensusEntityViewModel("10", "Delaware", 39.397164, -75.561908));
+            states.Add("11", new CensusEntityViewModel("11", "District of Columbia", 38.910092, -77.014001));
+            states.Add("12", new CensusEntityViewModel("12", "Florida", 27.795850, -81.634622));
+            states.Add("13", new CensusEntityViewModel("13", "Georgia", 33.332208, -83.868887));
 
-            states.Add("15", new UsState("15", "Hawaii", 21.146768, -157.524452));
-            states.Add("16", new UsState("16", "Idaho", 44.242605, -115.133222));
-            states.Add("17", new UsState("17", "Illinois", 41.278216, -88.380238));
-            states.Add("18", new UsState("18", "Indiana", 40.163935, -86.261515));
-            states.Add("19", new UsState("19", "Iowa", 41.960392, -93.049161));
-            states.Add("20", new UsState("20", "Kansas", 38.454303, -96.536052));
-            states.Add("21", new UsState("21", "Kentucky", 37.808159, -85.241819));
-            states.Add("22", new UsState("22", "Louisiana", 30.699270, -91.457133));
-            states.Add("23", new UsState("23", "Maine", 44.313614, -69.719931));
-            states.Add("24", new UsState("24", "Maryland", 39.145653, -76.797396));
-            states.Add("25", new UsState("25", "Massachusetts", 42.271831, -71.363628));
-            states.Add("26", new UsState("26", "Michigan", 42.866412, -84.170753));
-            states.Add("27", new UsState("27", "Minnesota", 45.210782, -93.583003));
-            states.Add("28", new UsState("28", "Mississippi", 32.566420, -89.593164));
-            states.Add("29", new UsState("29", "Missouri", 38.437715, -92.153770));
-            states.Add("30", new UsState("30", "Montana", 46.813302, -111.209708));
-            states.Add("31", new UsState("31", "Nebraska", 41.183753, -97.403875));
-            states.Add("32", new UsState("32", "Nevada", 37.165965, -116.304648));
-            states.Add("33", new UsState("33", "New Hampshire", 43.153046, -71.463342));
-            states.Add("34", new UsState("34", "New Jersy", 40.438458, -74.428055));
-            states.Add("35", new UsState("35", "New Mexico", 34.623012, -106.342108));
-            states.Add("36", new UsState("36", "New York", 41.507548, -74.645228));
-            states.Add("37", new UsState("37", "North Carolina", 35.553334, -79.667654));
-            states.Add("38", new UsState("38", "North Dakota", 47.375168, -99.334736));
-            states.Add("39", new UsState("39", "Ohio", 40.480854, -82.749366));
-            states.Add("40", new UsState("40", "Oklahoma", 35.597940, -96.834653));
-            states.Add("41", new UsState("41", "Oregon", 44.732273, -122.579524));
-            states.Add("42", new UsState("42", "Pennsylvania", 40.463528, -77.075925));
+            states.Add("15", new CensusEntityViewModel("15", "Hawaii", 21.146768, -157.524452));
+            states.Add("16", new CensusEntityViewModel("16", "Idaho", 44.242605, -115.133222));
+            states.Add("17", new CensusEntityViewModel("17", "Illinois", 41.278216, -88.380238));
+            states.Add("18", new CensusEntityViewModel("18", "Indiana", 40.163935, -86.261515));
+            states.Add("19", new CensusEntityViewModel("19", "Iowa", 41.960392, -93.049161));
+            states.Add("20", new CensusEntityViewModel("20", "Kansas", 38.454303, -96.536052));
+            states.Add("21", new CensusEntityViewModel("21", "Kentucky", 37.808159, -85.241819));
+            states.Add("22", new CensusEntityViewModel("22", "Louisiana", 30.699270, -91.457133));
+            states.Add("23", new CensusEntityViewModel("23", "Maine", 44.313614, -69.719931));
+            states.Add("24", new CensusEntityViewModel("24", "Maryland", 39.145653, -76.797396));
+            states.Add("25", new CensusEntityViewModel("25", "Massachusetts", 42.271831, -71.363628));
+            states.Add("26", new CensusEntityViewModel("26", "Michigan", 42.866412, -84.170753));
+            states.Add("27", new CensusEntityViewModel("27", "Minnesota", 45.210782, -93.583003));
+            states.Add("28", new CensusEntityViewModel("28", "Mississippi", 32.566420, -89.593164));
+            states.Add("29", new CensusEntityViewModel("29", "Missouri", 38.437715, -92.153770));
+            states.Add("30", new CensusEntityViewModel("30", "Montana", 46.813302, -111.209708));
+            states.Add("31", new CensusEntityViewModel("31", "Nebraska", 41.183753, -97.403875));
+            states.Add("32", new CensusEntityViewModel("32", "Nevada", 37.165965, -116.304648));
+            states.Add("33", new CensusEntityViewModel("33", "New Hampshire", 43.153046, -71.463342));
+            states.Add("34", new CensusEntityViewModel("34", "New Jersy", 40.438458, -74.428055));
+            states.Add("35", new CensusEntityViewModel("35", "New Mexico", 34.623012, -106.342108));
+            states.Add("36", new CensusEntityViewModel("36", "New York", 41.507548, -74.645228));
+            states.Add("37", new CensusEntityViewModel("37", "North Carolina", 35.553334, -79.667654));
+            states.Add("38", new CensusEntityViewModel("38", "North Dakota", 47.375168, -99.334736));
+            states.Add("39", new CensusEntityViewModel("39", "Ohio", 40.480854, -82.749366));
+            states.Add("40", new CensusEntityViewModel("40", "Oklahoma", 35.597940, -96.834653));
+            states.Add("41", new CensusEntityViewModel("41", "Oregon", 44.732273, -122.579524));
+            states.Add("42", new CensusEntityViewModel("42", "Pennsylvania", 40.463528, -77.075925));
 
-            states.Add("44", new UsState("44", "Rhode Island", 41.753318, -71.448902));
-            states.Add("45", new UsState("45", "South Carolina", 34.034551, -81.032387));
-            states.Add("46", new UsState("46", "South Dakota", 44.047502, -99.043799));
-            states.Add("47", new UsState("47", "Tennessee", 35.795862, -86.397772));
-            states.Add("48", new UsState("48", "Texas", 30.943149, -97.388631));
-            states.Add("49", new UsState("49", "Utah", 40.438987, -111.900160));
-            states.Add("50", new UsState("50", "Vermont", 44.081127, -72.814309));
-            states.Add("51", new UsState("51", "Virginia", 37.750345, -77.835857));
+            states.Add("44", new CensusEntityViewModel("44", "Rhode Island", 41.753318, -71.448902));
+            states.Add("45", new CensusEntityViewModel("45", "South Carolina", 34.034551, -81.032387));
+            states.Add("46", new CensusEntityViewModel("46", "South Dakota", 44.047502, -99.043799));
+            states.Add("47", new CensusEntityViewModel("47", "Tennessee", 35.795862, -86.397772));
+            states.Add("48", new CensusEntityViewModel("48", "Texas", 30.943149, -97.388631));
+            states.Add("49", new CensusEntityViewModel("49", "Utah", 40.438987, -111.900160));
+            states.Add("50", new CensusEntityViewModel("50", "Vermont", 44.081127, -72.814309));
+            states.Add("51", new CensusEntityViewModel("51", "Virginia", 37.750345, -77.835857));
 
-            states.Add("53", new UsState("53", "Washington", 47.341728, -121.624501));
-            states.Add("54", new UsState("54", "West Virginia", 38.767195, -80.820221));
-            states.Add("55", new UsState("55", "Wisconsin", 43.728544, -89.001006));
-            states.Add("56", new UsState("56", "Wyoming", 42.675762, -107.008835));
+            states.Add("53", new CensusEntityViewModel("53", "Washington", 47.341728, -121.624501));
+            states.Add("54", new CensusEntityViewModel("54", "West Virginia", 38.767195, -80.820221));
+            states.Add("55", new CensusEntityViewModel("55", "Wisconsin", 43.728544, -89.001006));
+            states.Add("56", new CensusEntityViewModel("56", "Wyoming", 42.675762, -107.008835));
 
             return states;
         }

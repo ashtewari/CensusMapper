@@ -114,11 +114,10 @@
     </Compile>
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\LocationCoordinateConverter.cs" />
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StringFormatConverter.cs" />
     <Compile Include="Views\MapItemDataTemplateSelector.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -146,7 +145,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainPage.xaml">
+    <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -198,10 +197,6 @@
     <ProjectReference Include="..\BingMapMVVM\BingMapMVVM.csproj">
       <Project>{159fd361-bcf6-4b86-8af9-d0b99d9332cf}</Project>
       <Name>BingMapMVVM</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CensusMapper.Models\CensusMapper.Models.csproj">
-      <Project>{073aca96-9ebe-4975-8308-9e10d2cdb5f8}</Project>
-      <Name>CensusMapper.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\CensusMapper.Services\CensusMapper.Services.csproj">
       <Project>{c483a673-f6ab-4314-893d-e0ded39051fb}</Project>

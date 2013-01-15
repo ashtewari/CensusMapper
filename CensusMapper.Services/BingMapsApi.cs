@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 //using Bing.Maps;
+using CensusMapper.Models;
 using CensusMapper.Services;
 using Newtonsoft.Json;
 
@@ -22,7 +23,7 @@ namespace CensusMapper
             client.BaseAddress = new Uri("http://dev.virtualearth.net/REST/v1/Locations/");
 	    }
 
-        public async Task<Address> GetAddress(Coordinates location)
+        public async Task<Address> GetAddress(Location location)
         {
             string requestUri = String.Format(baseUri, string.Format("{0},{1}", location.Latitude, location.Longitude), _bingMapsKey);
             var task = client.GetAsync(requestUri);

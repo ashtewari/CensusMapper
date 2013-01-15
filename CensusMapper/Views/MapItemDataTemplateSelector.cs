@@ -13,7 +13,7 @@ namespace CensusMapper.Views
     {
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
-            if (item is PopulatedState)
+            if (item is StateViewModel)
             {
                 return (DataTemplate) Application.Current.Resources["StateTemplate"];
             }

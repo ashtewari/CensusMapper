@@ -100,11 +100,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
-    <Compile Include="Coordinates.cs" />
     <Compile Include="County.cs" />
     <Compile Include="CountyFips.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="GeocodePoint.cs" />
+    <Compile Include="Location.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource.cs" />

@@ -99,14 +99,15 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Coordinates.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Mappings.cs" />
     <Compile Include="MapViewModel.cs" />
-    <Compile Include="PopulatedEntity.cs" />
-    <Compile Include="PopulatedState.cs" />
-    <Compile Include="PopulatedZipCode.cs" />
+    <Compile Include="PopulatedEntityViewModel.cs" />
+    <Compile Include="StateViewModel.cs" />
+    <Compile Include="ZipCodeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UsState.cs" />
+    <Compile Include="CensusEntityViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Bing.Maps">
