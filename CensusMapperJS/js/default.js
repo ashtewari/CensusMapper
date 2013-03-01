@@ -43,10 +43,10 @@
             var mapOptions =
             {
                 // Add your Bing Maps key here
-                credentials: 'AokHTH0-W5lExUUHR15VLgxjPm-OhzFMeNM5tqpgvAxy4TtvxKmsW6JekmllB3m5',
-                center: new Microsoft.Maps.Location(40.71, -74.00),
+                credentials: 'AjFaZyzK0GB6IrfCv0VQ7YJBj9vL9o1hpOWTDwpo-wS-61QEFM17jeRBA05GrpO5',
+                center: new Microsoft.Maps.Location(39.833333, -98.583333),
                 mapTypeId: Microsoft.Maps.MapTypeId.road,
-                zoom: 8
+                zoom: 5
             };
             map = new Microsoft.Maps.Map(document.getElementById("mapdiv"), mapOptions);
         }
