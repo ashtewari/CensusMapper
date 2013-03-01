@@ -31,4 +31,28 @@
     };
 
     app.start();
+    
+    function initialize() {
+        Microsoft.Maps.loadModule('Microsoft.Maps.Map', { callback: initMap, culture: 'en-us', homeRegion: 'US' });
+    }
+    document.addEventListener("DOMContentLoaded", initialize, false);
+    
+    var map;
+    function initMap() {
+        try {
+            var mapOptions =
+            {
+                // Add your Bing Maps key here
+                credentials: 'AokHTH0-W5lExUUHR15VLgxjPm-OhzFMeNM5tqpgvAxy4TtvxKmsW6JekmllB3m5',
+                center: new Microsoft.Maps.Location(40.71, -74.00),
+                mapTypeId: Microsoft.Maps.MapTypeId.road,
+                zoom: 8
+            };
+            map = new Microsoft.Maps.Map(document.getElementById("mapdiv"), mapOptions);
+        }
+        catch (e) {
+            var md = new Windows.UI.Popups.MessageDialog(e.message);
+            md.showAsync();
+        }
+    }
 })();
