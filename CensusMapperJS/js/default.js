@@ -33,22 +33,63 @@
     app.start();
     
     function initialize() {
+        // init bing maps
         Microsoft.Maps.loadModule('Microsoft.Maps.Map', { callback: initMap, culture: 'en-us', homeRegion: 'US' });
+
+        //hook button clicks
+        WinJS.UI.processAll().done(function () {
+            var cmdRefresh = document.getElementById("cmdRefresh");
+            cmdRefresh.addEventListener("click", function() {
+                // get census data and display it              
+
+                var pkg = Windows.ApplicationModel.Package.current;
+                var folder = pkg.installedLocation;
+                folder.getFileAsync("ApiKeys.json").done(function(file) {
+                    Windows.Storage.FileIO.readTextAsync(file).done(function(text) {
+                        var censusKey = JSON.parse(text).Census;
+                        
+                        var options = {
+                            url: "http://api.census.gov/data/2010/sf1?key=" + censusKey + "&get=P0010001&for=state:*",
+                            type: "GET",
+                        };
+
+                        WinJS.xhr(options).done(
+                            function success(req) {
+                                var data = JSON.parse(req.responseText);
+                                console.log(data);
+                            },
+                            function error(err) {
+                                var md = new Windows.UI.Popups.MessageDialog(err.message);
+                                md.showAsync();
+                            }
+                        );
+                    });
+                });                             
+            });
+        });
     }
     document.addEventListener("DOMContentLoaded", initialize, false);
     
     var map;
     function initMap() {
         try {
-            var mapOptions =
-            {
-                // Add your Bing Maps key here
-                credentials: 'AjFaZyzK0GB6IrfCv0VQ7YJBj9vL9o1hpOWTDwpo-wS-61QEFM17jeRBA05GrpO5',
-                center: new Microsoft.Maps.Location(39.833333, -98.583333),
-                mapTypeId: Microsoft.Maps.MapTypeId.road,
-                zoom: 5
-            };
-            map = new Microsoft.Maps.Map(document.getElementById("mapdiv"), mapOptions);
+            var pkg = Windows.ApplicationModel.Package.current;
+            var folder = pkg.installedLocation;
+            folder.getFileAsync("ApiKeys.json").done(function(file) {
+                Windows.Storage.FileIO.readTextAsync(file).done(function(text) {
+                    var bingKey = JSON.parse(text).Bing;
+
+                    var mapOptions =
+                    {
+                        // Add your Bing Maps key here
+                        credentials: bingKey,
+                        center: new Microsoft.Maps.Location(39.833333, -98.583333),
+                        mapTypeId: Microsoft.Maps.MapTypeId.road,
+                        zoom: 5
+                    };
+                    map = new Microsoft.Maps.Map(document.getElementById("mapdiv"), mapOptions);
+                });
+            });
         }
         catch (e) {
             var md = new Windows.UI.Popups.MessageDialog(e.message);
