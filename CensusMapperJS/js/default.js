@@ -42,6 +42,8 @@
             cmdRefresh.addEventListener("click", function() {
                 // get census data and display it              
 
+                map.entities.clear();
+                
                 var pkg = Windows.ApplicationModel.Package.current;
                 var folder = pkg.installedLocation;
                 folder.getFileAsync("ApiKeys.json").done(function(file) {
@@ -53,16 +55,33 @@
                             type: "GET",
                         };
 
-                        WinJS.xhr(options).done(
-                            function success(req) {
-                                var data = JSON.parse(req.responseText);
-                                console.log(data);
-                            },
-                            function error(err) {
-                                var md = new Windows.UI.Popups.MessageDialog(err.message);
-                                md.showAsync();
-                            }
-                        );
+                        folder.getFileAsync("\data\\states-data.json").done(function(statesfile) {
+                            Windows.Storage.FileIO.readTextAsync(statesfile).done(function(statesData) {
+                                console.log(statesData);
+                                var states = JSON.parse(statesData);
+
+                                WinJS.xhr(options).done(
+                                    function success(req) {
+                                        var data = JSON.parse(req.responseText);
+                                        for (var i = 0; i < data.length; i++) {
+                                            console.log(data[i][0] + " " + data[i][1]);
+                                            for (var j = 0; j < states.length; j++) {
+                                                if (data[i][1] == states[j].id) {
+                                                    console.log(states[j].name);                                                    
+                                                    var pushpinOptions = { width: null, height: null, htmlContent: "<div style='font-size:12px;font-weight:bold;border:solid 2px;background-color:LightBlue;width:100px;'>" + data[i][0] + "</div>" };
+                                                    var pushpin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(states[j].lat, states[j].lng), pushpinOptions);
+                                                    map.entities.push(pushpin);
+                                                }
+                                            }
+                                        }
+                                    },
+                                    function error(err) {
+                                        var md = new Windows.UI.Popups.MessageDialog(err.message);
+                                        md.showAsync();
+                                    }
+                                );
+                            });
+                        });
                     });
                 });                             
             });

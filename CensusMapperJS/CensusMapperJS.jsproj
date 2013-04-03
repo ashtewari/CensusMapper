@@ -65,6 +65,9 @@
     <Content Include="..\CensusMapper\Assets\StoreLogo.png">
       <Link>images\StoreLogo.png</Link>
     </Content>
+    <Content Include="data\states-data.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="default.html" />
     <Content Include="js\default.js" />
     <Content Include="css\default.css" />
