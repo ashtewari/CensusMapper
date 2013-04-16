@@ -68,7 +68,7 @@
                                             for (var j = 0; j < states.length; j++) {
                                                 if (data[i][1] == states[j].id) {
                                                     console.log(states[j].name);                                                    
-                                                    var pushpinOptions = { width: null, height: null, htmlContent: "<div class='population-box'>" + data[i][0] + "</div>" };
+                                                    var pushpinOptions = { width: null, height: null, htmlContent: "<div class='population-box'><div class=state-name>" + states[j].name + "</div><div>" + data[i][0] + "</div></div>" };
                                                     var pushpin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(states[j].lat, states[j].lng), pushpinOptions);
                                                     map.entities.push(pushpin);
                                                 }

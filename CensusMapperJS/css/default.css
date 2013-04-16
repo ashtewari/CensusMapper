@@ -1,6 +1,10 @@
 ﻿body {
 }
 
+.state-name {
+    font: 16px Arial, sans-serif
+}
+
 .population-box {
 	position:relative;
     padding: 15px 35px;    
