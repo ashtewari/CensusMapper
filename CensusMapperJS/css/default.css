@@ -2,12 +2,28 @@
 }
 
 .population-box {
-font-size:24px;
-font-weight:bold;
-border:solid 2px;
-background-color:Blue;
-width:100px;   
+	position:relative;
+    padding: 15px 35px;    
+    top:50px;
+    max-width:175px;
+	text-align:center;
+	font:22px Arial, sans-serif;
+	color:#fff;
+	background:#0822E8;
 }
+
+
+/* creates the larger triangle */
+.population-box:before {
+	content:"";
+	position:absolute;
+	top:-50px;
+    left:0;
+	border-width:75px 0px 0px 25px;
+    border-style:solid;
+	border-color:transparent #0822E8;
+}
+
 
 @media screen and (-ms-view-state: fullscreen-landscape) {
 }
