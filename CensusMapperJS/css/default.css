@@ -9,7 +9,6 @@
 	position:relative;
     padding: 15px 35px;    
     top:50px;
-    max-width:175px;
 	text-align:center;
 	font:22px Arial, sans-serif;
 	color:#fff;
@@ -17,7 +16,7 @@
 }
 
 
-/* creates the larger triangle */
+/* creates the beak */
 .population-box:before {
 	content:"";
 	position:absolute;
