@@ -1,6 +1,14 @@
 ﻿body {
 }
 
+.population-box {
+font-size:24px;
+font-weight:bold;
+border:solid 2px;
+background-color:Blue;
+width:100px;   
+}
+
 @media screen and (-ms-view-state: fullscreen-landscape) {
 }
 
