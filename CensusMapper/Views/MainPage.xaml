@@ -1,4 +1,4 @@
-﻿<Page
+﻿<common:LayoutAwarePage
     x:Class="CensusMapper.MainPage"
     IsTabStop="false"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -9,6 +9,7 @@
     xmlns:w8nlb="using:Win8nl.Behaviors"
     xmlns:bdm="using:BingMapMVVM"
     xmlns:views="using:CensusMapper.Views" xmlns:converters="using:CensusMapper.Converters"
+    xmlns:common="using:CensusMapper.Common"
     mc:Ignorable="d">
     <Page.Resources>
         <converters:LocationCoordinateConverter x:Key="LoConverter" />
@@ -37,7 +38,8 @@
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>                    
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button x:Name="LoadButton" Grid.Column="0" 
                         Command="{Binding RefreshCommand}"
@@ -54,7 +56,12 @@
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                         CommandParameter="{Binding ElementName=SearchBox, Path=Text, Mode=TwoWay}"
                 />
+
+                <Button x:Name="ComparisonButton" Grid.Column="4"
+                        Click="ComparisonButton_OnClick"
+                Style="{StaticResource NextAppBarButtonStyle}"
+                HorizontalAlignment="Right" VerticalAlignment="Center"></Button>
             </Grid>
         </AppBar>
     </Page.BottomAppBar>
-</Page>
+</common:LayoutAwarePage>

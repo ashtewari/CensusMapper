@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Bing.Maps;
 using BingMapMVVM;
+using CensusMapper.Common;
 using CensusMapper.Services;
 using CensusMapper.ViewModels;
+using CensusMapper.Views;
 using Windows.Devices.Geolocation;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
@@ -16,14 +20,12 @@ namespace CensusMapper
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : CensusMapper.Common.LayoutAwarePage
     {
         Geolocator geolocator = null;
 
         public MainPage()
-        {            
-            App.Current.Suspending += Current_Suspending;            
-
+        {                    
             this.InitializeComponent();
 
             var keyService = new ApiKeyProvider();
@@ -31,18 +33,9 @@ namespace CensusMapper
             this.InitializeApis(keyService);
 
             var bingMapsApi = new BingMapsApi(keyService);
-            var censusApi = new CensusApi(keyService);
+            var censusApi = new MockCensusApi(keyService);
 
             this.DataContext = new MainViewModel(bingMapsApi, censusApi);
-        }
-
-        async void Current_Suspending(object sender, Windows.ApplicationModel.SuspendingEventArgs e)
-        {
-            var deferral = e.SuspendingOperation.GetDeferral();
-
-            //// SaveUserData();
-
-            deferral.Complete();
         }
 
         private void InitializeApis(IApiKeyProvider keyService)
@@ -115,14 +108,47 @@ namespace CensusMapper
             
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.  The Parameter
-        /// property is typically used to configure the page.</param>
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
-        {            
-            SetCurrentLocation();
+        ///// <summary>
+        ///// Invoked when this page is about to be displayed in a Frame.
+        ///// </summary>
+        ///// <param name="e">Event data that describes how this page was reached.  The Parameter
+        ///// property is typically used to configure the page.</param>
+        //protected override async void OnNavigatedTo(NavigationEventArgs e)
+        //{            
+        //    SetCurrentLocation();
+        //}
+
+        protected override void LoadState(object navigationParameter, Dictionary<string, object> pageState)
+        {
+            if (pageState == null) return;
+
+            var vm = this.DataContext as MainViewModel;
+            if (vm == null) return;
+            
+            if (pageState.ContainsKey("locations"))
+            {
+                vm.MapViewModel.Items.Clear();
+
+                var list = pageState["locations"] as List<PopulatedEntityViewModel>;
+                foreach (var viewModel in list)
+                {
+                    vm.MapViewModel.Items.Add(viewModel);
+                }
+            }
+        }
+
+        protected override void SaveState(Dictionary<string, object> pageState)
+        {
+            var vm = this.DataContext as MainViewModel;
+            if (vm == null) return;
+
+            var list = new List<PopulatedEntityViewModel>();
+            foreach (var item in vm.MapViewModel.Items)
+            {
+                list.Add(item);
+            }
+
+            pageState.Add("locations", list);
         }
 
         private async void SetCurrentLocation()
@@ -164,5 +190,10 @@ namespace CensusMapper
         // 5 - 10 State
         // 10 - 12 County
         // 12 > City
+
+        private void ComparisonButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof (ComparisonView));
+        }
     }
 }

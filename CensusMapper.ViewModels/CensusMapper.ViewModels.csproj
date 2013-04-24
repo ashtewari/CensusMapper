@@ -99,6 +99,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ComparisonViewModel.cs" />
     <Compile Include="Coordinates.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Mappings.cs" />

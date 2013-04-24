@@ -13,7 +13,8 @@ namespace CensusMapper.Services
 
         public ApiKeyProvider()
         {
-            var data = XDocument.Load(System.IO.Path.Combine(ApiKeysFile));
+            var filepath = System.IO.Path.Combine(ApiKeysFile);
+            var data = XDocument.Load(filepath);
             var keys = data.Descendants("Keys").First();
 
             var census = from key in keys.Elements("Key") where key.Attribute("name").Value == "Census" select key.Attribute("value").Value;

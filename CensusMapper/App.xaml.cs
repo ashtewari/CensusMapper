@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using CensusMapper.Common;
+using CensusMapper.ViewModels;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -40,30 +42,51 @@ namespace CensusMapper
         /// search results, and so forth.
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        protected async override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            // Do not repeat app initialization when already running, just ensure that
-            // the window is active
-            if (args.PreviousExecutionState == ApplicationExecutionState.Running)
-            {
-                Window.Current.Activate();
-                return;
-            }
+            Frame rootFrame = Window.Current.Content as Frame;
 
-            if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
-            {
-                //TODO: Load state from previously suspended application
-            }
+            // Do not repeat app initialization when the Window already has content,
+            // just ensure that the window is active
 
-            // Create a Frame to act navigation context and navigate to the first page
-            var rootFrame = new Frame();
-            if (!rootFrame.Navigate(typeof(MainPage)))
+            if (rootFrame == null)
             {
-                throw new Exception("Failed to create initial page");
-            }
+                SuspensionManager.KnownTypes.Add(typeof(List<PopulatedEntityViewModel>));
+                SuspensionManager.KnownTypes.Add(typeof(StateViewModel));
 
-            // Place the frame in the current Window and ensure that it is active
-            Window.Current.Content = rootFrame;
+                // Create a Frame to act as the navigation context and navigate to the first page
+                rootFrame = new Frame();
+                //Associate the frame with a SuspensionManager key                                
+                SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
+
+                if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                {
+                    // Restore the saved session state only when appropriate
+                    try
+                    {
+                        ////await SuspensionManager.RestoreAsync();
+                    }
+                    catch (SuspensionManagerException)
+                    {
+                        //Something went wrong restoring state.
+                        //Assume there is no state and continue
+                    }
+                }
+
+                // Place the frame in the current Window
+                Window.Current.Content = rootFrame;
+            }
+            if (rootFrame.Content == null)
+            {
+                // When the navigation stack isn't restored navigate to the first page,
+                // configuring the new page by passing required information as a navigation
+                // parameter
+                if (!rootFrame.Navigate(typeof(MainPage), "MainPage"))
+                {
+                    throw new Exception("Failed to create initial page");
+                }
+            }
+            // Ensure the current window is active
             Window.Current.Activate();
         }
 
@@ -74,10 +97,10 @@ namespace CensusMapper
         /// </summary>
         /// <param name="sender">The source of the suspend request.</param>
         /// <param name="e">Details about the suspend request.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: Save application state and stop any background activity
+            await SuspensionManager.SaveAsync();
             deferral.Complete();
         }
     }
