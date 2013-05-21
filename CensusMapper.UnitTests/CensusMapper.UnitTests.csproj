@@ -136,6 +136,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BingMapMVVM\BingMapMVVM.csproj">
+      <Project>{159fd361-bcf6-4b86-8af9-d0b99d9332cf}</Project>
+      <Name>BingMapMVVM</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CensusMapper.Models\CensusMapper.Models.csproj">
       <Project>{073aca96-9ebe-4975-8308-9e10d2cdb5f8}</Project>
       <Name>CensusMapper.Models</Name>

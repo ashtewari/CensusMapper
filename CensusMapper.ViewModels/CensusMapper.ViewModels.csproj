@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -100,7 +101,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ComparisonViewModel.cs" />
-    <Compile Include="Coordinates.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Mappings.cs" />
     <Compile Include="MapViewModel.cs" />
@@ -120,6 +120,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BingMapMVVM\BingMapMVVM.csproj">
+      <Project>{159fd361-bcf6-4b86-8af9-d0b99d9332cf}</Project>
+      <Name>BingMapMVVM</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CensusMapper.Models\CensusMapper.Models.csproj">
       <Project>{073aca96-9ebe-4975-8308-9e10d2cdb5f8}</Project>
       <Name>CensusMapper.Models</Name>

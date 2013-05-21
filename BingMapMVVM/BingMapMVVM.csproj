@@ -36,6 +36,7 @@
     <DefineConstants>TRACE;NETFX_CORE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -114,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BindableMap.cs" />
+    <Compile Include="Coordinates.cs" />
     <Compile Include="DeferredAction.cs" />
     <Compile Include="LocationAwareDataTemplate.cs" />
     <Compile Include="MapItem.cs" />
@@ -124,12 +126,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CensusMapper.ViewModels\CensusMapper.ViewModels.csproj">
-      <Project>{ffac299f-d889-4aed-91fa-a229ae1ae4bf}</Project>
-      <Name>CensusMapper.ViewModels</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight.Win8, Version=4.1.26.29183, Culture=neutral, PublicKeyToken=7f0ea4153a3589fc, processorArchitecture=MSIL">

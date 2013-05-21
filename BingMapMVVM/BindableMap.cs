@@ -1,4 +1,6 @@
 ﻿
+using CensusMapper.ViewModels;
+
 namespace BingMapMVVM
 {
     using System.Collections.Generic;
@@ -6,7 +8,7 @@ namespace BingMapMVVM
     using System.Collections.Specialized;
     using System.Linq;
     using Bing.Maps;
-    using CensusMapper.ViewModels;
+   
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
     using System.Collections;

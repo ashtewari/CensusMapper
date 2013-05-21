@@ -30,9 +30,9 @@ namespace CensusMapper.ViewModels
             this.MapViewModel.Items.Clear();
         }
 
-        private void DoRefresh()
+        private async void DoRefresh()
         {
-            this.MapViewModel.LoadStateData();
+            await this.MapViewModel.LoadStateData();
         }
 
         public MapViewModel MapViewModel

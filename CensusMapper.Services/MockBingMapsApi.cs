@@ -12,7 +12,17 @@ namespace CensusMapper.Services
 
         public async Task<Address> GetAddress(Location location)
         {
-            return new Address() {AdminDistrict = "NC", AdminDistrict2 = "", CountryRegion = "", PostalCode = "27501", Locality = "Raleigh", FormattedAddress = "123 First Street"};
+            var result = new Address()
+                        {
+                            AdminDistrict = "NC",
+                            AdminDistrict2 = "",
+                            CountryRegion = "",
+                            PostalCode = "27501",
+                            Locality = "Raleigh",
+                            FormattedAddress = "123 First Street"
+                        };
+
+            return await Task.FromResult(result);
         }
     }
 }

@@ -32,12 +32,12 @@ namespace CensusMapper.Services
                 }
             }
 
-            return result;
+            return await Task.FromResult(result);
         }
 
         public async Task<int?> GetPopulationForZipCode(string state, string zipcode)
         {
-            return 55555;
+            return await Task.Run(() => 5555);
         }
     }
 }

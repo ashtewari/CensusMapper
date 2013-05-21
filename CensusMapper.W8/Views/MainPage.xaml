@@ -1,0 +1,67 @@
+﻿<common:LayoutAwarePage
+    x:Class="CensusMapper.MainPage"
+    IsTabStop="false"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wrtb="using:WinRtBehaviors"
+    xmlns:w8nlb="using:Win8nl.Behaviors"
+    xmlns:bdm="using:BingMapMVVM"
+    xmlns:views="using:CensusMapper.Views" xmlns:converters="using:CensusMapper.Converters"
+    xmlns:common="using:CensusMapper.Common"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <converters:LocationCoordinateConverter x:Key="LoConverter" />
+        <views:MapItemDataTemplateSelector x:Key="ItemTemplateSelector" />
+    </Page.Resources>
+
+    <wrtb:Interaction.Behaviors>
+        <w8nlb:EventToCommandBehavior Event="Loaded"
+                Command="LoadData" 
+                CommandParameter="States"/>
+    </wrtb:Interaction.Behaviors>
+
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <bdm:BindableMap x:Name="map" DataContext="{Binding MapViewModel}" 
+                         Center="{Binding CenterOfUs, Mode=TwoWay, Converter={StaticResource LoConverter}}"
+                        ZoomLevel="{Binding CurrentZoomLevel, Mode=TwoWay}"
+                        DataTemplateSelector="{StaticResource ItemTemplateSelector}" ItemsSource="{Binding Items}"                         
+                        Tapped="map_Tapped_1">
+            </bdm:BindableMap>
+        <TextBlock Name="txtZoom" Text="{Binding ElementName=map, Path=ZoomLevel, Mode=TwoWay}" FontSize="36" Foreground="Black" HorizontalAlignment="Right" VerticalAlignment="Bottom"></TextBlock>
+    </Grid>
+    <Page.BottomAppBar>
+        <AppBar Name="BottomBar">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="LoadButton" Grid.Column="0" 
+                        Command="{Binding RefreshCommand}"
+                        Style="{StaticResource RefreshAppBarButtonStyle}"
+                HorizontalAlignment="Right" VerticalAlignment="Center"></Button>                
+                <Button x:Name="ClearButton" Grid.Column="1"
+                        Command="{Binding ClearCommand}"
+                Style="{StaticResource DeleteAppBarButtonStyle}"
+                HorizontalAlignment="Right" VerticalAlignment="Center"></Button>
+
+                <TextBox x:Name="SearchBox" Grid.Column="2" Width="300" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBox>
+                <Button x:Name="SearchButton" Grid.Column="3"  Style="{StaticResource SearchAppBarButtonStyle}"   
+                        Command="{Binding SearchCommand}" 
+                        HorizontalAlignment="Left" VerticalAlignment="Center"
+                        CommandParameter="{Binding ElementName=SearchBox, Path=Text, Mode=TwoWay}"
+                />
+
+                <Button x:Name="ComparisonButton" Grid.Column="4"
+                        Click="ComparisonButton_OnClick"
+                Style="{StaticResource NextAppBarButtonStyle}"
+                HorizontalAlignment="Right" VerticalAlignment="Center"></Button>
+            </Grid>
+        </AppBar>
+    </Page.BottomAppBar>
+</common:LayoutAwarePage>
