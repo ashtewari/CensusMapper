@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using CensusMapper.Models;
 using Newtonsoft.Json;
 
-namespace CensusMapper
+namespace CensusMapper.Services
 {
     /*
                 SbaApi sba = new SbaApi();

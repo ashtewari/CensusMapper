@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace CensusMapper
+namespace CensusMapper.Models
 {
 
     public class Entity

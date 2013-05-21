@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{ae4e29a9-ab62-448a-a361-409e0fa9b449}</ProjectGuid>
+    <ArchitectureToolsVersion>2.0.0.0</ArchitectureToolsVersion>
+    <Name>CensusMapperCore.Architecture</Name>
+    <RootNamespace>CensusMapperCore.Architecture</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />
+  <ItemGroup>
+    <Folder Include="ModelDefinition\" />
+    <Content Include="ModelDefinition\CensusMapperCore.Architecture.uml">
+      <SubType>Content</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Validate Include="Mvvm.layerdiagram">
+      <SubType>Content</SubType>
+    </Validate>
+    <Validate Include="Mvvm.layerdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Mvvm.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="Mvvm.layerdiagram.suppressions">
+      <SubType>Content</SubType>
+      <DependentUpon>Mvvm.layerdiagram</DependentUpon>
+    </Validate>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BingMapMVVM\BingMapMVVM.csproj">
+      <Name>BingMapMVVM</Name>
+      <Project>{159fd361-bcf6-4b86-8af9-d0b99d9332cf}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\CensusMapper.Core\CensusMapper.Core.csproj">
+      <Name>CensusMapper.Core</Name>
+      <Project>{3eb0fa91-5572-43ce-82b0-211f1c6f3d4b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\CensusMapper.W8\CensusMapper.W8.csproj">
+      <Name>CensusMapper.W8</Name>
+      <Project>{12ddbaf7-efef-4fd0-8f2c-0aed517d6429}</Project>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

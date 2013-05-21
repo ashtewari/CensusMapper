@@ -6,7 +6,7 @@ using CensusMapper.Models;
 using CensusMapper.Services;
 using Newtonsoft.Json;
 
-namespace CensusMapper
+namespace CensusMapper.Services
 {
     public class BingMapsApi : IBingMapsApi
     {

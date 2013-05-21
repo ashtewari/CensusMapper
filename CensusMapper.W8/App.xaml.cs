@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using CensusMapper.Common;
 using CensusMapper.ViewModels;
+using CensusMapper.Views;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;

@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using CensusMapper.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 

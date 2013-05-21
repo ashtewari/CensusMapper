@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using CensusMapper.Models;
 
-namespace CensusMapper
+namespace CensusMapper.Services
 {
     public interface IBingMapsApi
     {

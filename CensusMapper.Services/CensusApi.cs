@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace CensusMapper
+namespace CensusMapper.Services
 {
     public class CensusApi : ICensusApi
     {
