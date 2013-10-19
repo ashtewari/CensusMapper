@@ -9,6 +9,8 @@
     <ArchitectureToolsVersion>2.0.0.0</ArchitectureToolsVersion>
     <Name>CensusMapper.Architecture</Name>
     <RootNamespace>CensusMapper.Architecture</RootNamespace>
+    <ValidateArchitecture>
+    </ValidateArchitecture>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug\</OutputPath>

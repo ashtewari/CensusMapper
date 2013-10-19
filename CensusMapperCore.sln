@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CensusMapper.W8", "CensusMa
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "CensusMapperCore.Architecture", "CensusMapperCore.Architecture\CensusMapperCore.Architecture.modelproj", "{AE4E29A9-AB62-448A-A361-409E0FA9B449}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CensusMapper.Core.Pcl", "CensusMapper.Core.Pcl\CensusMapper.Core.Pcl.csproj", "{374A34B2-BBF4-40D1-83A0-F0479A05DFDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,16 @@ Global
 		{AE4E29A9-AB62-448A-A361-409E0FA9B449}.Release|ARM.ActiveCfg = Release|Any CPU
 		{AE4E29A9-AB62-448A-A361-409E0FA9B449}.Release|x64.ActiveCfg = Release|Any CPU
 		{AE4E29A9-AB62-448A-A361-409E0FA9B449}.Release|x86.ActiveCfg = Release|Any CPU
+		{374A34B2-BBF4-40D1-83A0-F0479A05DFDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{374A34B2-BBF4-40D1-83A0-F0479A05DFDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{374A34B2-BBF4-40D1-83A0-F0479A05DFDD}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{374A34B2-BBF4-40D1-83A0-F0479A05DFDD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{374A34B2-BBF4-40D1-83A0-F0479A05DFDD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{374A34B2-BBF4-40D1-83A0-F0479A05DFDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{374A34B2-BBF4-40D1-83A0-F0479A05DFDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{374A34B2-BBF4-40D1-83A0-F0479A05DFDD}.Release|ARM.ActiveCfg = Release|Any CPU
+		{374A34B2-BBF4-40D1-83A0-F0479A05DFDD}.Release|x64.ActiveCfg = Release|Any CPU
+		{374A34B2-BBF4-40D1-83A0-F0479A05DFDD}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

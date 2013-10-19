@@ -32,7 +32,7 @@ namespace CensusMapper.Views
 
             this.InitializeApis(keyService);
 
-            var bingMapsApi = new BingMapsApi(keyService);
+            var bingMapsApi = new MockBingMapsApi(keyService);
             var censusApi = new MockCensusApi(keyService);
 
             this.DataContext = new MainViewModel(bingMapsApi, censusApi);

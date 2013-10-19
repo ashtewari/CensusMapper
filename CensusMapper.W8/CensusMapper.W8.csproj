@@ -233,9 +233,9 @@
       <Project>{159fd361-bcf6-4b86-8af9-d0b99d9332cf}</Project>
       <Name>BingMapMVVM</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CensusMapper.Core\CensusMapper.Core.csproj">
-      <Project>{3eb0fa91-5572-43ce-82b0-211f1c6f3d4b}</Project>
-      <Name>CensusMapper.Core</Name>
+    <ProjectReference Include="..\CensusMapper.Core.Pcl\CensusMapper.Core.Pcl.csproj">
+      <Project>{374a34b2-bbf4-40d1-83a0-f0479a05dfdd}</Project>
+      <Name>CensusMapper.Core.Pcl</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
