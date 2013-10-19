@@ -1,78 +1,103 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="ab1e7a59-7d4d-4f1e-9bee-7bfa7cda1bb7" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
   <layers>
-    <layer Id="f0e8a0ea-20ae-4bb1-8a5f-f29996dd265e" name="Model">
+    <layer Id="2d190269-cf45-4990-b3c6-da64d7c556e1" name="Core">
+      <childLayers>
+        <layer Id="f0e8a0ea-20ae-4bb1-8a5f-f29996dd265e" name="Model">
+          <references>
+            <reference Id="e920fe83-63da-4c18-aafb-cfd789b97450" name="CensusMapper‎.Models">
+              <ArtifactNode Label="CensusMapper‎.Models" Category="CodeSchema_Namespace" Id="(Namespace=CensusMapper.Models)" />
+              <ExpandedNode Id="(Assembly=CensusMapper.Core)" Label="CensusMapper.Core.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=CensusMapper.Models)" Label="CensusMapper‎.Models" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="f869f9e8-ca40-4811-8485-d2a44e56ff89" name="Services">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="1eac8492-453e-42a6-adfa-dc2cfc522823" direction="Forward">
+              <layerMoniker Id="f0e8a0ea-20ae-4bb1-8a5f-f29996dd265e" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="892c245c-24e7-4ced-8879-4ef3e6c561fa" name="CensusMapper‎.Services1">
+              <ArtifactNode Label="CensusMapper‎.Services" Category="CodeSchema_Namespace" Id="(Namespace=CensusMapper.Services)" />
+              <ExpandedNode Id="(Namespace=CensusMapper.Services)" Label="CensusMapper‎.Services" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
       <references>
-        <reference Id="e920fe83-63da-4c18-aafb-cfd789b97450" name="CensusMapper‎.Models">
-          <ArtifactNode Label="CensusMapper‎.Models" Category="CodeSchema_Namespace" Id="(Namespace=CensusMapper.Models)" />
-          <ExpandedNode Id="(Assembly=CensusMapper.Core)" Label="CensusMapper.Core.dll" Category="CodeSchema_Assembly">
-            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
-          </ExpandedNode>
-          <ExpandedNode Id="(Namespace=CensusMapper.Models)" Label="CensusMapper‎.Models" Category="CodeSchema_Namespace">
+        <reference Id="3923f605-8baa-4e26-9597-91cb79618ac4" name="CensusMapper.Core.Pcl">
+          <ArtifactNode Label="CensusMapper.Core.Pcl" Category="CodeSchema_Project" Id="(Assembly=&quot;$(PersonalUri)/GitHub/CensusMapper/CensusMapper.Core.Pcl/CensusMapper.Core.Pcl.csproj&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=CensusMapper.Core.Pcl)" Label="CensusMapper.Core.Pcl.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
             <LinkCategory Ref="Represents" />
           </ExpandedNode>
         </reference>
       </references>
     </layer>
-    <layer Id="aeaaafa0-5987-4809-83e0-fb07ccfa739d" name="ViewModel">
+    <layer Id="f2f5079b-90cd-4df0-93af-148ba6edfdfd" name="Platform (W8)">
       <dependencyToLayers>
-        <dependencyFromLayerToLayer Id="a3381b5d-05fb-434e-b286-051851f15e65" direction="Forward">
-          <layerMoniker Id="f0e8a0ea-20ae-4bb1-8a5f-f29996dd265e" />
-        </dependencyFromLayerToLayer>
-        <dependencyFromLayerToLayer Id="395031eb-eb0e-4071-abcc-628e1c28a1b3" direction="Forward">
-          <layerMoniker Id="f869f9e8-ca40-4811-8485-d2a44e56ff89" />
+        <dependencyFromLayerToLayer Id="10e339bb-0cbc-42a6-888a-788983bf0ad9" direction="Forward">
+          <layerMoniker Id="2d190269-cf45-4990-b3c6-da64d7c556e1" />
         </dependencyFromLayerToLayer>
       </dependencyToLayers>
-      <references>
-        <reference Id="fb3c2829-3f51-4681-8073-4e306fb669d3" name="CensusMapper‎.ViewModels">
-          <ArtifactNode Label="CensusMapper‎.ViewModels" Category="CodeSchema_Namespace" Id="(Namespace=CensusMapper.ViewModels)" />
-          <ExpandedNode Id="(Assembly=CensusMapper)" Label="CensusMapper.exe" Category="CodeSchema_Assembly">
-            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
-          </ExpandedNode>
-          <ExpandedNode Id="(Assembly=BingMapMVVM)" Label="BingMapMVVM.dll" Category="CodeSchema_Assembly">
-            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
-          </ExpandedNode>
-          <ExpandedNode Id="(Namespace=CensusMapper.ViewModels)" Label="CensusMapper‎.ViewModels" Category="CodeSchema_Namespace">
-            <LinkCategory Ref="Represents" />
-          </ExpandedNode>
-        </reference>
-      </references>
-    </layer>
-    <layer Id="67168e8f-7cfe-4867-a202-695f61147dac" name="View">
-      <dependencyToLayers>
-        <dependencyFromLayerToLayer Id="5a9d1aed-5cbf-4441-bd60-ec1509d656b8" direction="Forward">
-          <layerMoniker Id="aeaaafa0-5987-4809-83e0-fb07ccfa739d" />
-        </dependencyFromLayerToLayer>
-        <dependencyFromLayerToLayer Id="2e73e9bf-611c-4128-aada-439037612619" direction="Forward">
-          <layerMoniker Id="f869f9e8-ca40-4811-8485-d2a44e56ff89" />
-        </dependencyFromLayerToLayer>
-      </dependencyToLayers>
-      <references>
-        <reference Id="17693936-492b-473d-9770-3622834b9475" name="CensusMapper‎.Views">
-          <ArtifactNode Label="CensusMapper‎.Views" Category="CodeSchema_Namespace" Id="(Namespace=CensusMapper.Views)" />
-          <ExpandedNode Id="(Assembly=CensusMapper)" Label="CensusMapper.exe" Category="CodeSchema_Assembly">
-            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
-          </ExpandedNode>
-          <ExpandedNode Id="(Namespace=CensusMapper.Views)" Label="CensusMapper‎.Views" Category="CodeSchema_Namespace">
-            <LinkCategory Ref="Represents" />
-          </ExpandedNode>
-        </reference>
-      </references>
-    </layer>
-    <layer Id="f869f9e8-ca40-4811-8485-d2a44e56ff89" name="Services">
-      <dependencyToLayers>
-        <dependencyFromLayerToLayer Id="1eac8492-453e-42a6-adfa-dc2cfc522823" direction="Forward">
-          <layerMoniker Id="f0e8a0ea-20ae-4bb1-8a5f-f29996dd265e" />
-        </dependencyFromLayerToLayer>
-      </dependencyToLayers>
-      <references>
-        <reference Id="892c245c-24e7-4ced-8879-4ef3e6c561fa" name="CensusMapper‎.Services1">
-          <ArtifactNode Label="CensusMapper‎.Services" Category="CodeSchema_Namespace" Id="(Namespace=CensusMapper.Services)" />
-          <ExpandedNode Id="(Namespace=CensusMapper.Services)" Label="CensusMapper‎.Services" Category="CodeSchema_Namespace">
-            <LinkCategory Ref="Represents" />
-          </ExpandedNode>
-        </reference>
-      </references>
+      <childLayers>
+        <layer Id="aeaaafa0-5987-4809-83e0-fb07ccfa739d" name="ViewModel">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="a3381b5d-05fb-434e-b286-051851f15e65" direction="Forward">
+              <layerMoniker Id="f0e8a0ea-20ae-4bb1-8a5f-f29996dd265e" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="395031eb-eb0e-4071-abcc-628e1c28a1b3" direction="Forward">
+              <layerMoniker Id="f869f9e8-ca40-4811-8485-d2a44e56ff89" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="fb3c2829-3f51-4681-8073-4e306fb669d3" name="CensusMapper‎.ViewModels">
+              <ArtifactNode Label="CensusMapper‎.ViewModels" Category="CodeSchema_Namespace" Id="(Namespace=CensusMapper.ViewModels)" />
+              <ExpandedNode Id="(Assembly=CensusMapper)" Label="CensusMapper.exe" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Assembly=BingMapMVVM)" Label="BingMapMVVM.dll" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=CensusMapper.ViewModels)" Label="CensusMapper‎.ViewModels" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+        <layer Id="67168e8f-7cfe-4867-a202-695f61147dac" name="View">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="5a9d1aed-5cbf-4441-bd60-ec1509d656b8" direction="Forward">
+              <layerMoniker Id="aeaaafa0-5987-4809-83e0-fb07ccfa739d" />
+            </dependencyFromLayerToLayer>
+            <dependencyFromLayerToLayer Id="2e73e9bf-611c-4128-aada-439037612619" direction="Forward">
+              <layerMoniker Id="f869f9e8-ca40-4811-8485-d2a44e56ff89" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <references>
+            <reference Id="17693936-492b-473d-9770-3622834b9475" name="CensusMapper‎.Views">
+              <ArtifactNode Label="CensusMapper‎.Views" Category="CodeSchema_Namespace" Id="(Namespace=CensusMapper.Views)" />
+              <ExpandedNode Id="(Assembly=CensusMapper)" Label="CensusMapper.exe" Category="CodeSchema_Assembly">
+                <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+              </ExpandedNode>
+              <ExpandedNode Id="(Namespace=CensusMapper.Views)" Label="CensusMapper‎.Views" Category="CodeSchema_Namespace">
+                <LinkCategory Ref="Represents" />
+              </ExpandedNode>
+            </reference>
+          </references>
+        </layer>
+      </childLayers>
     </layer>
   </layers>
 </layerModel>

@@ -45,9 +45,9 @@
       <Name>BingMapMVVM</Name>
       <Project>{159fd361-bcf6-4b86-8af9-d0b99d9332cf}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\CensusMapper.Core\CensusMapper.Core.csproj">
-      <Name>CensusMapper.Core</Name>
-      <Project>{3eb0fa91-5572-43ce-82b0-211f1c6f3d4b}</Project>
+    <ProjectReference Include="..\CensusMapper.Core.Pcl\CensusMapper.Core.Pcl.csproj">
+      <Name>CensusMapper.Core.Pcl</Name>
+      <Project>{374a34b2-bbf4-40d1-83a0-f0479a05dfdd}</Project>
     </ProjectReference>
     <ProjectReference Include="..\CensusMapper.W8\CensusMapper.W8.csproj">
       <Name>CensusMapper.W8</Name>
