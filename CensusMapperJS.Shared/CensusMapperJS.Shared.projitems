@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>299d3ae9-93c2-419b-9f9d-9f8cc7bbb57a</SharedGUID>
+  </PropertyGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>

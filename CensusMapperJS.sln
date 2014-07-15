@@ -1,9 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "CensusMapperJS", "CensusMapperJS\CensusMapperJS.jsproj", "{E171C73C-94A8-4021-B74A-8B83D9EF0B0D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CensusMapperJS", "CensusMapperJS", "{DC2AA441-CF46-4C29-B56D-177D6410A6CE}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CensusMapperJS.Shared", "CensusMapperJS.Shared\CensusMapperJS.Shared.shproj", "{299D3AE9-93C2-419B-9F9D-9F8CC7BBB57A}"
+EndProject
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "CensusMapperJS.WindowsPhone", "CensusMapperJS.WindowsPhone\CensusMapperJS.WindowsPhone.jsproj", "{88EA6C77-030E-4CDD-B975-933E976530E3}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		CensusMapperJS.Shared\CensusMapperJS.Shared.projitems*{e171c73c-94a8-4021-b74a-8b83d9ef0b0d}*SharedItemsImports = 5
+		CensusMapperJS.Shared\CensusMapperJS.Shared.projitems*{88ea6c77-030e-4cdd-b975-933e976530e3}*SharedItemsImports = 5
+		CensusMapperJS.Shared\CensusMapperJS.Shared.projitems*{299d3ae9-93c2-419b-9f9d-9f8cc7bbb57a}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
@@ -39,8 +52,33 @@ Global
 		{E171C73C-94A8-4021-B74A-8B83D9EF0B0D}.Release|x86.ActiveCfg = Release|x86
 		{E171C73C-94A8-4021-B74A-8B83D9EF0B0D}.Release|x86.Build.0 = Release|x86
 		{E171C73C-94A8-4021-B74A-8B83D9EF0B0D}.Release|x86.Deploy.0 = Release|x86
+		{88EA6C77-030E-4CDD-B975-933E976530E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88EA6C77-030E-4CDD-B975-933E976530E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88EA6C77-030E-4CDD-B975-933E976530E3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{88EA6C77-030E-4CDD-B975-933E976530E3}.Debug|ARM.ActiveCfg = Debug|ARM
+		{88EA6C77-030E-4CDD-B975-933E976530E3}.Debug|ARM.Build.0 = Debug|ARM
+		{88EA6C77-030E-4CDD-B975-933E976530E3}.Debug|ARM.Deploy.0 = Debug|ARM
+		{88EA6C77-030E-4CDD-B975-933E976530E3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{88EA6C77-030E-4CDD-B975-933E976530E3}.Debug|x86.ActiveCfg = Debug|x86
+		{88EA6C77-030E-4CDD-B975-933E976530E3}.Debug|x86.Build.0 = Debug|x86
+		{88EA6C77-030E-4CDD-B975-933E976530E3}.Debug|x86.Deploy.0 = Debug|x86
+		{88EA6C77-030E-4CDD-B975-933E976530E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88EA6C77-030E-4CDD-B975-933E976530E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88EA6C77-030E-4CDD-B975-933E976530E3}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{88EA6C77-030E-4CDD-B975-933E976530E3}.Release|ARM.ActiveCfg = Release|ARM
+		{88EA6C77-030E-4CDD-B975-933E976530E3}.Release|ARM.Build.0 = Release|ARM
+		{88EA6C77-030E-4CDD-B975-933E976530E3}.Release|ARM.Deploy.0 = Release|ARM
+		{88EA6C77-030E-4CDD-B975-933E976530E3}.Release|x64.ActiveCfg = Release|Any CPU
+		{88EA6C77-030E-4CDD-B975-933E976530E3}.Release|x86.ActiveCfg = Release|x86
+		{88EA6C77-030E-4CDD-B975-933E976530E3}.Release|x86.Build.0 = Release|x86
+		{88EA6C77-030E-4CDD-B975-933E976530E3}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E171C73C-94A8-4021-B74A-8B83D9EF0B0D} = {DC2AA441-CF46-4C29-B56D-177D6410A6CE}
+		{299D3AE9-93C2-419B-9F9D-9F8CC7BBB57A} = {DC2AA441-CF46-4C29-B56D-177D6410A6CE}
+		{88EA6C77-030E-4CDD-B975-933E976530E3} = {DC2AA441-CF46-4C29-B56D-177D6410A6CE}
 	EndGlobalSection
 EndGlobal
