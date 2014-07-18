@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>4ad11571-57a2-4425-8271-fc66d2f589ba</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>CensusMapper</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)BingMaps.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Census.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Item.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Address.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\County.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\CountyFips.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Entity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\GeocodePoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Point.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Resource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\ResourceSet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PopulatedState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SbaApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StringFormatConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UsState.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)CountyFips.json.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)TextFile1.txt" />
+  </ItemGroup>
+</Project>

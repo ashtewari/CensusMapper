@@ -1,13 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CensusMapper", "CensusMapper\CensusMapper.csproj", "{12DDBAF7-EFEF-4FD0-8F2C-0AED517D6429}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CensusMapper.Tests", "CensusMapper.Tests\CensusMapper.Tests.csproj", "{4857D4CE-24D1-4EA6-B0DB-195F75DFA1A7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CensusMapper.UnitTests", "CensusMapper.UnitTests\CensusMapper.UnitTests.csproj", "{27B4C7A8-6111-413B-A28E-CBEEEA8E7F0A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CensusMapper", "CensusMapper", "{07E2B6B1-3501-4448-BF5A-9323E5D9709C}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CensusMapper.Shared", "CensusMapper.Shared\CensusMapper.Shared.shproj", "{4AD11571-57A2-4425-8271-FC66D2F589BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CensusMapper.WindowsPhone", "CensusMapper.WindowsPhone\CensusMapper.WindowsPhone.csproj", "{8AC57166-D820-455D-860D-AF472C942F70}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		CensusMapper.Shared\CensusMapper.Shared.projitems*{4ad11571-57a2-4425-8271-fc66d2f589ba}*SharedItemsImports = 13
+		CensusMapper.Shared\CensusMapper.Shared.projitems*{12ddbaf7-efef-4fd0-8f2c-0aed517d6429}*SharedItemsImports = 4
+		CensusMapper.Shared\CensusMapper.Shared.projitems*{8ac57166-d820-455d-860d-af472c942f70}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
@@ -77,8 +90,33 @@ Global
 		{27B4C7A8-6111-413B-A28E-CBEEEA8E7F0A}.Release|x86.ActiveCfg = Release|x86
 		{27B4C7A8-6111-413B-A28E-CBEEEA8E7F0A}.Release|x86.Build.0 = Release|x86
 		{27B4C7A8-6111-413B-A28E-CBEEEA8E7F0A}.Release|x86.Deploy.0 = Release|x86
+		{8AC57166-D820-455D-860D-AF472C942F70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AC57166-D820-455D-860D-AF472C942F70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AC57166-D820-455D-860D-AF472C942F70}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8AC57166-D820-455D-860D-AF472C942F70}.Debug|ARM.ActiveCfg = Debug|ARM
+		{8AC57166-D820-455D-860D-AF472C942F70}.Debug|ARM.Build.0 = Debug|ARM
+		{8AC57166-D820-455D-860D-AF472C942F70}.Debug|ARM.Deploy.0 = Debug|ARM
+		{8AC57166-D820-455D-860D-AF472C942F70}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8AC57166-D820-455D-860D-AF472C942F70}.Debug|x86.ActiveCfg = Debug|x86
+		{8AC57166-D820-455D-860D-AF472C942F70}.Debug|x86.Build.0 = Debug|x86
+		{8AC57166-D820-455D-860D-AF472C942F70}.Debug|x86.Deploy.0 = Debug|x86
+		{8AC57166-D820-455D-860D-AF472C942F70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AC57166-D820-455D-860D-AF472C942F70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AC57166-D820-455D-860D-AF472C942F70}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8AC57166-D820-455D-860D-AF472C942F70}.Release|ARM.ActiveCfg = Release|ARM
+		{8AC57166-D820-455D-860D-AF472C942F70}.Release|ARM.Build.0 = Release|ARM
+		{8AC57166-D820-455D-860D-AF472C942F70}.Release|ARM.Deploy.0 = Release|ARM
+		{8AC57166-D820-455D-860D-AF472C942F70}.Release|x64.ActiveCfg = Release|Any CPU
+		{8AC57166-D820-455D-860D-AF472C942F70}.Release|x86.ActiveCfg = Release|x86
+		{8AC57166-D820-455D-860D-AF472C942F70}.Release|x86.Build.0 = Release|x86
+		{8AC57166-D820-455D-860D-AF472C942F70}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{12DDBAF7-EFEF-4FD0-8F2C-0AED517D6429} = {07E2B6B1-3501-4448-BF5A-9323E5D9709C}
+		{4AD11571-57A2-4425-8271-FC66D2F589BA} = {07E2B6B1-3501-4448-BF5A-9323E5D9709C}
+		{8AC57166-D820-455D-860D-AF472C942F70} = {07E2B6B1-3501-4448-BF5A-9323E5D9709C}
 	EndGlobalSection
 EndGlobal
