@@ -3,6 +3,9 @@
 #################
 ApiKeys*
 
+packages/*
+!packages/repositories.config
+
 #################
 ## Eclipse
 #################

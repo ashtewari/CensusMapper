@@ -4,7 +4,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Bing.Maps;
+using Windows.Devices.Geolocation;
+
 using Newtonsoft.Json;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -26,9 +27,9 @@ namespace CensusMapper
             client.BaseAddress = new Uri("http://dev.virtualearth.net/REST/v1/Locations/");
 	    }
 
-        public async Task<Address> GetAddress(Location location)
+        public async Task<Address> GetAddress(Geopoint location)
         {
-            string requestUri = String.Format(baseUri, string.Format("{0},{1}", location.Latitude, location.Longitude), _bingMapsKey);
+            string requestUri = String.Format(baseUri, string.Format("{0},{1}", location.Position.Latitude, location.Position.Longitude), _bingMapsKey);
             var task = client.GetAsync(requestUri);
             HttpResponseMessage response = await task;
             response.EnsureSuccessStatusCode();

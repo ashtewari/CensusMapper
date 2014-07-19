@@ -44,5 +44,15 @@ namespace CensusMapper
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
         }
+
+        private void map_Tapped_1(Windows.UI.Xaml.Controls.Maps.MapControl sender, Windows.UI.Xaml.Controls.Maps.MapInputEventArgs args)
+        {
+
+        }
+
+        private void BtnSearch_OnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

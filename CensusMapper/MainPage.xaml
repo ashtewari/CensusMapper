@@ -9,19 +9,11 @@
     xmlns:bm="using:Bing.Maps"
     mc:Ignorable="d">
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-        <bm:Map x:Name="map" MapType="Road" Tapped="map_Tapped_1" ViewChanged="map_ViewChanged_1">
-        </bm:Map>  
-        <TextBlock Name="txtZoom" Text="Zoom Level" FontSize="36" Foreground="Black" HorizontalAlignment="Right" VerticalAlignment="Bottom"></TextBlock>
+        <bm:Map x:Name="map" MapType="Road" Tapped="map_Tapped_1"/>
     </Grid>
     <Page.BottomAppBar>
-    <AppBar Name="appBar">
+        <AppBar Name="appBar">
             <StackPanel Orientation="Horizontal" Height="75">
-                <!--<Button x:Name="btnLoad"
-                Click="btnLoad_Click_1"  Style="{StaticResource SaveAppBarButtonStyle}"
-                HorizontalAlignment="Right" VerticalAlignment="Center"></Button>
-            <Button x:Name="btnSave"
-                Click="btnSave_Click_1" Style="{StaticResource SaveAppBarButtonStyle}"
-                HorizontalAlignment="Right" VerticalAlignment="Center"></Button>-->
                 <TextBox x:Name="txtSearch" Width="300"></TextBox>
                 <Button x:Name="btnSearch"
                 Click="BtnSearch_OnClick"  Style="{StaticResource SaveAppBarButtonStyle}"

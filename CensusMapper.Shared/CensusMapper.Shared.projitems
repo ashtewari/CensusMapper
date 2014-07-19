@@ -9,6 +9,9 @@
     <Import_RootNamespace>CensusMapper</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)BingMaps.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Census.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Item.cs" />
@@ -28,5 +31,11 @@
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)CountyFips.json.txt" />
     <Content Include="$(MSBuildThisFileDirectory)TextFile1.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
   </ItemGroup>
 </Project>

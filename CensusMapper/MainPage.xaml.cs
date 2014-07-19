@@ -168,7 +168,7 @@ namespace CensusMapper
         }
 
         private void SetApiKeys()
-        {            
+        {
             string fileName = API_KEYS_FILE;
 
             var data = XDocument.Load(System.IO.Path.Combine(fileName));
@@ -176,7 +176,7 @@ namespace CensusMapper
 
             var census = from key in keys.Elements("Key") where key.Attribute("name").Value == "Census" select key.Attribute("value").Value;
             var bing = from key in keys.Elements("Key") where key.Attribute("name").Value == "Bing" select key.Attribute("value").Value;
-            var azureMobile = from key in keys.Elements("Key") where key.Attribute("name").Value == "AzureMobile" select key.Attribute("value").Value;                              
+            var azureMobile = from key in keys.Elements("Key") where key.Attribute("name").Value == "AzureMobile" select key.Attribute("value").Value;
 
             keyCensus = census.ElementAt(0);
             keyBingMaps = bing.ElementAt(0);
@@ -233,7 +233,7 @@ namespace CensusMapper
                             var ctrl = new ContentControl();
                             ctrl.Template = Application.Current.Resources["StateTemplate"] as ControlTemplate;
                             ctrl.DataContext = new PopulatedState(state) { Population = count };
-                            MapLayer.SetPosition(ctrl, state.Center);
+                            MapLayer.SetPosition(ctrl, new Location(state.Center.Position.Latitude, state.Center.Position.Longitude));
                             map.Children.Add(ctrl);
                         }
                     }
@@ -405,7 +405,7 @@ namespace CensusMapper
             Location location;
             map.TryPixelToLocation(pos, out location);
 
-            bool result = await AddPushPinAtLocation(map, location);
+            bool result = await AddPushPinAtLocation(map, new Geopoint(new BasicGeoposition() { Latitude = location.Latitude, Longitude = location.Longitude}));
 
             if (result)
             {
@@ -413,12 +413,12 @@ namespace CensusMapper
             }
         }
 
-        private async Task<bool> AddPushPinAtLocation(Map map, Location location)
+        private async Task<bool> AddPushPinAtLocation(Map map, Geopoint location)
         {
             var ctrl = new ContentControl();
             ctrl.Template = Application.Current.Resources["ZipCodeTemplate"] as ControlTemplate;
 
-            MapLayer.SetPosition(ctrl, location);
+            MapLayer.SetPosition(ctrl, new Location(location.Position.Latitude, location.Position.Longitude));
             map.Children.Add(ctrl);
 
             BingMaps bingMaps = new BingMaps(keyBingMaps);
@@ -427,7 +427,7 @@ namespace CensusMapper
             return await AddPushPin(map, address, location, ctrl);
         }
 
-        private async Task<bool> AddPushPin(Map map, Address address, Location location, ContentControl ctrl)
+        private async Task<bool> AddPushPin(Map map, Address address, Geopoint location, ContentControl ctrl)
         {
             if (address != null)
             {
@@ -635,23 +635,6 @@ namespace CensusMapper
         {
             //await Authenticate();
             await SaveUserData();            
-        }
-
-        private void map_ViewChanged_1(object sender, ViewChangedEventArgs e)
-        {
-            this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Low,
-                new Windows.UI.Core.DispatchedHandler(() =>
-                {
-                    this.txtZoom.Text = this.map.ZoomLevel.ToString();
-                }));              
-            System.Diagnostics.Debug.WriteLine("{0}", this.map.ZoomLevel);
-
-            currentZoomLevel = this.map.ZoomLevel;
-
-            // > 5 USA
-            // 5 - 10 State
-            // 10 - 12 County
-            // 12 > City
         }
 
         private async void btnLoad_Click_1(object sender, RoutedEventArgs e)

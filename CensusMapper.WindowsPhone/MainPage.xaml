@@ -6,9 +6,20 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Maps:MapControl Grid.Row="1" x:Name="map" MapTapped="map_Tapped_1" />        
     </Grid>
+    <Page.BottomAppBar>
+        <AppBar Name="appBar">
+            <StackPanel Orientation="Horizontal" Height="75">
+                <TextBox x:Name="txtSearch" Width="300"></TextBox>
+                <Button x:Name="btnSearch"
+                Click="BtnSearch_OnClick"  Style="{StaticResource SaveAppBarButtonStyle}"
+                HorizontalAlignment="Right" VerticalAlignment="Center"></Button>
+            </StackPanel>
+        </AppBar>
+    </Page.BottomAppBar>    
 </Page>

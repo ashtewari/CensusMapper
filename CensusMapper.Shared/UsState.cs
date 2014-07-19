@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Bing.Maps;
+using Windows.Devices.Geolocation;
 
 namespace CensusMapper
 {
@@ -13,10 +13,10 @@ namespace CensusMapper
         {
             Fips = fips;
             Name = name;
-            Center = new Location(lat, lng);
+            Center = new Geopoint(new BasicGeoposition() { Latitude = lat, Longitude = lng});
         }
         public string Fips { get; set; }
         public string Name { get; set; }
-        public Location Center { get; set; }
+        public Geopoint Center { get; set; }
     }
 }
