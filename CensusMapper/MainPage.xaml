@@ -13,12 +13,6 @@
     </Grid>
     <Page.BottomAppBar>
         <AppBar Name="appBar">
-            <StackPanel Orientation="Horizontal" Height="75">
-                <TextBox x:Name="txtSearch" Width="300"></TextBox>
-                <Button x:Name="btnSearch"
-                Click="BtnSearch_OnClick"  Style="{StaticResource SaveAppBarButtonStyle}"
-                HorizontalAlignment="Right" VerticalAlignment="Center"></Button>
-            </StackPanel>
         </AppBar>
     </Page.BottomAppBar>
 </Page>

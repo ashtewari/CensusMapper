@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)BingMaps.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Census.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Item.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Address.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\County.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\CountyFips.cs" />
