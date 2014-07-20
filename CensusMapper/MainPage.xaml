@@ -8,6 +8,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:bm="using:Bing.Maps"
     mc:Ignorable="d">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+            <!-- 
+                    Styles that define common aspects of the platform look and feel
+                    Required by Visual Studio project and item templates
+                 -->
+            <ResourceDictionary Source="Common/StandardStyles.xaml"/>
+        </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
         <bm:Map x:Name="map" MapType="Road" Tapped="map_Tapped_1"/>
     </Grid>

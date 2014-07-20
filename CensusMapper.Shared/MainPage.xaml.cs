@@ -29,8 +29,6 @@ namespace CensusMapper
 
         Census census = null;
 
-        Geolocator geolocator = null;
-
         //public MobileServiceClient MobileService = null;
 
         private IList<Geopoint> locations;
@@ -47,9 +45,6 @@ namespace CensusMapper
             //MobileService = new MobileServiceClient(
             //"https://censusmapper.azure-mobile.net/",
             //keyAzureMobile);
-
-            geolocator = new Geolocator();
-            geolocator.StatusChanged += geolocator_StatusChanged;
 
             census = new Census(keyCensus);
         }
@@ -79,67 +74,10 @@ namespace CensusMapper
                 })).AsTask().Wait();
         }
 
-        void geolocator_StatusChanged(Geolocator sender, StatusChangedEventArgs args)
-        {
-            locationEnabled = false;
-            switch (args.Status)
-            {
-                case Windows.Devices.Geolocation.PositionStatus.Ready:
-                    // Location data is available
-                    Status = "Location is available.";
-                    locationEnabled = true;
-                    break;
-                case Windows.Devices.Geolocation.PositionStatus.Initializing:
-                    // This status indicates that a GPS is still acquiring a fix
-                    Status = "A GPS device is still initializing.";
-                    break;
-                case Windows.Devices.Geolocation.PositionStatus.NoData:
-                    // No location data is currently available
-                    Status = "Data from location services is currently unavailable.";
-                    break;
-                case Windows.Devices.Geolocation.PositionStatus.Disabled:
-                    // The app doesn't have permission to access location,
-                    // either because location has been turned off.
-                    Status = "Your location is currently turned off. " +
-                        "Change your settings through the Settings charm " +
-                        " to turn it back on.";
-                    locationEnabled = false;
-                    break;
-                case Windows.Devices.Geolocation.PositionStatus.NotInitialized:
-                    // This status indicates that the app has not yet requested
-                    // location data by calling GetGeolocationAsync() or
-                    // registering an event handler for the positionChanged event.
-                    Status = "Location status is not initialized because " +
-                                  "the app has not requested location data.";
-                    locationEnabled = false;
-                    break;
-                case Windows.Devices.Geolocation.PositionStatus.NotAvailable:
-                    // Location is not available on this version of Windows
-                    Status = "You do not have the required location services " +
-                        "present on your system.";
-                    locationEnabled = false;
-                    break;
-                default:
-                    Status = "Unknown status";
-                    break;
-            }
-
-        }
-
         private void SetApiKeys()
         {
-            string fileName = API_KEYS_FILE;
-
-            var data = XDocument.Load(System.IO.Path.Combine(fileName));
-            var keys = data.Descendants("Keys").First();
-
-            var census = from key in keys.Elements("Key") where key.Attribute("name").Value == "Census" select key.Attribute("value").Value;
-            var bing = from key in keys.Elements("Key") where key.Attribute("name").Value == "Bing" select key.Attribute("value").Value;
-            var azureMobile = from key in keys.Elements("Key") where key.Attribute("name").Value == "AzureMobile" select key.Attribute("value").Value;
-
-            keyCensus = census.ElementAt(0);
-            keyBingMaps = bing.ElementAt(0);
-            keyAzureMobile = azureMobile.ElementAt(0);
+            keyCensus = "abcd";
+            keyBingMaps = "abcd";
 
             SetApiCredentials();
         }

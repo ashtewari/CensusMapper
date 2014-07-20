@@ -10,10 +10,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Maps:MapControl Grid.Row="1" x:Name="map" MapTapped="map_Tapped_1" />        
-    </Grid>
-    <Page.BottomAppBar>
-        <AppBar Name="appBar">
-        </AppBar>
-    </Page.BottomAppBar>    
+        <Maps:MapControl Grid.Row="1" x:Name="map" MapServiceToken="Credentials=&quot;AiFTXnMoalZ-eN9AjO34J_3ZIv0r1rFsnEKOn8TUBD6QvCyoVm7FVGkdNZzM7bVu&quot;" MapTapped="map_Tapped_1" />        
+    </Grid>  
 </Page>

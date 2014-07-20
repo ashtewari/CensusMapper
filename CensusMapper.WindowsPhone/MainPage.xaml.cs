@@ -26,9 +26,7 @@ namespace CensusMapper
     public sealed partial class MainPage : Page
     {
         public MainPage()
-        {
-            App.Current.Suspending += Current_Suspending;
-            
+        {           
             this.InitializeComponent();
             this.InitializeApis();
 
@@ -37,7 +35,7 @@ namespace CensusMapper
 
         private void SetApiCredentials()
         {
-            map.MapServiceToken = keyBingMaps;
+            //map.MapServiceToken = keyBingMaps;        
         }
 
         /// <summary>
