@@ -13,26 +13,14 @@ namespace CensusMapper
 {
     public partial class MainPage
     {
-        const string API_KEYS_FILE = "ApiKeys.xml";
         const double InitialZoomLevel = 5.0;
-
-        private double currentZoomLevel = 5.0;
 
         private string keyCensus = "";
         private string keyBingMaps = "";
-        private string keyAzureMobile = "";
-        private string _status = "";
-        private bool locationEnabled = false;
 
-        //private LiveConnectSession session;
-        private string userId;
-
-        Census census = null;
-
-        //public MobileServiceClient MobileService = null;
+        private Census census = null;
 
         private IList<Geopoint> locations;
-        private CountyFips counties = null;
 
         private Geopoint centerOfUs = new Geopoint(new BasicGeoposition() { Latitude = 39.833333, Longitude = -98.583333 });
 
@@ -42,36 +30,7 @@ namespace CensusMapper
 
             SetApiKeys();
 
-            //MobileService = new MobileServiceClient(
-            //"https://censusmapper.azure-mobile.net/",
-            //keyAzureMobile);
-
             census = new Census(keyCensus);
-        }
-
-        private string Status
-        {
-            get
-            {
-                return _status;
-            }
-
-            set
-            {
-                _status = value;
-
-                ToggleStatusDisplay();
-            }
-        }
-
-        private void ToggleStatusDisplay()
-        {
-            this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
-                new Windows.UI.Core.DispatchedHandler(() =>
-                {
-                    // txtStatus.Text = this.Status;
-                    // txtStatus.Visibility = locationEnabled ? Visibility.Collapsed : Visibility.Visible;
-                })).AsTask().Wait();
         }
 
         private void SetApiKeys()
@@ -86,7 +45,7 @@ namespace CensusMapper
         {
             var deferral = e.SuspendingOperation.GetDeferral();
 
-            await SaveUserData();
+            // Save User Data
 
             deferral.Complete();
         }
@@ -118,12 +77,6 @@ namespace CensusMapper
                         }
                     }
                 }
-
-                //SetCurrentLocation();
-
-                //await Authenticate();
-
-                await LoadUserData();
             }
             catch (Exception exception)
             {
@@ -157,14 +110,7 @@ namespace CensusMapper
         {
             if (address != null)
             {
-
-                //string fipsCounty = CountyNameToFips(address.AdminDistrict, address.AdminDistrict2);
-
                 string fips = StateAbbreviationToFips(address.AdminDistrict);
-
-                //SbaApi sba = new SbaApi();
-                //var cities = await sba.GetCityData(address.AdminDistrict.ToLowerInvariant());
-                //var apex = cities.FirstOrDefault((c) => c.name.ToLowerInvariant() == address.Locality.ToLowerInvariant());
 
                 if (string.IsNullOrEmpty(fips))
                 {
@@ -173,18 +119,6 @@ namespace CensusMapper
                 }
 
                 string requestUri = string.Format("get=P0010001&for=zip+code+tabulation+area:{0}&in=state:{1}", address.PostalCode, fips);
-
-                //if (string.IsNullOrEmpty(fipsCounty) == false)
-                //{                   
-                //    requestUri = string.Format("get=P0010001&for=county:{0}&in=state:{1}", fipsCounty.TrimStart(fips.ToCharArray()), fips);
-                //}
-
-                //if (apex != null)
-                //{
-                //    ////http://api.census.gov/data/2010/sf1?get=P0010001&gnis=county:00161526
-                //    requestUri = string.Format("get=P0010001&gnis=place:{0}", apex.feature_id);
-                //}
-
 
                 var array = await census.GetCensusData(requestUri);
 
@@ -217,33 +151,6 @@ namespace CensusMapper
             }
 
             return true;
-        }
-
-        private async Task SaveUserData()
-        {
-            if (locations.Count > 0)
-            {
-                var locs = new List<string>();
-                foreach (var loc in locations)
-                {
-                    locs.Add(string.Format("{0},{1}", loc.Position.Latitude, loc.Position.Longitude));
-                }
-
-                string points = await JsonConvert.SerializeObjectAsync(locs);
-
-                //var reader = await this.MobileService.GetTable<Item>().ReadAsync();
-                //if (reader.Any())
-                //{
-                //    var first = reader.First();
-                //    first.Text = points;
-                //    await this.MobileService.GetTable<Item>().UpdateAsync(first);
-                //}
-                //else
-                //{
-                //    Item log = new Item { UserId = userId, Text = points };
-                //    await this.MobileService.GetTable<Item>().InsertAsync(log);
-                //}
-            }
         }
 
         private string StateAbbreviationToFips(string abbreviation)
@@ -384,12 +291,6 @@ namespace CensusMapper
             return string.Empty;
         }
 
-        //private async Task LoadCountyData()
-        //{
-        //    string countyFipsJson = await ReadTextFile("CountyFips.json.txt");
-        //    counties = await JsonConvert.DeserializeObjectAsync<CountyFips>(countyFipsJson);
-        //}
-
         private async Task<string> ReadTextFile(string filename)
         {
             var folder = Windows.ApplicationModel.Package.Current.InstalledLocation;
@@ -397,131 +298,5 @@ namespace CensusMapper
             var text = await Windows.Storage.FileIO.ReadTextAsync(file);
             return text;
         }
-
-        private async Task LoadUserData()
-        {
-            //var request = await this.MobileService.GetTable<Item>().ReadAsync();
-            //foreach (var item in request)
-            //{
-            //    if (!item.Text.StartsWith("[")) continue;
-
-            //    JArray points = JArray.Parse(item.Text);
-
-            //    foreach (var pt in points)
-            //    {
-            //        double lat, lng;
-
-            //        var l = pt.ToString().Split(",".ToCharArray());
-            //        if (double.TryParse(l[0].ToString(), out lat) && double.TryParse(l[1].ToString(), out lng))
-            //        {
-            //            locations.Add(new Location(lat, lng));
-            //        }
-            //    }
-            //}
-
-            //foreach (var item in locations)
-            //{
-            //    await AddPushPinAtLocation(map, item);
-            //}            
-        }
-
-
-        //internal static void AddPushPin(Map map, Location location)
-        //{
-        //    Pushpin pin = new Pushpin();
-        //    MapLayer.SetPosition(pin, location);
-        //    map.Children.Add(pin);        
-        //}
-
-        //private async void SetCurrentLocation()
-        //{
-        //    if (!locationEnabled) return;
-
-        //    var pos = await geolocator.GetGeopositionAsync();
-        //    Location location = new Location(pos.Coordinate.Latitude, pos.Coordinate.Longitude);
-        //    map.SetView(location, 6.0f);
-
-        //    AddPushPin(map, location);
-        //}
-
-        //internal void AddExtendedPushPin(Map map, Address address, Location location)
-        //{
-        //    var ctrl = new ContentControl();
-        //    ctrl.Template = Application.Current.Resources["PushpinTemplate"] as ControlTemplate;
-        //    ctrl.DataContext = new { Name = string.Format("{0}", address.Locality) };
-        //    MapLayer.SetPosition(ctrl, location);
-        //    map.Children.Add(ctrl);
-        //}
-
-
-        //private string CountyNameToFips(string stateAbr, string countyName)
-        //{
-        //    if (counties == null) return string.Empty;
-
-        //    string name = countyName.Trim();
-        //    if (name.EndsWith("Co."))
-        //    {
-        //        name = name.Substring(0, name.Length - 3);
-        //    }
-        //    else if (name.EndsWith("County"))
-        //    {
-        //        name = name.Substring(0, name.Length - 6);
-        //    }
-
-        //    var result = counties.table.rows.FirstOrDefault((row) => row[1] == string.Format("{0}, {1}", stateAbr, name.Trim()));
-
-        //    if (result == null) return string.Empty;
-
-        //    return result[0];
-        //}
-
-
-
-        //private async System.Threading.Tasks.Task Authenticate()
-        //{
-        //    LiveAuthClient liveIdClient = new LiveAuthClient("https://censusmapper.azure-mobile.net/");
-
-
-        //    while (session == null)
-        //    {
-        //        LiveLoginResult result = await liveIdClient.LoginAsync(new[] { "wl.basic" });
-        //        if (result.Status == LiveConnectSessionStatus.Connected)
-        //        {
-        //            session = result.Session;
-        //            LiveConnectClient client = new LiveConnectClient(result.Session);                    
-        //            LiveOperationResult meResult = await client.GetAsync("me");
-        //            MobileServiceUser loginResult = await this.MobileService.LoginAsync(result.Session.AuthenticationToken);
-
-        //            userId = loginResult.UserId;
-        //            string title = string.Format("Welcome {0}!", meResult.Result["first_name"]);
-        //            var message = string.Format("You are now logged in - {0}", loginResult.UserId);
-        //            //var dialog = new MessageDialog(message, title);
-        //            //dialog.Commands.Add(new UICommand("OK"));
-        //            //await dialog.ShowAsync();
-        //            System.Diagnostics.Debug.WriteLine(message);
-        //        }
-        //        else
-        //        {
-        //            session = null;
-        //            userId = "";
-        //            var dialog = new MessageDialog("You must log in.", "Login Required");
-        //            dialog.Commands.Add(new UICommand("OK"));
-        //            await dialog.ShowAsync();
-        //        }
-        //    }
-
-
-        //}
-
-        //private async void btnSave_Click_1(object sender, RoutedEventArgs e)
-        //{
-        //    //await Authenticate();
-        //    await SaveUserData();            
-        //}
-
-        //private async void btnLoad_Click_1(object sender, RoutedEventArgs e)
-        //{
-        //    await LoadCountyData();
-        //}
     }
 }
