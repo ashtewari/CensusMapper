@@ -76,12 +76,7 @@ namespace CensusMapper
             map.Children.Add(ctrl);
 
             MapControl.SetLocation(ctrl, location);
-            MapControl.SetNormalizedAnchorPoint(ctrl, new Windows.Foundation.Point(0.5, 0.5));            
-        }
-
-        private void RemovePushpin(ContentControl ctrl)
-        {
-            map.Children.Remove(ctrl);
+            MapControl.SetNormalizedAnchorPoint(ctrl, new Windows.Foundation.Point(0.0, 0.0));
         }
     }
 }

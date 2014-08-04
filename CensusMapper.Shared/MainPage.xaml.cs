@@ -153,6 +153,20 @@ namespace CensusMapper
             return await AddPushPin(address, ctrl);
         }
 
+//        private void InsertContentTemplateAtLocation(Geopoint location, ContentControl ctrl)
+//        {
+//#if WINDOWS_PHONE_APP
+//            map.Children.Add(ctrl);
+
+//            MapControl.SetLocation(ctrl, location);
+//            MapControl.SetNormalizedAnchorPoint(ctrl, new Windows.Foundation.Point(0.0, 0.0));
+//#elif WINDOWS_APP
+//            MapLayer.SetPosition(ctrl, new Location(location.Position.Latitude, location.Position.Longitude));
+
+//            map.Children.Add(ctrl);
+//#endif
+//        }
+
         private async Task<bool> AddPushPin(Address address, ContentControl ctrl)
         {
             if (address != null)
@@ -396,6 +410,11 @@ namespace CensusMapper
             var file = await folder.GetFileAsync(filename);
             var text = await Windows.Storage.FileIO.ReadTextAsync(file);
             return text;
+        }
+
+        private void RemovePushpin(ContentControl ctrl)
+        {
+            map.Children.Remove(ctrl);
         }
 
         private async Task LoadUserData()

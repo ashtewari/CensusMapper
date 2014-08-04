@@ -65,10 +65,5 @@ namespace CensusMapper
             MapLayer.SetPosition(ctrl, new Location(location.Position.Latitude, location.Position.Longitude));
             map.Children.Add(ctrl);
         }
-
-        private void RemovePushpin(ContentControl ctrl)
-        {
-            map.Children.Remove(ctrl);     
-        }
     }
 }

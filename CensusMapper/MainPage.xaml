@@ -22,8 +22,4 @@
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
         <bm:Map x:Name="map" MapType="Road" Tapped="map_Tapped_1"/>
     </Grid>
-    <Page.BottomAppBar>
-        <AppBar Name="appBar">
-        </AppBar>
-    </Page.BottomAppBar>
 </Page>
