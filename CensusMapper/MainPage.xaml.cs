@@ -60,10 +60,10 @@ namespace CensusMapper
             }
         }
 
-        private void InsertContentTemplateAtLocation(Geopoint location, ContentControl ctrl)
-        {
-            MapLayer.SetPosition(ctrl, new Location(location.Position.Latitude, location.Position.Longitude));
-            map.Children.Add(ctrl);
-        }
+        //private void InsertContentTemplateAtLocation(Geopoint location, ContentControl ctrl)
+        //{
+        //    MapLayer.SetPosition(ctrl, new Location(location.Position.Latitude, location.Position.Longitude));
+        //    map.Children.Add(ctrl);
+        //}
     }
 }

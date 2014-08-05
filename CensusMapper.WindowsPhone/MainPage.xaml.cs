@@ -71,12 +71,12 @@ namespace CensusMapper
             }
         }
 
-        private void InsertContentTemplateAtLocation(Geopoint location, ContentControl ctrl)
-        {
-            map.Children.Add(ctrl);
+        //private void InsertContentTemplateAtLocation(Geopoint location, ContentControl ctrl)
+        //{
+        //    map.Children.Add(ctrl);
 
-            MapControl.SetLocation(ctrl, location);
-            MapControl.SetNormalizedAnchorPoint(ctrl, new Windows.Foundation.Point(0.0, 0.0));
-        }
+        //    MapControl.SetLocation(ctrl, location);
+        //    MapControl.SetNormalizedAnchorPoint(ctrl, new Windows.Foundation.Point(0.0, 0.0));
+        //}
     }
 }

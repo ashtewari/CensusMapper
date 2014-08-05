@@ -9,30 +9,27 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Newtonsoft.Json;
 
+#if WINDOWS_APP
+using Bing.Maps;
+#endif
+
+#if WINDOWS_PHONE_APP
+using Windows.UI.Xaml.Controls.Maps;
+#endif
+
+
 namespace CensusMapper
 {
     public partial class MainPage
     {
-        const string API_KEYS_FILE = "ApiKeys.xml";
         const double InitialZoomLevel = 5.0;
-
-        private double currentZoomLevel = 5.0;
 
         private string keyCensus = "";
         private string keyBingMaps = "";
-        private string keyAzureMobile = "";
-        private string _status = "";
-        private bool locationEnabled = false;
 
-        //private LiveConnectSession session;
-        private string userId;
-
-        Census census = null;
-
-        //public MobileServiceClient MobileService = null;
+        private Census census = null;
 
         private IList<Geopoint> locations;
-        private CountyFips counties = null;
 
         private Geopoint centerOfUs = new Geopoint(new BasicGeoposition() { Latitude = 39.833333, Longitude = -98.583333 });
 
@@ -42,36 +39,7 @@ namespace CensusMapper
 
             SetApiKeys();
 
-            //MobileService = new MobileServiceClient(
-            //"https://censusmapper.azure-mobile.net/",
-            //keyAzureMobile);
-
             census = new Census(keyCensus);
-        }
-
-        private string Status
-        {
-            get
-            {
-                return _status;
-            }
-
-            set
-            {
-                _status = value;
-
-                ToggleStatusDisplay();
-            }
-        }
-
-        private void ToggleStatusDisplay()
-        {
-            this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
-                new Windows.UI.Core.DispatchedHandler(() =>
-                {
-                    // txtStatus.Text = this.Status;
-                    // txtStatus.Visibility = locationEnabled ? Visibility.Collapsed : Visibility.Visible;
-                })).AsTask().Wait();
         }
 
         private void SetApiKeys()
@@ -86,7 +54,7 @@ namespace CensusMapper
         {
             var deferral = e.SuspendingOperation.GetDeferral();
 
-            await SaveUserData();
+            // Save User Data
 
             deferral.Complete();
         }
@@ -118,12 +86,6 @@ namespace CensusMapper
                         }
                     }
                 }
-
-                //SetCurrentLocation();
-
-                //await Authenticate();
-
-                await LoadUserData();
             }
             catch (Exception exception)
             {
@@ -153,32 +115,30 @@ namespace CensusMapper
             return await AddPushPin(address, ctrl);
         }
 
-//        private void InsertContentTemplateAtLocation(Geopoint location, ContentControl ctrl)
-//        {
-//#if WINDOWS_PHONE_APP
-//            map.Children.Add(ctrl);
 
-//            MapControl.SetLocation(ctrl, location);
-//            MapControl.SetNormalizedAnchorPoint(ctrl, new Windows.Foundation.Point(0.0, 0.0));
-//#elif WINDOWS_APP
-//            MapLayer.SetPosition(ctrl, new Location(location.Position.Latitude, location.Position.Longitude));
+        #if WINDOWS_PHONE_APP
+        private void InsertContentTemplateAtLocation(Geopoint location, ContentControl ctrl)
+        {
+            map.Children.Add(ctrl);
+            MapControl.SetLocation(ctrl, location);
+            MapControl.SetNormalizedAnchorPoint(ctrl, new Windows.Foundation.Point(0.0, 0.0));
+        }
 
-//            map.Children.Add(ctrl);
-//#endif
-//        }
+        #endif
+
+        #if WINDOWS_APP
+        private void InsertContentTemplateAtLocation(Geopoint location, ContentControl ctrl)
+        {
+            MapLayer.SetPosition(ctrl, new Location(location.Position.Latitude, location.Position.Longitude));
+            map.Children.Add(ctrl);
+        }
+        #endif
 
         private async Task<bool> AddPushPin(Address address, ContentControl ctrl)
         {
             if (address != null)
             {
-
-                //string fipsCounty = CountyNameToFips(address.AdminDistrict, address.AdminDistrict2);
-
                 string fips = StateAbbreviationToFips(address.AdminDistrict);
-
-                //SbaApi sba = new SbaApi();
-                //var cities = await sba.GetCityData(address.AdminDistrict.ToLowerInvariant());
-                //var apex = cities.FirstOrDefault((c) => c.name.ToLowerInvariant() == address.Locality.ToLowerInvariant());
 
                 if (string.IsNullOrEmpty(fips))
                 {
@@ -187,18 +147,6 @@ namespace CensusMapper
                 }
 
                 string requestUri = string.Format("get=P0010001&for=zip+code+tabulation+area:{0}&in=state:{1}", address.PostalCode, fips);
-
-                //if (string.IsNullOrEmpty(fipsCounty) == false)
-                //{                   
-                //    requestUri = string.Format("get=P0010001&for=county:{0}&in=state:{1}", fipsCounty.TrimStart(fips.ToCharArray()), fips);
-                //}
-
-                //if (apex != null)
-                //{
-                //    ////http://api.census.gov/data/2010/sf1?get=P0010001&gnis=county:00161526
-                //    requestUri = string.Format("get=P0010001&gnis=place:{0}", apex.feature_id);
-                //}
-
 
                 var array = await census.GetCensusData(requestUri);
 
@@ -231,33 +179,6 @@ namespace CensusMapper
             }
 
             return true;
-        }
-
-        private async Task SaveUserData()
-        {
-            if (locations.Count > 0)
-            {
-                var locs = new List<string>();
-                foreach (var loc in locations)
-                {
-                    locs.Add(string.Format("{0},{1}", loc.Position.Latitude, loc.Position.Longitude));
-                }
-
-                string points = await JsonConvert.SerializeObjectAsync(locs);
-
-                //var reader = await this.MobileService.GetTable<Item>().ReadAsync();
-                //if (reader.Any())
-                //{
-                //    var first = reader.First();
-                //    first.Text = points;
-                //    await this.MobileService.GetTable<Item>().UpdateAsync(first);
-                //}
-                //else
-                //{
-                //    Item log = new Item { UserId = userId, Text = points };
-                //    await this.MobileService.GetTable<Item>().InsertAsync(log);
-                //}
-            }
         }
 
         private string StateAbbreviationToFips(string abbreviation)
@@ -397,12 +318,6 @@ namespace CensusMapper
 
             return string.Empty;
         }
-
-        //private async Task LoadCountyData()
-        //{
-        //    string countyFipsJson = await ReadTextFile("CountyFips.json.txt");
-        //    counties = await JsonConvert.DeserializeObjectAsync<CountyFips>(countyFipsJson);
-        //}
 
         private async Task<string> ReadTextFile(string filename)
         {
