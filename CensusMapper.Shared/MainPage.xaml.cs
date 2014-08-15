@@ -11,10 +11,12 @@ using Newtonsoft.Json;
 
 #if WINDOWS_APP
 using Bing.Maps;
+using Windows.UI.Xaml.Navigation;
 #endif
 
 #if WINDOWS_PHONE_APP
 using Windows.UI.Xaml.Controls.Maps;
+using Windows.UI.Xaml.Navigation;
 #endif
 
 
@@ -44,8 +46,8 @@ namespace CensusMapper
 
         private void SetApiKeys()
         {
-            keyCensus = "abcd";
-            keyBingMaps = "abcd";
+            keyCensus = "ABC";
+            keyBingMaps = "DEF";
 
             SetApiCredentials();
         }
@@ -59,11 +61,22 @@ namespace CensusMapper
             deferral.Complete();
         }
 
+        /// <summary>
+        /// Invoked when this page is about to be displayed in a Frame.
+        /// </summary>
+        /// <param name="e">Event data that describes how this page was reached.  The Parameter
+        /// property is typically used to configure the page.</param>
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            CenterMap();
+
+            //await LoadAndDisplayStateData();
+        }
+
         private async Task LoadAndDisplayStateData()
         {
             try
-            {
-                CenterMap();
+            {                
 
                 Dictionary<string, UsState> statesList = GetStatesList();
 
@@ -115,24 +128,19 @@ namespace CensusMapper
             return await AddPushPin(address, ctrl);
         }
 
-
-        #if WINDOWS_PHONE_APP
         private void InsertContentTemplateAtLocation(Geopoint location, ContentControl ctrl)
         {
-            map.Children.Add(ctrl);
-            MapControl.SetLocation(ctrl, location);
-            MapControl.SetNormalizedAnchorPoint(ctrl, new Windows.Foundation.Point(0.0, 0.0));
-        }
+            #if WINDOWS_PHONE_APP
+                map.Children.Add(ctrl);
+                MapControl.SetLocation(ctrl, location);
+                MapControl.SetNormalizedAnchorPoint(ctrl, new Windows.Foundation.Point(0.0, 0.0));
+            #endif
 
-        #endif
-
-        #if WINDOWS_APP
-        private void InsertContentTemplateAtLocation(Geopoint location, ContentControl ctrl)
-        {
-            MapLayer.SetPosition(ctrl, new Location(location.Position.Latitude, location.Position.Longitude));
-            map.Children.Add(ctrl);
+            #if WINDOWS_APP        
+                MapLayer.SetPosition(ctrl, new Location(location.Position.Latitude, location.Position.Longitude));
+                map.Children.Add(ctrl);        
+            #endif
         }
-        #endif
 
         private async Task<bool> AddPushPin(Address address, ContentControl ctrl)
         {
@@ -332,130 +340,8 @@ namespace CensusMapper
             map.Children.Remove(ctrl);
         }
 
-        private async Task LoadUserData()
-        {
-            //var request = await this.MobileService.GetTable<Item>().ReadAsync();
-            //foreach (var item in request)
-            //{
-            //    if (!item.Text.StartsWith("[")) continue;
-
-            //    JArray points = JArray.Parse(item.Text);
-
-            //    foreach (var pt in points)
-            //    {
-            //        double lat, lng;
-
-            //        var l = pt.ToString().Split(",".ToCharArray());
-            //        if (double.TryParse(l[0].ToString(), out lat) && double.TryParse(l[1].ToString(), out lng))
-            //        {
-            //            locations.Add(new Location(lat, lng));
-            //        }
-            //    }
-            //}
-
-            //foreach (var item in locations)
-            //{
-            //    await AddPushPinAtLocation(map, item);
-            //}            
-        }
-
-
-        //internal static void AddPushPin(Map map, Location location)
-        //{
-        //    Pushpin pin = new Pushpin();
-        //    MapLayer.SetPosition(pin, location);
-        //    map.Children.Add(pin);        
-        //}
-
-        //private async void SetCurrentLocation()
-        //{
-        //    if (!locationEnabled) return;
-
-        //    var pos = await geolocator.GetGeopositionAsync();
-        //    Location location = new Location(pos.Coordinate.Latitude, pos.Coordinate.Longitude);
-        //    map.SetView(location, 6.0f);
-
-        //    AddPushPin(map, location);
-        //}
-
-        //internal void AddExtendedPushPin(Map map, Address address, Location location)
-        //{
-        //    var ctrl = new ContentControl();
-        //    ctrl.Template = Application.Current.Resources["PushpinTemplate"] as ControlTemplate;
-        //    ctrl.DataContext = new { Name = string.Format("{0}", address.Locality) };
-        //    MapLayer.SetPosition(ctrl, location);
-        //    map.Children.Add(ctrl);
-        //}
-
-
-        //private string CountyNameToFips(string stateAbr, string countyName)
-        //{
-        //    if (counties == null) return string.Empty;
-
-        //    string name = countyName.Trim();
-        //    if (name.EndsWith("Co."))
-        //    {
-        //        name = name.Substring(0, name.Length - 3);
-        //    }
-        //    else if (name.EndsWith("County"))
-        //    {
-        //        name = name.Substring(0, name.Length - 6);
-        //    }
-
-        //    var result = counties.table.rows.FirstOrDefault((row) => row[1] == string.Format("{0}, {1}", stateAbr, name.Trim()));
-
-        //    if (result == null) return string.Empty;
-
-        //    return result[0];
-        //}
-
-
-
-        //private async System.Threading.Tasks.Task Authenticate()
-        //{
-        //    LiveAuthClient liveIdClient = new LiveAuthClient("https://censusmapper.azure-mobile.net/");
-
-
-        //    while (session == null)
-        //    {
-        //        LiveLoginResult result = await liveIdClient.LoginAsync(new[] { "wl.basic" });
-        //        if (result.Status == LiveConnectSessionStatus.Connected)
-        //        {
-        //            session = result.Session;
-        //            LiveConnectClient client = new LiveConnectClient(result.Session);                    
-        //            LiveOperationResult meResult = await client.GetAsync("me");
-        //            MobileServiceUser loginResult = await this.MobileService.LoginAsync(result.Session.AuthenticationToken);
-
-        //            userId = loginResult.UserId;
-        //            string title = string.Format("Welcome {0}!", meResult.Result["first_name"]);
-        //            var message = string.Format("You are now logged in - {0}", loginResult.UserId);
-        //            //var dialog = new MessageDialog(message, title);
-        //            //dialog.Commands.Add(new UICommand("OK"));
-        //            //await dialog.ShowAsync();
-        //            System.Diagnostics.Debug.WriteLine(message);
-        //        }
-        //        else
-        //        {
-        //            session = null;
-        //            userId = "";
-        //            var dialog = new MessageDialog("You must log in.", "Login Required");
-        //            dialog.Commands.Add(new UICommand("OK"));
-        //            await dialog.ShowAsync();
-        //        }
-        //    }
-
-
-        //}
-
-        //private async void btnSave_Click_1(object sender, RoutedEventArgs e)
-        //{
-        //    //await Authenticate();
-        //    await SaveUserData();            
-        //}
-
-        //private async void btnLoad_Click_1(object sender, RoutedEventArgs e)
-        //{
-        //    await LoadCountyData();
+        //private async Task LoadUserData()
+        //{          
         //}
     }
 }
