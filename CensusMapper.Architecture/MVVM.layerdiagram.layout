@@ -5,13 +5,13 @@
     <layerShape Id="14f3335e-ed62-4034-9790-9aef9563a46b" absoluteBounds="5.875, 3.625, 2, 0.75" customColor="161, 199, 231">
       <layerMoniker Id="b985a4f0-5af7-4822-83ab-2e1f7873c4cd" />
     </layerShape>
-    <layerShape Id="59f87293-33ff-4463-86be-dae1f3e7949e" absoluteBounds="4.75, 2, 2, 0.75" customColor="161, 199, 231">
+    <layerShape Id="59f87293-33ff-4463-86be-dae1f3e7949e" absoluteBounds="4.75, 2, 2, 0.75" customColor="192, 192, 255">
       <layerMoniker Id="2a2a6303-8de7-4210-b765-3890de316cd6" />
     </layerShape>
-    <layerShape Id="f74b9888-7670-4790-abbd-1d6e2f61e970" absoluteBounds="5.875, 0.625, 2, 0.75" customColor="161, 199, 231">
+    <layerShape Id="f74b9888-7670-4790-abbd-1d6e2f61e970" absoluteBounds="5.875, 0.625, 2, 0.75" customColor="255, 192, 255">
       <layerMoniker Id="a2f80b9c-80cb-4cdf-ad50-33ba88ac4396" />
     </layerShape>
-    <layerShape Id="6eb60d2f-bbea-43b2-971b-64bdeac8c200" absoluteBounds="7.25, 2, 2, 0.75" customColor="161, 199, 231">
+    <layerShape Id="6eb60d2f-bbea-43b2-971b-64bdeac8c200" absoluteBounds="7.25, 2, 2, 0.75" customColor="192, 255, 255">
       <layerMoniker Id="9b49c22d-a76d-4523-95b0-dba1a58982df" />
     </layerShape>
     <dependencyConnector edgePoints="[(6.3125 : 3.625); (6.3125 : 2.75)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110">

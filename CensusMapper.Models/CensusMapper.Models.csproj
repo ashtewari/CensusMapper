@@ -108,6 +108,7 @@
     <Compile Include="Entity.cs" />
     <Compile Include="GeocodePoint.cs" />
     <Compile Include="Location.cs" />
+    <Compile Include="NestedPoint.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource.cs" />

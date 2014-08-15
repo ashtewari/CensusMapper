@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="d9e483c2-2a46-4f95-ae34-2277d5506489" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="f6c9c3a1-ea9c-4394-ae4f-ea25da975474" name="CensusMapper.ViewModels">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="9ac641b9-2d4e-4c2b-baa4-2809ad3d1786" direction="Forward">
+          <layerMoniker Id="78c8de73-21f7-4786-9486-6969ae522665" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="6dd582ac-15d1-4857-89d2-5c5a84da2977" direction="Forward">
+          <layerMoniker Id="b8305f45-ed29-4816-ad77-6b3a4e4c907e" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="4cd55536-2b57-4d4d-a4e1-385ffb60ccf5" name="CensusMapper.ViewModels">
+          <ArtifactNode Label="CensusMapper.ViewModels" Category="CodeSchema_Project" Id="(Assembly=&quot;$(PersonalUri)/GitHub/CensusMapper/CensusMapper.ViewModels/CensusMapper.ViewModels.csproj&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=CensusMapper.ViewModels)" Label="CensusMapper.ViewModels.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="b8305f45-ed29-4816-ad77-6b3a4e4c907e" name="CensusMapper.Models">
+      <references>
+        <reference Id="ddaafe5c-571a-4822-bf23-649c214c8604" name="CensusMapper.Models">
+          <ArtifactNode Label="CensusMapper.Models" Category="CodeSchema_Project" Id="(Assembly=&quot;$(PersonalUri)/GitHub/CensusMapper/CensusMapper.Models/CensusMapper.Models.csproj&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=CensusMapper.Models)" Label="CensusMapper.Models.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="78c8de73-21f7-4786-9486-6969ae522665" name="CensusMapper.Services">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="0d01eca5-f48e-400d-9b5b-f8adacad2ea2" direction="Forward">
+          <layerMoniker Id="b8305f45-ed29-4816-ad77-6b3a4e4c907e" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="7fe00a8f-7625-469c-9b19-df7dffc53064" name="CensusMapper.Services">
+          <ArtifactNode Label="CensusMapper.Services" Category="CodeSchema_Project" Id="(Assembly=&quot;$(PersonalUri)/GitHub/CensusMapper/CensusMapper.Services/CensusMapper.Services.csproj&quot;)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=CensusMapper.Services)" Label="CensusMapper.Services.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="af6285b8-d53f-4f95-b804-5321ddd3b0a6" name="View">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="426ae416-d5c1-47c3-81ab-5e652fed7301" direction="Forward">
+          <layerMoniker Id="f6c9c3a1-ea9c-4394-ae4f-ea25da975474" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="3f4d0bdb-66af-4ff5-bf44-6954b75f794c" direction="Forward">
+          <layerMoniker Id="78c8de73-21f7-4786-9486-6969ae522665" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="ab46ee42-a15a-493e-8a7c-bdbc7f1bf142" name="CensusMapper‎.Views">
+          <ArtifactNode Label="CensusMapper‎.Views" Category="CodeSchema_Namespace" Id="(Namespace=CensusMapper.Views)" />
+          <ExpandedNode Id="(Assembly=CensusMapper)" Label="CensusMapper.exe" Category="CodeSchema_Assembly">
+            <LinkCategory Ref="Dsl.NamespaceUsedInAssembly" />
+          </ExpandedNode>
+          <ExpandedNode Id="(Namespace=CensusMapper.Views)" Label="CensusMapper‎.Views" Category="CodeSchema_Namespace">
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+  </layers>
+</layerModel>
