@@ -12,26 +12,25 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)BingMaps.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Census.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Item.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\StringFormatConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Address.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\County.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\CountyFips.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Entity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\GeocodePoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Item.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Point.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\PopulatedState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Resource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\ResourceSet.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PopulatedState.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SbaApi.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)StringFormatConverter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)UsState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\UsState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\BingMaps.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Census.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\SbaApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MainPage.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)CountyFips.json.txt" />
-    <Content Include="$(MSBuildThisFileDirectory)TextFile1.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Data\CountyFips.json.txt" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
