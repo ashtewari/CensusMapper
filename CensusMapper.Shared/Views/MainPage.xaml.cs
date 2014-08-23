@@ -117,15 +117,10 @@ namespace CensusMapper
 
         private async Task<bool> AddPushPinAtLocation(Coordinates location)
         {
-            var ctrl = new ContentControl();
-            ctrl.Template = Application.Current.Resources["ZipCodeTemplate"] as ControlTemplate;
-
-            InsertContentTemplateAtLocation(location, ctrl);
-
             BingMaps bingMaps = new BingMaps(keyBingMaps);
             Address address = await bingMaps.GetAddress(location);
 
-            return await AddPushPin(address, ctrl);
+            return await AddPushPin(address, location);
         }
 
         private void InsertContentTemplateAtLocation(Coordinates location, ContentControl ctrl)
@@ -142,41 +137,35 @@ namespace CensusMapper
             #endif
         }
 
-        private async Task<bool> AddPushPin(Address address, ContentControl ctrl)
+        private async Task<bool> AddPushPin(Address address, Coordinates location)
         {
             if (address != null)
             {                            
                 var array = await census.GetPopulationForPostalCode(address);
 
-                if (array == null)
+                if (array != null)
                 {
-                    RemovePushpin(ctrl);
-                    return false;
-                }
+                    int count;
 
-                int count;
-
-                if (int.TryParse(array[1][0].ToString(), out count))
-                {
-                    ctrl.DataContext = new
+                    if (int.TryParse(array[1][0].ToString(), out count))
                     {
-                        Name = string.Format("{0} ({1})", address.Locality, address.PostalCode),
-                        FormattedPopulation = string.Format("{0:0,0}", count)
-                    };
+                        var ctrl = new ContentControl();
+                        ctrl.Template = Application.Current.Resources["ZipCodeTemplate"] as ControlTemplate;
+
+                        InsertContentTemplateAtLocation(location, ctrl);
+
+                        ctrl.DataContext = new
+                        {
+                            Name = string.Format("{0} ({1})", address.Locality, address.PostalCode),
+                            FormattedPopulation = string.Format("{0:0,0}", count)
+                        };
+                        
+                        return true;
+                    }
                 }
-                else
-                {
-                    RemovePushpin(ctrl);
-                    return false;
-                }
-            }
-            else
-            {
-                RemovePushpin(ctrl);
-                return false;
             }
 
-            return true;
+            return false;
         }
 
         private async Task<string> ReadTextFile(string filename)
@@ -186,14 +175,5 @@ namespace CensusMapper
             var text = await Windows.Storage.FileIO.ReadTextAsync(file);
             return text;
         }
-
-        private void RemovePushpin(ContentControl ctrl)
-        {
-            map.Children.Remove(ctrl);
-        }
-
-        //private async Task LoadUserData()
-        //{          
-        //}
     }
 }
