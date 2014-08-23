@@ -42,7 +42,7 @@ namespace CensusMapper
             Location location;
             map.TryPixelToLocation(pos, out location);
 
-            bool result = await AddPushPinAtLocation(new Geopoint(new BasicGeoposition() { Latitude = location.Latitude, Longitude = location.Longitude}));
+            bool result = await AddPushPinAtLocation(new Coordinates() { Latitude = location.Latitude, Longitude = location.Longitude });
 
             if (result)
             {

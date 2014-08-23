@@ -46,7 +46,7 @@ namespace CensusMapper
 
         private async void map_Tapped_1(Windows.UI.Xaml.Controls.Maps.MapControl sender, Windows.UI.Xaml.Controls.Maps.MapInputEventArgs args)
         {
-            bool result = await AddPushPinAtLocation(args.Location);
+            bool result = await AddPushPinAtLocation(new Coordinates() { Latitude = args.Location.Position.Latitude, Longitude = args.Location .Position.Longitude });
 
             if (result)
             {

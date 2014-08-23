@@ -112,6 +112,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CensusMapper.Core.Pcl\CensusMapper.Core.Pcl.csproj">
+      <Project>{0484808f-44e4-43e4-a39d-01e3e992af2c}</Project>
+      <Name>CensusMapper.Core.Pcl</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

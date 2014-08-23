@@ -11,6 +11,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CensusMapper.Shared", "Cens
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CensusMapper.WindowsPhone", "CensusMapper.WindowsPhone\CensusMapper.WindowsPhone.csproj", "{8AC57166-D820-455D-860D-AF472C942F70}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CensusMapper.Core.Pcl", "CensusMapper.Core.Pcl\CensusMapper.Core.Pcl.csproj", "{0484808F-44E4-43E4-A39D-01E3E992AF2C}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		CensusMapper.Shared\CensusMapper.Shared.projitems*{4ad11571-57a2-4425-8271-fc66d2f589ba}*SharedItemsImports = 13
@@ -72,6 +74,16 @@ Global
 		{8AC57166-D820-455D-860D-AF472C942F70}.Release|x86.ActiveCfg = Release|x86
 		{8AC57166-D820-455D-860D-AF472C942F70}.Release|x86.Build.0 = Release|x86
 		{8AC57166-D820-455D-860D-AF472C942F70}.Release|x86.Deploy.0 = Release|x86
+		{0484808F-44E4-43E4-A39D-01E3E992AF2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0484808F-44E4-43E4-A39D-01E3E992AF2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0484808F-44E4-43E4-A39D-01E3E992AF2C}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{0484808F-44E4-43E4-A39D-01E3E992AF2C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0484808F-44E4-43E4-A39D-01E3E992AF2C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0484808F-44E4-43E4-A39D-01E3E992AF2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0484808F-44E4-43E4-A39D-01E3E992AF2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0484808F-44E4-43E4-A39D-01E3E992AF2C}.Release|ARM.ActiveCfg = Release|Any CPU
+		{0484808F-44E4-43E4-A39D-01E3E992AF2C}.Release|x64.ActiveCfg = Release|Any CPU
+		{0484808F-44E4-43E4-A39D-01E3E992AF2C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CensusMapper
+namespace CensusMapper.ViewModels
 {
     class PopulatedState : UsState
     {
-        public PopulatedState(UsState state):base(state.Fips, state.Name, state.Center.Position.Latitude, state.Center.Position.Longitude)
+        public PopulatedState(UsState state):base(state.Fips, state.Name, state.Center.Latitude, state.Center.Longitude)
         {
             
         }
