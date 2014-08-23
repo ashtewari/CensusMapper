@@ -25,6 +25,24 @@ namespace CensusMapper
 
         public CensusDataSet DataSet { get; set; }
 
+        public async Task<JArray> GetPopulationForAllStates()
+        {
+            string requestUri = string.Format("get=P0010001,NAME&for=state:*", _apiKey);
+            return await GetCensusData(requestUri);
+        }
+
+        public async Task<JArray> GetPopulationForPostalCode(Address address)
+        {
+            string fips = this.StateAbbreviationToFips(address.AdminDistrict);
+            if(string.IsNullOrEmpty(fips))
+            {
+                return null;
+            }
+
+            string requestUri = string.Format("get=P0010001&for=zip+code+tabulation+area:{0}&in=state:{1}", address.PostalCode, fips);
+            return await GetCensusData(requestUri);
+        }
+
         public async Task<JArray> GetCensusData(string requestUri)
         {
             var task = client.GetAsync(string.Format(query, DataSet == CensusDataSet.SF1 ? "sf1" : "acs", _apiKey, requestUri));

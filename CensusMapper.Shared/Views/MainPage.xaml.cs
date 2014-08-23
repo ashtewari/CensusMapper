@@ -79,11 +79,9 @@ namespace CensusMapper
         {
             try
             {                
-
                 Dictionary<string, UsState> statesList = census.GetStatesList();
 
-                string requestUri = string.Format("get=P0010001,NAME&for=state:*", keyCensus);
-                var array = await census.GetCensusData(requestUri);
+                var array = await census.GetPopulationForAllStates();
 
                 if (array == null) return;
 
@@ -147,18 +145,8 @@ namespace CensusMapper
         private async Task<bool> AddPushPin(Address address, ContentControl ctrl)
         {
             if (address != null)
-            {
-                string fips = census.StateAbbreviationToFips(address.AdminDistrict);
-
-                if (string.IsNullOrEmpty(fips))
-                {
-                    RemovePushpin(ctrl);
-                    return false;
-                }
-
-                string requestUri = string.Format("get=P0010001&for=zip+code+tabulation+area:{0}&in=state:{1}", address.PostalCode, fips);
-
-                var array = await census.GetCensusData(requestUri);
+            {                            
+                var array = await census.GetPopulationForPostalCode(address);
 
                 if (array == null)
                 {
