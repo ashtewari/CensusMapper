@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CensusMapper.Core", "CensusMapper.Core\CensusMapper.Core.csproj", "{08E1E6C3-ABAC-4D0F-89CB-CBF0F3C9C44A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CensusMapper.Android", "Android\CensusMapper.Android.csproj", "{79EEFFE5-0A41-4856-9B82-017EE1E8BFC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CensusMapper.Core.Pcl", "CensusMapper.Core.Pcl\CensusMapper.Core.Pcl.csproj", "{0484808F-44E4-43E4-A39D-01E3E992AF2C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0484808F-44E4-43E4-A39D-01E3E992AF2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0484808F-44E4-43E4-A39D-01E3E992AF2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0484808F-44E4-43E4-A39D-01E3E992AF2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0484808F-44E4-43E4-A39D-01E3E992AF2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08E1E6C3-ABAC-4D0F-89CB-CBF0F3C9C44A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08E1E6C3-ABAC-4D0F-89CB-CBF0F3C9C44A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08E1E6C3-ABAC-4D0F-89CB-CBF0F3C9C44A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08E1E6C3-ABAC-4D0F-89CB-CBF0F3C9C44A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79EEFFE5-0A41-4856-9B82-017EE1E8BFC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79EEFFE5-0A41-4856-9B82-017EE1E8BFC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79EEFFE5-0A41-4856-9B82-017EE1E8BFC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79EEFFE5-0A41-4856-9B82-017EE1E8BFC6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Android\CensusMapper.Android.csproj
+	EndGlobalSection
+EndGlobal

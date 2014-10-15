@@ -1,0 +1,24 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.7c087364" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Android\MapViewRenderer.cs">
+    <Files>
+      <File FileName="..\CensusMapper.Core.Pcl\Model\Address.cs" Line="1" Column="1" />
+      <File FileName="CensusMapper.Core\MapPage.cs" Line="4" Column="4" />
+      <File FileName="..\CensusMapper.Core.Pcl\Services\Census.cs" Line="1" Column="1" />
+      <File FileName="..\CensusMapper.Core.Pcl\Model\UsState.cs" Line="1" Column="1" />
+      <File FileName="CensusMapper.Core\App.cs" Line="1" Column="1" />
+      <File FileName="Android\MainActivity.cs" Line="1" Column="1" />
+      <File FileName="Android\MapViewRenderer.cs" Line="4" Column="4" />
+      <File FileName="CensusMapper.Core\CensusMap.cs" Line="1" Column="1" />
+      <File FileName="Android\Properties\AndroidManifest.xml" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <DisabledProjects>
+    <String>..\CensusMapper.Core.Pcl\CensusMapper.Core.Pcl.csproj</String>
+  </DisabledProjects>
+  <MonoDevelop.Ide.ItemProperties.CensusMapper.Android AndroidDeviceId-Debug="7c087364" />
+</Properties>

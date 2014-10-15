@@ -6,6 +6,8 @@ ApiKeys*
 packages/*
 !packages/repositories.config
 
+CMX/packages/*
+CMX/Components/*
 #################
 ## Eclipse
 #################
