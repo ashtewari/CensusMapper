@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("CensusMapper.Android.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("CensusMapperAndroid.Resource", IsApplication=true)]
 
-namespace CensusMapper.Android
+namespace CensusMapperAndroid
 {
 	
 	
@@ -1078,7 +1078,7 @@ namespace CensusMapper.Android
 			public const int Icon = 2130837619;
 			
 			// aapt resource value: 0x7f020074
-			public const int Logo = 2130837620;
+			public const int logo = 2130837620;
 			
 			// aapt resource value: 0x7f020075
 			public const int mr_ic_audio_vol = 2130837621;
@@ -1132,13 +1132,10 @@ namespace CensusMapper.Android
 			public const int mr_ic_media_route_on_holo_light = 2130837637;
 			
 			// aapt resource value: 0x7f020086
-			public const int pin = 2130837638;
+			public const int powered_by_google_dark = 2130837638;
 			
 			// aapt resource value: 0x7f020087
-			public const int powered_by_google_dark = 2130837639;
-			
-			// aapt resource value: 0x7f020088
-			public const int powered_by_google_light = 2130837640;
+			public const int powered_by_google_light = 2130837639;
 			
 			static Drawable()
 			{
@@ -1267,38 +1264,41 @@ namespace CensusMapper.Android
 			// aapt resource value: 0x7f070039
 			public const int image = 2131165241;
 			
+			// aapt resource value: 0x7f07004e
+			public const int linearLayout1 = 2131165262;
+			
 			// aapt resource value: 0x7f070001
 			public const int listMode = 2131165185;
 			
 			// aapt resource value: 0x7f07003b
 			public const int list_item = 2131165243;
 			
+			// aapt resource value: 0x7f07004f
+			public const int map = 2131165263;
+			
 			// aapt resource value: 0x7f070024
 			public const int match_parent = 2131165220;
 			
-			// aapt resource value: 0x7f070052
-			public const int media_route_control_frame = 2131165266;
-			
 			// aapt resource value: 0x7f070053
-			public const int media_route_disconnect_button = 2131165267;
+			public const int media_route_control_frame = 2131165267;
 			
-			// aapt resource value: 0x7f07004f
-			public const int media_route_list = 2131165263;
+			// aapt resource value: 0x7f070054
+			public const int media_route_disconnect_button = 2131165268;
 			
 			// aapt resource value: 0x7f070050
-			public const int media_route_volume_layout = 2131165264;
+			public const int media_route_list = 2131165264;
 			
 			// aapt resource value: 0x7f070051
-			public const int media_route_volume_slider = 2131165265;
+			public const int media_route_volume_layout = 2131165265;
+			
+			// aapt resource value: 0x7f070052
+			public const int media_route_volume_slider = 2131165266;
 			
 			// aapt resource value: 0x7f070012
 			public const int middle = 2131165202;
 			
 			// aapt resource value: 0x7f07002b
 			public const int monochrome = 2131165227;
-			
-			// aapt resource value: 0x7f07004e
-			public const int myButton = 2131165262;
 			
 			// aapt resource value: 0x7f070009
 			public const int never = 2131165193;
@@ -2512,7 +2512,7 @@ namespace CensusMapper.Android
 					16843055,
 					16843056,
 					16843057,
-					16843788};
+					16843754};
 			
 			// aapt resource value: 4
 			public const int MenuView_android_headerBackground = 4;

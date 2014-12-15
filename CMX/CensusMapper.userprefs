@@ -1,17 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.7c087364" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Android\MapViewRenderer.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.GPS" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="CensusMapperAndroid\MainActivity.cs">
     <Files>
-      <File FileName="..\CensusMapper.Core.Pcl\Model\Address.cs" Line="1" Column="1" />
+      <File FileName="CensusMapperAndroid\MainActivity.cs" Line="49" Column="49" />
+      <File FileName="CensusMapper.Core.Pcl\Model\UsState.cs" Line="1" Column="1" />
       <File FileName="CensusMapper.Core\MapPage.cs" Line="1" Column="1" />
-      <File FileName="..\CensusMapper.Core.Pcl\Services\Census.cs" Line="1" Column="1" />
-      <File FileName="..\CensusMapper.Core.Pcl\Model\UsState.cs" Line="1" Column="1" />
-      <File FileName="CensusMapper.Core\App.cs" Line="1" Column="1" />
-      <File FileName="Android\MainActivity.cs" Line="1" Column="1" />
-      <File FileName="Android\MapViewRenderer.cs" Line="45" Column="45" />
       <File FileName="CensusMapper.Core\CensusMap.cs" Line="1" Column="1" />
+      <File FileName="CensusMapper.Core\App.cs" Line="1" Column="1" />
+      <File FileName="Android\MapViewRenderer.cs" Line="1" Column="1" />
       <File FileName="CensusMapper.Core.Pcl\Services\Census.cs" Line="1" Column="1" />
-      <File FileName="..\..\..\..\Program Files (x86)\MSBuild\Xamarin\Android\Xamarin.Android.Common.targets" Line="1" Column="1" />
+      <File FileName="CensusMapper.Core.Pcl\Services\BingMaps.cs" Line="1" Column="1" />
+      <File FileName="CensusMapper.Core.Pcl\Model\Coordinates.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -20,5 +19,8 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <DisabledProjects>
     <String>..\CensusMapper.Core.Pcl\CensusMapper.Core.Pcl.csproj</String>
+    <String>Android\CensusMapper.Android.csproj</String>
+    <String>CensusMapper.Core\CensusMapper.Core.csproj</String>
   </DisabledProjects>
+  <MonoDevelop.Ide.ItemProperties.CensusMapperAndroid MonoForAntroid.PreferredDevice="Nexus 4" />
 </Properties>

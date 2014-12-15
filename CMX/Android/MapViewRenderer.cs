@@ -70,10 +70,13 @@ namespace CensusMapper.Android
 				//markerWithIcon.SetTitle (formsPin.Label);
 				//markerWithIcon.SetSnippet (formsPin.Address);
 
-				//					if (!string.IsNullOrEmpty ("Logo"))
-				//						markerWithIcon.InvokeIcon (BitmapDescriptorFactory.FromAsset (String.Format ("{0}.png", "Logo")));
-				//					else
-				//						markerWithIcon.InvokeIcon (BitmapDescriptorFactory.DefaultMarker ());
+
+				//markerWithIcon.InvokeIcon (BitmapDescriptorFactory.FromResource (Resource.Drawable.pin));
+
+//				if (!string.IsNullOrEmpty ("Logo"))
+//					markerWithIcon.InvokeIcon (BitmapDescriptorFactory.FromAsset (String.Format ("{0}.png", "pin.9")));
+//				else
+//					markerWithIcon.InvokeIcon (BitmapDescriptorFactory.DefaultMarker ());
 
 				markerWithIcon.InvokeIcon (CreateCensusMarker(formsPin));
 				markers.Add (markerWithIcon);
@@ -118,9 +121,20 @@ namespace CensusMapper.Android
 			color.TextSize = 18;
 			color.Color = global::Android.Graphics.Color.Black;
 
-			Bitmap bmp = Bitmap.CreateBitmap(200, 100, Bitmap.Config.Argb8888);
-			Canvas canvas = new Canvas(bmp);
+			Bitmap bmp = Bitmap.CreateBitmap(200, 100, Bitmap.Config.Rgb565);
 
+			var options = new BitmapFactory.Options {
+				InJustDecodeBounds = true,
+			};
+			// BitmapFactory.DecodeResource() will return a non-null value; dispose of it.
+//			using (var bmp = BitmapFactory.DecodeResource(Resources, Resource.Drawable.pin, options)) {
+//				Canvas canvas = new Canvas(bmp);
+//				canvas.DrawText (pin.Label, 30, 40, color);
+//				return BitmapDescriptorFactory.FromBitmap (bmp);
+//			}
+
+			//Bitmap bmp = BitmapFactory.DecodeResource (Resources, Resource.Drawable.Logo);
+			Canvas canvas = new Canvas(bmp);
 			canvas.DrawText (pin.Label, 30, 40, color);
 
 			return BitmapDescriptorFactory.FromBitmap (bmp);
