@@ -26,6 +26,7 @@ namespace CensusMapperAndroid
 	{	
 		private const string censusApiKey = "11174******";
 		private const string bingMapsKey = "AjFaZ******";
+
 		private LatLng raleighNC = new LatLng(35.772096000000000000, -78.638614500000020000);
 		private LatLng centerOfUs = new LatLng(39.828127, -98.579404);
 
@@ -35,7 +36,7 @@ namespace CensusMapperAndroid
 		public static readonly int InstallGooglePlayServicesId = 1000;
 		private bool _isGooglePlayServicesInstalled;
 
-		protected async override void OnCreate (Bundle bundle)
+		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 			_isGooglePlayServicesInstalled = TestIfGooglePlayServicesIsInstalled ();
@@ -44,7 +45,6 @@ namespace CensusMapperAndroid
 
 			if (_isGooglePlayServicesInstalled) {
 				InitMapFragment();
-				///await SetupMapIfNeeded(); // It's not gauranteed that the map will be available at this point.
 			}
 		}
 
@@ -79,7 +79,7 @@ namespace CensusMapperAndroid
 				if (_map != null)
 				{
 					// We create an instance of CameraUpdate, and move the map to it.
-					CameraUpdate cameraUpdate = CameraUpdateFactory.NewLatLngZoom(raleighNC, 7);
+					CameraUpdate cameraUpdate = CameraUpdateFactory.NewLatLngZoom(centerOfUs, 5);
 					_map.MoveCamera(cameraUpdate);
 
 					await LoadStateData ();
@@ -89,6 +89,10 @@ namespace CensusMapperAndroid
 			}
 		}			
 
+		// TODO : Show splash screen
+		// TODO: Create ApiKeyService
+		// TODO : Animate touching markers, should behave like a button press.
+		// TODO : Navigate to another page to show more information about the location
 		async void HandleMapClick (object sender, GoogleMap.MapClickEventArgs e)
 		{
 			LatLng position = new LatLng (e.Point.Latitude, e.Point.Longitude);
@@ -99,6 +103,8 @@ namespace CensusMapperAndroid
 			if (address != null) {
 				CensusMapper.Census censusApi = new CensusMapper.Census(censusApiKey);
 				var population = await censusApi.GetPopulationForPostalCode (address);
+
+				// TODO: Move parsing of CensusApi data to a common service. Should not have to access data like this - population[1][0]
 				AddPin (position, string.Format("Postal Code: {0}\nPopulation: {1}", address.PostalCode, population[1][0]));
 			}				
 		}			
@@ -149,6 +155,8 @@ namespace CensusMapperAndroid
 			}
 		}
 
+		// TODO : Fade-in new pin - color animation
+		// TODO : Save user marked locations; Integrate with Azure Mobile Services
 		private void AddPin(LatLng position, string label)
 		{
 			var point = _map.Projection.ToScreenLocation (position);

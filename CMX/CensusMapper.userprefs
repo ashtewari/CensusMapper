@@ -1,16 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.GPS" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.7c087364" />
   <MonoDevelop.Ide.Workbench ActiveDocument="CensusMapperAndroid\MainActivity.cs">
     <Files>
-      <File FileName="CensusMapperAndroid\MainActivity.cs" Line="49" Column="49" />
-      <File FileName="CensusMapper.Core.Pcl\Model\UsState.cs" Line="1" Column="1" />
-      <File FileName="CensusMapper.Core\MapPage.cs" Line="1" Column="1" />
-      <File FileName="CensusMapper.Core\CensusMap.cs" Line="1" Column="1" />
-      <File FileName="CensusMapper.Core\App.cs" Line="1" Column="1" />
-      <File FileName="Android\MapViewRenderer.cs" Line="1" Column="1" />
-      <File FileName="CensusMapper.Core.Pcl\Services\Census.cs" Line="1" Column="1" />
-      <File FileName="CensusMapper.Core.Pcl\Services\BingMaps.cs" Line="1" Column="1" />
-      <File FileName="CensusMapper.Core.Pcl\Model\Coordinates.cs" Line="1" Column="1" />
+      <File FileName="CensusMapperAndroid\MainActivity.cs" Line="46" Column="46" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -22,5 +14,6 @@
     <String>Android\CensusMapper.Android.csproj</String>
     <String>CensusMapper.Core\CensusMapper.Core.csproj</String>
   </DisabledProjects>
+  <AuthorInfo Name="Ash.Tewari" Email="" Copyright="Ash.Tewari" Company="www.tewari.info" Trademark="" />
   <MonoDevelop.Ide.ItemProperties.CensusMapperAndroid MonoForAntroid.PreferredDevice="Nexus 4" />
 </Properties>
