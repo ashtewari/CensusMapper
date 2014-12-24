@@ -1137,6 +1137,9 @@ namespace CensusMapperAndroid
 			// aapt resource value: 0x7f020087
 			public const int powered_by_google_light = 2130837639;
 			
+			// aapt resource value: 0x7f020088
+			public const int splash = 2130837640;
+			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -1882,6 +1885,9 @@ namespace CensusMapperAndroid
 			
 			// aapt resource value: 0x7f060003
 			public const int Theme_MediaRouter_Light = 2131099651;
+			
+			// aapt resource value: 0x7f060094
+			public const int Theme_Splash = 2131099796;
 			
 			// aapt resource value: 0x7f060092
 			public const int WalletFragmentDefaultButtonTextAppearance = 2131099794;

@@ -21,11 +21,10 @@ using CensusMapper;
 
 namespace CensusMapperAndroid
 {
-	[Activity (Label = "Census Mapper", MainLauncher = true, Icon = "@drawable/logo")]
+	[Activity (Label = "Census Mapper", Icon = "@drawable/logo")]
 	public class MainActivity : Activity
 	{	
-		private const string censusApiKey = "11174******";
-		private const string bingMapsKey = "AjFaZ******";
+		private ApiKeyService keys = new  ApiKeyService();
 
 		private LatLng raleighNC = new LatLng(35.772096000000000000, -78.638614500000020000);
 		private LatLng centerOfUs = new LatLng(39.828127, -98.579404);
@@ -97,15 +96,15 @@ namespace CensusMapperAndroid
 		{
 			LatLng position = new LatLng (e.Point.Latitude, e.Point.Longitude);
 
-			BingMaps bing = new BingMaps (bingMapsKey);
+			BingMaps bing = new BingMaps (keys.BingMapsKey);
 			Address address = await bing.GetAddress (new Coordinates() { Latitude = e.Point.Latitude, Longitude = e.Point.Longitude });
 
 			if (address != null) {
-				CensusMapper.Census censusApi = new CensusMapper.Census(censusApiKey);
+				CensusMapper.Census censusApi = new CensusMapper.Census(keys.CensusKey);
 				var population = await censusApi.GetPopulationForPostalCode (address);
 
 				// TODO: Move parsing of CensusApi data to a common service. Should not have to access data like this - population[1][0]
-				AddPin (position, string.Format("Postal Code: {0}\nPopulation: {1}", address.PostalCode, population[1][0]));
+				AddPin (position, string.Format("Postal Code: {0}\nPopulation: {1}", address.PostalCode, population[1][0]), Color.Blue);
 			}				
 		}			
 
@@ -132,7 +131,7 @@ namespace CensusMapperAndroid
 
 		private async Task LoadStateData()
 		{
-			CensusMapper.Census censusApi = new CensusMapper.Census(censusApiKey);
+			CensusMapper.Census censusApi = new CensusMapper.Census(keys.CensusKey);
 
 			Dictionary<string, UsState> states = censusApi.GetStatesList();
 
@@ -149,7 +148,7 @@ namespace CensusMapperAndroid
 
 					int count;
 					if (int.TryParse (item [0].ToString (), out count)) {
-						AddPin (new LatLng(state.Center.Latitude, state.Center.Longitude), string.Format("State: {0}\nPopulation: {1}", state.Name, count));
+						AddPin (new LatLng(state.Center.Latitude, state.Center.Longitude), string.Format("State: {0}\nPopulation: {1}", state.Name, count), Color.Yellow);
 					}
 				}
 			}
@@ -157,13 +156,13 @@ namespace CensusMapperAndroid
 
 		// TODO : Fade-in new pin - color animation
 		// TODO : Save user marked locations; Integrate with Azure Mobile Services
-		private void AddPin(LatLng position, string label)
+		private void AddPin(LatLng position, string label, Color color)
 		{
 			var point = _map.Projection.ToScreenLocation (position);
 			MarkerOptions marker1 = new MarkerOptions();
 			marker1.Anchor(0.0f, 1.0f);
 			marker1.SetPosition(position);
-			marker1.InvokeIcon (CreateCensusMarker(point, label));
+			marker1.InvokeIcon (CreateCensusMarker(point, label, color));
 
 			_map.AddMarker(marker1);
 		}
@@ -173,7 +172,7 @@ namespace CensusMapperAndroid
 			return BitmapDescriptorFactory.DefaultMarker ();
 		}
 
-		private BitmapDescriptor CreateCensusMarker(Android.Graphics.Point point, string label)
+		private BitmapDescriptor CreateCensusMarker(Android.Graphics.Point point, string label, Color bgColor)
 		{
 			Paint color = new Paint();
 			color.TextSize = 18;
@@ -189,7 +188,7 @@ namespace CensusMapperAndroid
 			canvas.DrawColor (Color.Transparent);
 
 			Paint tr = new Paint ();
-			tr.Color = Color.Blue;
+			tr.Color = bgColor;
 			tr.SetStyle(Paint.Style.Fill);
 			tr.AntiAlias = true;
 
