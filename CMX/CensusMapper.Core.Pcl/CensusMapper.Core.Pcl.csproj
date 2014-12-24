@@ -49,7 +49,7 @@
     <Compile Include="Services\Census.cs" />
     <Compile Include="Services\SbaApi.cs" />
     <Compile Include="Model\Coordinates.cs" />
-    <Compile Include="Services\ApiKeyService.cs" />
+    <Compile Include="Services\ApiService.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
