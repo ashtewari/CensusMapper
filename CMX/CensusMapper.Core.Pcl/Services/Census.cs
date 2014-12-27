@@ -25,10 +25,16 @@ namespace CensusMapper
 
         public CensusDataSet DataSet { get; set; }
 
+		JArray statePops = null;
+
         public async Task<JArray> GetPopulationForAllStates()
         {
-            string requestUri = string.Format("get=P0010001,NAME&for=state:*", _apiKey);
-            return await GetCensusData(requestUri);
+			if (statePops == null) {
+				string requestUri = string.Format ("get=P0010001,NAME&for=state:*", _apiKey);
+				statePops = await GetCensusData (requestUri);
+			}
+
+			return statePops;
         }
 
         public async Task<JArray> GetPopulationForPostalCode(Address address)
@@ -41,7 +47,7 @@ namespace CensusMapper
 
             string requestUri = string.Format("get=P0010001&for=zip+code+tabulation+area:{0}&in=state:{1}", address.PostalCode, fips);
             return await GetCensusData(requestUri);
-        }
+        }			
 
         public async Task<JArray> GetCensusData(string requestUri)
         {

@@ -68,6 +68,9 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplashActivity.cs" />
+    <Compile Include="LatLngEvaluator.cs" />
+    <Compile Include="DetailActivity.cs" />
+    <Compile Include="LocationInformation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

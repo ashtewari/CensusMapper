@@ -1886,16 +1886,11 @@ namespace CensusMapperAndroid
 			// aapt resource value: 0x7f050093
 			public const int Theme_MediaRouter_Light = 2131034259;
 			
-<<<<<<< Updated upstream
-			// aapt resource value: 0x7f060094
-			public const int Theme_Splash = 2131099796;
+			// aapt resource value: 0x7f050094
+			public const int Theme_Splash = 2131034260;
 			
-			// aapt resource value: 0x7f060092
-			public const int WalletFragmentDefaultButtonTextAppearance = 2131099794;
-=======
 			// aapt resource value: 0x7f050003
 			public const int WalletFragmentDefaultButtonTextAppearance = 2131034115;
->>>>>>> Stashed changes
 			
 			// aapt resource value: 0x7f050002
 			public const int WalletFragmentDefaultDetailsHeaderTextAppearance = 2131034114;

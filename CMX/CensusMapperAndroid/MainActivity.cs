@@ -18,10 +18,13 @@ using System.Diagnostics;
 using System.Collections.Generic;
 
 using CensusMapper;
+using Android.Animation;
+using Java.IO;
+using Newtonsoft.Json;
 
 namespace CensusMapperAndroid
 {
-	[Activity (Label = "Census Mapper", Icon = "@drawable/logo")]
+	[Activity (Label = "Census Mapper", MainLauncher = true, Icon = "@drawable/logo")]
 	public class MainActivity : Activity
 	{	
 		private ApiKeyService keys = new  ApiKeyService();
@@ -34,6 +37,9 @@ namespace CensusMapperAndroid
 
 		public static readonly int InstallGooglePlayServicesId = 1000;
 		private bool _isGooglePlayServicesInstalled;
+
+		private IDictionary<string, LocationInformation> locations = new Dictionary<string, LocationInformation>();
+		private IDictionary<string, int> stateInformation = new Dictionary<string, int>();
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -84,7 +90,22 @@ namespace CensusMapperAndroid
 					await LoadStateData ();
 
 					_map.MapClick += HandleMapClick;
+					_map.MarkerClick += HandleMarkerClick;
 				}
+			}
+		}
+
+		void HandleMarkerClick (object sender, GoogleMap.MarkerClickEventArgs e)
+		{
+			// locate LocationInfo
+			if (locations.ContainsKey (e.Marker.Id)) {
+				// Show details
+				var detailActivity = new Intent (this, typeof(DetailActivity));
+
+				var payload = JsonConvert.SerializeObject (locations [e.Marker.Id]);
+
+				detailActivity.PutExtra ("LocationInfo", payload);
+				StartActivity (detailActivity);
 			}
 		}			
 
@@ -104,7 +125,17 @@ namespace CensusMapperAndroid
 				var population = await censusApi.GetPopulationForPostalCode (address);
 
 				// TODO: Move parsing of CensusApi data to a common service. Should not have to access data like this - population[1][0]
-				AddPin (position, string.Format("Postal Code: {0}\nPopulation: {1}", address.PostalCode, population[1][0]), Color.Blue);
+				Marker marker = AddMarker (position, string.Format("Postal Code: {0}\nPopulation: {1}", address.PostalCode, population[1][0]), Color.Blue, true);
+
+				var stateFipsCode = censusApi.StateAbbreviationToFips (address.AdminDistrict);
+				if (stateInformation.ContainsKey (stateFipsCode)) {
+					locations.Add (marker.Id, new LocationInformation () {
+						State = address.CountryRegion,
+						StatePopulation = stateInformation[stateFipsCode],
+						PostalCode = address.PostalCode,
+						PostalCodePopulation = (int)population [1] [0]
+					});
+				}
 			}				
 		}			
 
@@ -148,7 +179,9 @@ namespace CensusMapperAndroid
 
 					int count;
 					if (int.TryParse (item [0].ToString (), out count)) {
-						AddPin (new LatLng(state.Center.Latitude, state.Center.Longitude), string.Format("State: {0}\nPopulation: {1}", state.Name, count), Color.Yellow);
+						AddMarker (new LatLng(state.Center.Latitude, state.Center.Longitude), string.Format("State: {0}\nPopulation: {1}", state.Name, count), Color.Brown, false);
+
+						stateInformation.Add (fips, count);
 					}
 				}
 			}
@@ -156,7 +189,7 @@ namespace CensusMapperAndroid
 
 		// TODO : Fade-in new pin - color animation
 		// TODO : Save user marked locations; Integrate with Azure Mobile Services
-		private void AddPin(LatLng position, string label, Color color)
+		private Marker AddMarker(LatLng position, string label, Color color, bool withAnimation)
 		{
 			var point = _map.Projection.ToScreenLocation (position);
 			MarkerOptions marker1 = new MarkerOptions();
@@ -164,7 +197,22 @@ namespace CensusMapperAndroid
 			marker1.SetPosition(position);
 			marker1.InvokeIcon (CreateCensusMarker(point, label, color));
 
-			_map.AddMarker(marker1);
+			var marker = _map.AddMarker(marker1);
+
+			if (withAnimation) {
+				var startPoint = point;
+				// We will start 35dp above the final position
+				startPoint.Offset (0, -35);
+				var startPos = _map.Projection.FromScreenLocation (startPoint);
+
+				var evaluator = new LatLngEvaluator ();
+				var animator = ObjectAnimator.OfObject (marker, "position", evaluator, startPos, position);
+				animator.SetDuration (1000);
+				animator.SetInterpolator (new Android.Views.Animations.BounceInterpolator ());
+				animator.Start ();
+			}	
+
+			return marker;
 		}
 
 		private BitmapDescriptor CreateDefaultMarker()
