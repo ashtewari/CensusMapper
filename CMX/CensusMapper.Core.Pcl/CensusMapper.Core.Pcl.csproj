@@ -50,6 +50,7 @@
     <Compile Include="Services\SbaApi.cs" />
     <Compile Include="Model\Coordinates.cs" />
     <Compile Include="Services\ApiService.cs" />
+    <Compile Include="Converters\PopulationFormatter.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
@@ -67,5 +68,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Converters\" />
   </ItemGroup>
 </Project>
