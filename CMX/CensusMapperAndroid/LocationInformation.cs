@@ -10,22 +10,22 @@ namespace CensusMapperAndroid
 		{
 		}
 
-		public int PostalCodePopulation {
+		public int ItemCount {
 			get;
 			set;
 		}
 
-		public int StatePopulation {
+		public int GroupCount {
 			get;
 			set;
 		}
 
-		public string PostalCode {
+		public string ItemName {
 			get;
 			set;
 		}
 
-		public string State {
+		public string GroupName {
 			get;
 			set;
 		}

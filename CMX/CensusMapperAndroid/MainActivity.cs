@@ -125,15 +125,15 @@ namespace CensusMapperAndroid
 				var population = await censusApi.GetPopulationForPostalCode (address);
 
 				// TODO: Move parsing of CensusApi data to a common service. Should not have to access data like this - population[1][0]
-				Marker marker = AddMarker (position, string.Format("Postal Code: {0}\nPopulation: {1}", address.PostalCode, population[1][0]), Color.Blue, true);
+				Marker marker = AddMarker (position, string.Format("Postal Code: {0}\nPopulation: {1}", address.PostalCode, PopulationFormatter.Convert(population[1][0])), Color.Blue, true);
 
 				var stateFipsCode = censusApi.StateAbbreviationToFips (address.AdminDistrict);
 				if (stateInformation.ContainsKey (stateFipsCode)) {
 					locations.Add (marker.Id, new LocationInformation () {
-						State = address.CountryRegion,
-						StatePopulation = stateInformation[stateFipsCode],
-						PostalCode = address.PostalCode,
-						PostalCodePopulation = (int)population [1] [0]
+						GroupName = censusApi.StateAbbreviationToName(address.AdminDistrict),
+						GroupCount = stateInformation[stateFipsCode],
+						ItemName = address.PostalCode,
+						ItemCount = (int)population [1] [0]
 					});
 				}
 			}				
@@ -179,9 +179,16 @@ namespace CensusMapperAndroid
 
 					int count;
 					if (int.TryParse (item [0].ToString (), out count)) {
-						AddMarker (new LatLng(state.Center.Latitude, state.Center.Longitude), string.Format("State: {0}\nPopulation: {1}", state.Name, count), Color.Brown, false);
+						var marker = AddMarker (new LatLng(state.Center.Latitude, state.Center.Longitude), string.Format("State: {0}\nPopulation: {1}", state.Name, PopulationFormatter.Convert(count)), Color.Brown, false);
 
 						stateInformation.Add (fips, count);
+
+						locations.Add (marker.Id, new LocationInformation () {
+							GroupName = "USA",
+							GroupCount = 308745538,
+							ItemName = state.Name,
+							ItemCount = count
+						});
 					}
 				}
 			}
