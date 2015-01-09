@@ -1,9 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.Nexus 4 (KitKat)" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="CensusMapperAndroid/MainActivity.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.GPS" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="CensusMapperAndroid\MainActivity.cs">
     <Files>
-      <File FileName="CensusMapperAndroid/MainActivity.cs" Line="18" Column="18" />
-      <File FileName="CensusMapperAndroid/Properties/AndroidManifest.xml" Line="1" Column="1" />
+      <File FileName="CensusMapperAndroid\MainActivity.cs" Line="1" Column="1" />
+      <File FileName="CensusMapperAndroid\Properties\AndroidManifest.xml" Line="1" Column="1" />
+      <File FileName="CensusMapperAndroid\Resources\values\Styles.xml" Line="13" Column="13" />
+      <File FileName="CensusMapperAndroid\SplashActivity.cs" Line="1" Column="1" />
+      <File FileName="CensusMapper.Core.Pcl\Services\ApiService.cs" Line="1" Column="1" />
+      <File FileName="CensusMapper.Core.Pcl\Services\BingMaps.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
