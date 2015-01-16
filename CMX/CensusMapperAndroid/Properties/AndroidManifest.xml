@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="4" android:versionName="0.2" package="info.tewari.censusmapper">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="info.tewari.censusmapper" android:versionCode="5" android:versionName="0.5">
 	<uses-sdk android:targetSdkVersion="15" />
 	<uses-library android:name="com.google.android.maps" />
 	<application android:label="Census Mapper" android:icon="@drawable/logo">

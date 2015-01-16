@@ -24,7 +24,7 @@ using Newtonsoft.Json;
 
 namespace CensusMapperAndroid
 {
-	[Activity (Label = "Census Mapper", MainLauncher = true, Icon = "@drawable/logo")]
+	[Activity (Label = "Census Mapper", Icon = "@drawable/logo")]
 	public class MainActivity : Activity
 	{	
 		private ApiKeyService keys = new  ApiKeyService();
@@ -108,11 +108,8 @@ namespace CensusMapperAndroid
 				StartActivity (detailActivity);
 			}
 		}			
-
-		// TODO : Show splash screen
-		// TODO: Create ApiKeyService
+			
 		// TODO : Animate touching markers, should behave like a button press.
-		// TODO : Navigate to another page to show more information about the location
 		async void HandleMapClick (object sender, GoogleMap.MapClickEventArgs e)
 		{
 			LatLng position = new LatLng (e.Point.Latitude, e.Point.Longitude);
@@ -193,8 +190,7 @@ namespace CensusMapperAndroid
 				}
 			}
 		}
-
-		// TODO : Fade-in new pin - color animation
+			
 		// TODO : Save user marked locations; Integrate with Azure Mobile Services
 		private Marker AddMarker(LatLng position, string label, Color color, bool withAnimation)
 		{

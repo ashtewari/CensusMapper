@@ -1243,6 +1243,9 @@ namespace CensusMapperAndroid
 			// aapt resource value: 0x7f07002a
 			public const int grayscale = 2131165226;
 			
+			// aapt resource value: 0x7f07004e
+			public const int gridLayout1 = 2131165262;
+			
 			// aapt resource value: 0x7f07001d
 			public const int holo_dark = 2131165213;
 			
@@ -1267,8 +1270,8 @@ namespace CensusMapperAndroid
 			// aapt resource value: 0x7f070039
 			public const int image = 2131165241;
 			
-			// aapt resource value: 0x7f07004e
-			public const int linearLayout1 = 2131165262;
+			// aapt resource value: 0x7f070054
+			public const int linearLayout1 = 2131165268;
 			
 			// aapt resource value: 0x7f070001
 			public const int listMode = 2131165185;
@@ -1276,26 +1279,26 @@ namespace CensusMapperAndroid
 			// aapt resource value: 0x7f07003b
 			public const int list_item = 2131165243;
 			
-			// aapt resource value: 0x7f07004f
-			public const int map = 2131165263;
+			// aapt resource value: 0x7f070055
+			public const int map = 2131165269;
 			
 			// aapt resource value: 0x7f070024
 			public const int match_parent = 2131165220;
 			
-			// aapt resource value: 0x7f070053
-			public const int media_route_control_frame = 2131165267;
+			// aapt resource value: 0x7f070059
+			public const int media_route_control_frame = 2131165273;
 			
-			// aapt resource value: 0x7f070054
-			public const int media_route_disconnect_button = 2131165268;
+			// aapt resource value: 0x7f07005a
+			public const int media_route_disconnect_button = 2131165274;
 			
-			// aapt resource value: 0x7f070050
-			public const int media_route_list = 2131165264;
+			// aapt resource value: 0x7f070056
+			public const int media_route_list = 2131165270;
 			
-			// aapt resource value: 0x7f070051
-			public const int media_route_volume_layout = 2131165265;
+			// aapt resource value: 0x7f070057
+			public const int media_route_volume_layout = 2131165271;
 			
-			// aapt resource value: 0x7f070052
-			public const int media_route_volume_slider = 2131165266;
+			// aapt resource value: 0x7f070058
+			public const int media_route_volume_slider = 2131165272;
 			
 			// aapt resource value: 0x7f070012
 			public const int middle = 2131165202;
@@ -1311,6 +1314,9 @@ namespace CensusMapperAndroid
 			
 			// aapt resource value: 0x7f070000
 			public const int normal = 2131165184;
+			
+			// aapt resource value: 0x7f07004f
+			public const int populationHeader = 2131165263;
 			
 			// aapt resource value: 0x7f07001f
 			public const int production = 2131165215;
@@ -1378,6 +1384,12 @@ namespace CensusMapperAndroid
 			// aapt resource value: 0x7f070030
 			public const int split_action_bar = 2131165232;
 			
+			// aapt resource value: 0x7f070050
+			public const int stateLabel = 2131165264;
+			
+			// aapt resource value: 0x7f070051
+			public const int statePop = 2131165265;
+			
 			// aapt resource value: 0x7f070021
 			public const int strict_sandbox = 2131165217;
 			
@@ -1407,6 +1419,12 @@ namespace CensusMapperAndroid
 			
 			// aapt resource value: 0x7f070025
 			public const int wrap_content = 2131165221;
+			
+			// aapt resource value: 0x7f070052
+			public const int zipLabel = 2131165266;
+			
+			// aapt resource value: 0x7f070053
+			public const int zipPop = 2131165267;
 			
 			static Id()
 			{
@@ -1513,19 +1531,22 @@ namespace CensusMapperAndroid
 			public const int abc_simple_decor = 2130903063;
 			
 			// aapt resource value: 0x7f030018
-			public const int Main = 2130903064;
+			public const int LocationInfo = 2130903064;
 			
 			// aapt resource value: 0x7f030019
-			public const int mr_media_route_chooser_dialog = 2130903065;
+			public const int Main = 2130903065;
 			
 			// aapt resource value: 0x7f03001a
-			public const int mr_media_route_controller_dialog = 2130903066;
+			public const int mr_media_route_chooser_dialog = 2130903066;
 			
 			// aapt resource value: 0x7f03001b
-			public const int mr_media_route_list_item = 2130903067;
+			public const int mr_media_route_controller_dialog = 2130903067;
 			
 			// aapt resource value: 0x7f03001c
-			public const int support_simple_spinner_dropdown_item = 2130903068;
+			public const int mr_media_route_list_item = 2130903068;
+			
+			// aapt resource value: 0x7f03001d
+			public const int support_simple_spinner_dropdown_item = 2130903069;
 			
 			static Layout()
 			{
