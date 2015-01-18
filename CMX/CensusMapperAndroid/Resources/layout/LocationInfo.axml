@@ -58,4 +58,9 @@
             android:layout_margin="8dp"
             android:id="@+id/zipPop" />
     </GridLayout>
+    <oxyplot.xamarinandroid.PlotView
+        android:id="@+id/plotview"
+        android:layout_margin="48dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
 </LinearLayout>

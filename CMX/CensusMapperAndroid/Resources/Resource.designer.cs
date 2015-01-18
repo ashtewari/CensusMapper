@@ -1270,8 +1270,8 @@ namespace CensusMapperAndroid
 			// aapt resource value: 0x7f070039
 			public const int image = 2131165241;
 			
-			// aapt resource value: 0x7f070054
-			public const int linearLayout1 = 2131165268;
+			// aapt resource value: 0x7f070055
+			public const int linearLayout1 = 2131165269;
 			
 			// aapt resource value: 0x7f070001
 			public const int listMode = 2131165185;
@@ -1279,26 +1279,26 @@ namespace CensusMapperAndroid
 			// aapt resource value: 0x7f07003b
 			public const int list_item = 2131165243;
 			
-			// aapt resource value: 0x7f070055
-			public const int map = 2131165269;
+			// aapt resource value: 0x7f070056
+			public const int map = 2131165270;
 			
 			// aapt resource value: 0x7f070024
 			public const int match_parent = 2131165220;
 			
-			// aapt resource value: 0x7f070059
-			public const int media_route_control_frame = 2131165273;
-			
 			// aapt resource value: 0x7f07005a
-			public const int media_route_disconnect_button = 2131165274;
+			public const int media_route_control_frame = 2131165274;
 			
-			// aapt resource value: 0x7f070056
-			public const int media_route_list = 2131165270;
+			// aapt resource value: 0x7f07005b
+			public const int media_route_disconnect_button = 2131165275;
 			
 			// aapt resource value: 0x7f070057
-			public const int media_route_volume_layout = 2131165271;
+			public const int media_route_list = 2131165271;
 			
 			// aapt resource value: 0x7f070058
-			public const int media_route_volume_slider = 2131165272;
+			public const int media_route_volume_layout = 2131165272;
+			
+			// aapt resource value: 0x7f070059
+			public const int media_route_volume_slider = 2131165273;
 			
 			// aapt resource value: 0x7f070012
 			public const int middle = 2131165202;
@@ -1314,6 +1314,9 @@ namespace CensusMapperAndroid
 			
 			// aapt resource value: 0x7f070000
 			public const int normal = 2131165184;
+			
+			// aapt resource value: 0x7f070054
+			public const int plotview = 2131165268;
 			
 			// aapt resource value: 0x7f07004f
 			public const int populationHeader = 2131165263;

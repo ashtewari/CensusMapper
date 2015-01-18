@@ -40,6 +40,28 @@ namespace CensusMapperAndroid
 
 				zipLabel.Text = string.Format("{0}", info.ItemName);
 				zipPop.Text = PopulationFormatter.Convert(info.ItemCount);
+
+				var plotview = FindViewById<OxyPlot.XamarinAndroid.PlotView> (Resource.Id.plotview);
+				plotview.SetBackgroundColor (Android.Graphics.Color.Transparent);
+
+				var itemSlice = new OxyPlot.Series.PieSlice (info.ItemName, info.ItemCount) {
+					IsExploded = true,
+					Fill = OxyPlot.OxyColors.DarkOrange
+				};
+
+				var groupSlice = new OxyPlot.Series.PieSlice (info.GroupName, info.GroupCount) { Fill = OxyPlot.OxyColors.LightSkyBlue };
+
+				var s = new OxyPlot.Series.PieSeries ();
+				s.InsideLabelFormat = null;
+
+				s.Slices.Add ( itemSlice );
+				s.Slices.Add ( groupSlice );
+
+				var model = new OxyPlot.PlotModel ();
+				model.Series.Add (s);
+
+				plotview.Model = model;
+
 			}
 		}
 	}
