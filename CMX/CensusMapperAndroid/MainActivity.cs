@@ -66,7 +66,7 @@ namespace CensusMapperAndroid
 			{
 				GoogleMapOptions mapOptions = new GoogleMapOptions()
 					.InvokeMapType(GoogleMap.MapTypeHybrid)
-					.InvokeZoomControlsEnabled(false)
+					.InvokeZoomControlsEnabled(true)
 					.InvokeCompassEnabled(true);
 
 				FragmentTransaction fragTx = FragmentManager.BeginTransaction();
@@ -83,8 +83,7 @@ namespace CensusMapperAndroid
 				_map = mf.Map;
 				if (_map != null)
 				{
-					// We create an instance of CameraUpdate, and move the map to it.
-					CameraUpdate cameraUpdate = CameraUpdateFactory.NewLatLngZoom(centerOfUs, 5);
+					CameraUpdate cameraUpdate = CameraUpdateFactory.NewLatLngZoom(centerOfUs, 7);
 					_map.MoveCamera(cameraUpdate);
 
 					await LoadStateData ();

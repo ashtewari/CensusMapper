@@ -11,7 +11,8 @@
         android:columnCount="2"
         android:rowCount="3"
         android:layout_margin="8dp"
-        android:id="@+id/gridLayout1">
+        android:id="@+id/gridLayout1"
+        android:paddingLeft="48dp">
         <TextView
             android:text="Population"
             android:textAppearance="?android:attr/textAppearanceMedium"

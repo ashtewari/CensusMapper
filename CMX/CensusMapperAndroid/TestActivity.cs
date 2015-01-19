@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace CensusMapperAndroid
 {
-	[Activity (Label = "Test Activity", MainLauncher = true, Icon = "@drawable/logo")]			
+	[Activity (Label = "Test Activity", MainLauncher = false, NoHistory = true, Icon = "@drawable/logo")]			
 	public class TestActivity : Activity
 	{
 		protected override void OnCreate (Bundle bundle)
